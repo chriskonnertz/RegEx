@@ -30,11 +30,10 @@ class AndEx extends AbstractBaseEx
     
     /**
      * This PHP magic method returns the regular expression as a string
-     * TODO Rename this method
      *
      * @return string
      */
-    public function getValuesAsString()
+    public function getRegEx()
     {
         $regEx = '';
         
@@ -52,7 +51,7 @@ class AndEx extends AbstractBaseEx
      */
     public function __toString()
     {
-        return $this->getValuesAsString();
+        return $this->getRegEx();
     }
 
 }
