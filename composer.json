@@ -1,0 +1,23 @@
+{
+  "name": "chriskonnertz/regexmaker",
+  "description": "Use methods to fluently create a regular expression in PHP",
+  "keywords": ["regex", "regular expression", "php", "oop", "fluent", "api", "interface"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Chris Konnertz"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.7",
+  },
+  "autoload": {
+    "psr-0": {
+      "ChrisKonnertz\\RegExMaker": "src/"
+    }
+  },
+  "minimum-stability": "dev"
+}
