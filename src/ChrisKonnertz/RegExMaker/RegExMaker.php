@@ -2,6 +2,8 @@
 
 namespace ChrisKonnertz\RegExMaker;
 
+use Closure;
+
 class RegExMaker
 {
 
@@ -10,16 +12,23 @@ class RegExMaker
      */
     const VERSION = '0.0.1';
     
+    /**
+     * Array with all partial expressions
+     *
+     * @var array
+     */
     protected $expressions = [];
     
-    public function __construct()
-    {
-        // TODO remove empty constructor?
-    }
-    
+    /**
+     * Add something to the regular expression and wrap it in an and expression.
+     * TODO Add examples
+     *
+     * @param string|int|float|Closure $value
+     * @return void
+     */
     public function addAnd($value)
     {
-        if ($value isntanceof \Closure) {
+        if ($value instanceof Closure) {
             $value = $value($this);
             
             // TODO validate $value
