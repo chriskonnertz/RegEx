@@ -2,7 +2,7 @@
 
 namespace ChrisKonnertz\RegExMaker\Expressions;
 
-class AndEx extends BaseEx
+class AndEx extends AbstractBaseEx
 {
 
     /**
