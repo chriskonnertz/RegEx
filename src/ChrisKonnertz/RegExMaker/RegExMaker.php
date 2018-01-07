@@ -10,7 +10,7 @@ class RegExMaker
     /**
      * The current version number
      */
-    const VERSION = '0.0.1';
+    const VERSION = '0.1.0';
     
     /**
      * Array with all partial expressions
