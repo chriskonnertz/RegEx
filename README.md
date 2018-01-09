@@ -39,9 +39,11 @@ echo $regExMaker;
 
 RegExMaker has been inspired by [PHPVerbalExpressions](https://github.com/VerbalExpressions/PHPVerbalExpressions).
 It is not better than VerbalExpressions but different. RegExMaker makes more use of OOP principles. 
-Therefore its more flexible but also more complex.
+Therefore it is more flexible but also more complex.
 
 ## General notes
+
+* Official PHP documentation about the syntax of regular expressions: http://php.net/manual/de/reference.pcre.pattern.syntax.php
 
 * The code of this library is formatted according to the code style defined by the 
 [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) standard.

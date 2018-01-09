@@ -11,17 +11,32 @@ class RegExMaker
     /**
      * The current version number
      */
-    const VERSION = '0.3.0';
-    
+    const VERSION = '0.4.0';
+
+    /**
+     * The start of the regular expression
+     *
+     * @var string
+     */
+    protected $start = '/^';
+
     /**
      * Array with all partial expressions
      *
      * @var array
      */
     protected $expressions = [];
+
+    /**
+     * Then end of the regular expression
+     *
+     * @var string
+     */
+    protected $end = '/';
     
     /**
      * Add an item to the regular expression and wrap it in an "and" expression.
+     * This expression requires that all of it parts exist in the tested string.
      * TODO Add examples
      *
      * @param string|int|float|Closure|AbstractExpression $values
@@ -43,6 +58,7 @@ class RegExMaker
 
     /**
      * Add at least two items to the regular expression and wrap it in an "or" expression.
+     * This expression requires that one of it parts exists in the tested string.
      * TODO Add examples
      *
      * @param string|int|float|Closure|AbstractExpression $values
@@ -64,6 +80,7 @@ class RegExMaker
 
     /**
      * Add one ore more items to the regular expression and wrap them in an "optional" expression.
+     * The parts of this expression may or may not exist in the tested string.
      * TODO Add examples
      *
      * @param string|int|float|Closure|AbstractExpression $values
@@ -84,6 +101,28 @@ class RegExMaker
     }
 
     /**
+     * Add one ore more items to the regular expression and wrap them in a "raw" expression.
+     * This expression will not quote its regular expression characters.
+     * TODO Add examples
+     *
+     * @param string|int|float|Closure|AbstractExpression $values
+     * @return self
+     */
+    public function addRaw(...$values)
+    {
+        foreach ($values as &$value) {
+            if ($value instanceof Closure) {
+                $value = $value($this);
+            }
+        }
+
+        $expression = new Expressions\RawEx(...$values);
+        $this->expressions[] = $expression;
+
+        return $this;
+    }
+
+    /**
      * Removes all expressions.
      *
      * @return $this
@@ -94,6 +133,16 @@ class RegExMaker
 
         return $this;
     }
+
+    /**
+     * Getter for the expressions array
+     *
+     * @return array
+     */
+    public function getExpressions()
+    {
+        return $this->expressions;
+    }
     
     /**
      * Returns the complete regular expressions as a string
@@ -102,13 +151,13 @@ class RegExMaker
      */
     public function getRegEx()
     {        
-        $regEx = '';
+        $regEx = $this->start;
         
         foreach ($this->expressions as $expression) {
             $regEx .= $expression->getRegEx();
         }
         
-        return $regEx;
+        return $regEx.$this->end;
     }
     
     /**

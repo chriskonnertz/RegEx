@@ -3,6 +3,7 @@
 namespace ChrisKonnertz\RegExMaker\Expressions;
 
 /**
+ * This expression requires that one of it parts exists in the tested string.
  * Example: (a|b)
  */
 class OrEx extends AbstractExpression
@@ -38,7 +39,7 @@ class OrEx extends AbstractExpression
         
         foreach ($this->values as $value) {
             if ($regEx === '') {
-                $regEx = '(';
+                $regEx = '(?:';
             } else {
                 $regEx .= '|';
             }

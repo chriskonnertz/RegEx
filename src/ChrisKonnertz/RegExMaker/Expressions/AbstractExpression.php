@@ -20,9 +20,7 @@ abstract class AbstractExpression
      */
     public function __construct(...$values)
     {
-        $this->validate($values);
-
-        $this->values = $values;
+        $this->setValues($values);
     }
 
     /**
@@ -47,6 +45,35 @@ abstract class AbstractExpression
                 throw new \InvalidArgumentException('Type of the '.($index + 1).'. passed value is invalid.');
             }
         }
+    }
+
+    /**
+     * Setter for the values array
+     *
+     * @param array $values
+     */
+    public function setValues($values)
+    {
+        $this->validate($values);
+
+        foreach ($values as &$value) {
+            if (! $value instanceof AbstractExpression) {
+                /** @see http://php.net/manual/en/function.preg-quote.php */
+                $value = preg_quote($value, '/');
+            }
+        }
+
+        $this->values = $values;
+    }
+
+    /**
+     * Getter for the values array
+     *
+     * @return array
+     */
+    public function getValues()
+    {
+        return $this->values;
     }
 
     /**

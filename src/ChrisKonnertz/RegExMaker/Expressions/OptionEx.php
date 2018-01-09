@@ -3,6 +3,8 @@
 namespace ChrisKonnertz\RegExMaker\Expressions;
 
 /**
+ * The parts of this expression may or may not exist in the tested string.
+ * If you add more than one part these parts are linked by "and".
  * Example: (a)?
  */
 class OptionEx extends AbstractExpression
@@ -15,7 +17,7 @@ class OptionEx extends AbstractExpression
      */
     public function getRegEx()
     {
-        $regEx = '(';
+        $regEx = '(?:';
         
         foreach ($this->values as $value) {
             $regEx .= $value;
