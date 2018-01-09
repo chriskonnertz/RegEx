@@ -35,6 +35,9 @@ $regExMaker->addAnd("http")
 echo $regExMaker;
 ```
 
+This will print out `/^(?:http)(?:s)?(?:\:\/\/)(?:www\.)?/`. There is not much beauty in it but this is a perfect
+regular expression. Note that special characters will be quoted.
+
 ## PHPVerbalExpressions
 
 RegExMaker has been inspired by [PHPVerbalExpressions](https://github.com/VerbalExpressions/PHPVerbalExpressions).
