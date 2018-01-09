@@ -23,7 +23,7 @@ class RegExMaker
      *
      * @var string
      */
-    protected $start = '/^';
+    protected $start = '/';
 
     /**
      * Array with all partial expressions
@@ -44,19 +44,19 @@ class RegExMaker
      * This expression requires that all of it parts exist in the tested string.
      * TODO Add examples
      *
-     * @param string|int|float|Closure|AbstractExpression $values
+     * @param string|int|float|Closure|AbstractExpression $partialExpressions
      * @return self
      */
-    public function addAnd(...$values)
+    public function addAnd(...$partialExpressions)
     {
-        foreach ($values as &$value) {
-            if ($value instanceof Closure) {
-                $value = $value($this);
+        foreach ($partialExpressions as &$partialExpression) {
+            if ($partialExpression instanceof Closure) {
+                $partialExpression = $partialExpression($this);
             }
         }
 
-        $expression = new Expressions\AndEx(...$values);
-        $this->expressions[] = $expression;
+        $wrapperExpression = new Expressions\AndEx(...$partialExpressions);
+        $this->expressions[] = $wrapperExpression;
 
         return $this;
     }
@@ -69,16 +69,16 @@ class RegExMaker
      * @param string|int|float|Closure|AbstractExpression $values
      * @return self
      */
-    public function addOr(...$values)
+    public function addOr(...$partialExpressions)
     {
-        foreach ($values as &$value) {
-            if ($value instanceof Closure) {
-                $value = $value($this);
+        foreach ($partialExpressions as &$partialExpression) {
+            if ($partialExpression instanceof Closure) {
+                $partialExpression = $partialExpression($this);
             }
         }
 
-        $expression = new Expressions\OrEx(...$values);
-        $this->expressions[] = $expression;
+        $wrapperExpression = new Expressions\OrEx(...$partialExpressions);
+        $this->expressions[] = $wrapperExpression;
 
         return $this;
     }
@@ -91,16 +91,16 @@ class RegExMaker
      * @param string|int|float|Closure|AbstractExpression $values
      * @return self
      */
-    public function addOption(...$values)
+    public function addOption(...$partialExpressions)
     {
-        foreach ($values as &$value) {
-            if ($value instanceof Closure) {
-                $value = $value($this);
+        foreach ($partialExpressions as &$partialExpression) {
+            if ($partialExpression instanceof Closure) {
+                $partialExpression = $partialExpression($this);
             }
         }
 
-        $expression = new Expressions\OptionEx(...$values);
-        $this->expressions[] = $expression;
+        $wrapperExpression = new Expressions\OptionEx(...$partialExpressions);
+        $this->expressions[] = $wrapperExpression;
 
         return $this;
     }
@@ -113,16 +113,16 @@ class RegExMaker
      * @param string|int|float|Closure|AbstractExpression $values
      * @return self
      */
-    public function addRaw(...$values)
+    public function addRaw(...$partialExpressions)
     {
-        foreach ($values as &$value) {
-            if ($value instanceof Closure) {
-                $value = $value($this);
+        foreach ($partialExpressions as &$partialExpression) {
+            if ($partialExpression instanceof Closure) {
+                $partialExpression = $partialExpression($this);
             }
         }
 
-        $expression = new Expressions\RawEx(...$values);
-        $this->expressions[] = $expression;
+        $wrapperExpression = new Expressions\RawEx(...$partialExpressions);
+        $this->expressions[] = $wrapperExpression;
 
         return $this;
     }
