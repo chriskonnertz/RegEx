@@ -5,13 +5,18 @@ namespace ChrisKonnertz\RegExMaker;
 use ChrisKonnertz\RegExMaker\Expressions\AbstractExpression;
 use Closure;
 
+/**
+ * This is the RegExMaker base class. It is the API frontend of the RegExMaker library.
+ * Call its add<Something>() methods to add partial expressions.
+ * Finally call its toString() method to retrieve the complete regular expression as a string.
+ */
 class RegExMaker
 {
 
     /**
      * The current version number
      */
-    const VERSION = '0.4.0';
+    const VERSION = '0.5.0';
 
     /**
      * The start of the regular expression
@@ -23,7 +28,7 @@ class RegExMaker
     /**
      * Array with all partial expressions
      *
-     * @var array
+     * @var AbstractExpression[]
      */
     protected $expressions = [];
 
@@ -35,7 +40,7 @@ class RegExMaker
     protected $end = '/';
     
     /**
-     * Add an item to the regular expression and wrap it in an "and" expression.
+     * Add a partial expression to the overall regular expression and wrap it in an "and" expression.
      * This expression requires that all of it parts exist in the tested string.
      * TODO Add examples
      *
@@ -57,7 +62,7 @@ class RegExMaker
     }
 
     /**
-     * Add at least two items to the regular expression and wrap it in an "or" expression.
+     * Add at least two partial expressions to the overall regular expression and wrap it in an "or" expression.
      * This expression requires that one of it parts exists in the tested string.
      * TODO Add examples
      *
@@ -79,7 +84,7 @@ class RegExMaker
     }
 
     /**
-     * Add one ore more items to the regular expression and wrap them in an "optional" expression.
+     * Add one ore more partial expressions to the overall regular expression and wrap them in an "optional" expression.
      * The parts of this expression may or may not exist in the tested string.
      * TODO Add examples
      *
@@ -101,7 +106,7 @@ class RegExMaker
     }
 
     /**
-     * Add one ore more items to the regular expression and wrap them in a "raw" expression.
+     * Add one ore more partial expressions to the overall regular expression and wrap them in a "raw" expression.
      * This expression will not quote its regular expression characters.
      * TODO Add examples
      *
@@ -123,9 +128,52 @@ class RegExMaker
     }
 
     /**
-     * Removes all expressions.
+     * Tests a given subject against the regular expression.
+     * Returns the matches.
      *
-     * @return $this
+     * @param string $subject
+     * @return array
+     */
+    public function test(string $subject)
+    {
+        $regEx = $this->toString();
+
+        $matches = [];
+
+        preg_match($regEx, $subject, $matches);
+
+        return $matches;
+    }
+
+    /**
+     * Call this method if you want to traverse it and all of it child expression,
+     * no matter how deep they are nested in the tree. You only have to pass a closure,
+     * you do not have to pass an argument for the level parameter.
+     * The callback will have three arguments: The first is the child expression
+     * (an object of type AbstractExpression or a string | int | float),
+     * the second is the level of the that expression and the third tells you if
+     * it has children.
+     *
+     * Example:
+     *
+     * $regExMaker->traverse(function(Closure $expression, int $level, bool $hasChildren)
+     * {
+     *     var_dump($expression, $level, $hasChildren);
+     * });
+     *
+     * @param Closure $callback
+     */
+    public function traverse(Closure $callback)
+    {
+        foreach ($this->expressions as $expression) {
+            $expression->traverse($callback);
+        }
+    }
+
+    /**
+     * Removes all partial expressions.
+     *
+     * @return self
      */
     public function clear()
     {
@@ -135,9 +183,19 @@ class RegExMaker
     }
 
     /**
-     * Getter for the expressions array
+     * Returns the number of partial expressions
      *
-     * @return array
+     * @return int
+     */
+    public function getSize()
+    {
+        return sizeof($this->expressions);
+    }
+
+    /**
+     * Getter for the partial expressions array
+     *
+     * @return AbstractExpression[]
      */
     public function getExpressions()
     {
@@ -145,29 +203,29 @@ class RegExMaker
     }
     
     /**
-     * Returns the complete regular expressions as a string
+     * Returns the concatenated partial regular expressions as a string
      * 
      * @return string
      */
-    public function getRegEx()
+    public function toString()
     {        
         $regEx = $this->start;
         
         foreach ($this->expressions as $expression) {
-            $regEx .= $expression->getRegEx();
+            $regEx .= $expression->toString();
         }
         
         return $regEx.$this->end;
     }
     
     /**
-     * This PHP magic method returns the complete regular expression as a string
+     * This PHP magic method returns the concatenated partial regular expression as a string
      *
      * @return string
      */
     public function __toString()
     {
-        return $this->getRegEx();
+        return $this->toString();
     }
 
 }

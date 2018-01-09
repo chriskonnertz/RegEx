@@ -2,87 +2,138 @@
 
 namespace ChrisKonnertz\RegExMaker\Expressions;
 
+use Closure;
+
+/**
+ * This is the abstract base class for all expression classes.
+ * The concrete expression class has to overwrite the toString() method.
+ * It may have to overwrite the validate() method as well.
+ */
 abstract class AbstractExpression
 {
 
     /**
-     * Array with all values (at least 1) of the expression
+     * Array with all partial expressions (at least one) of the overall expression.
      * Valid types of the array values are: string|int|float|AbstractExpression
      *
      * @var array
      */
-    protected $values;
+    protected $expressions;
 
     /**
-     * Constructor of the expression class.
+     * Constructor of the abstract expression class.
+     * Please do not change the parameters in the concrete expression class.
      *
-     * @param string|int|float|AbstractExpression ...$values
+     * @param string|int|float|AbstractExpression ...$expressions
      */
-    public function __construct(...$values)
+    public function __construct(...$expressions)
     {
-        $this->setValues($values);
+        $this->setExpressions($expressions);
     }
 
     /**
-     * Validates the values that are passed to the constructor of the concrete class
+     * Validates the partial expressions that are passed to the constructor of the concrete class.
      * Valid types of the array values are: string|int|float|AbstractExpression
      * Feel free to override this method if you need enhanced validation.
      *
-     * @param array $values
+     * @param array $expressions
      * @return void
      * @throws \Exception
      */
-    public function validate($values)
+    public function validate(array $expressions)
     {
-        if (count($values) === 0) {
+        if (count($expressions) === 0) {
             throw new \InvalidArgumentException(
                 'You have to pass at least one argument to the constructor of an object of type"'.gettype($this).'".'
             );
         }
 
-        foreach ($values as $index => $value) {
-            if (! (is_string($value) or is_int($value) or is_float($value) or $value instanceof AbstractExpression)) {
-                throw new \InvalidArgumentException('Type of the '.($index + 1).'. passed value is invalid.');
+        foreach ($expressions as $index => $expression) {
+            if (! (is_string($expression) or is_int($expression) or is_float($expression) or $expression instanceof AbstractExpression)) {
+                throw new \InvalidArgumentException('Type of the '.($index + 1).'. passed partial expression is invalid.');
             }
         }
     }
 
     /**
-     * Setter for the values array
+     * Setter for the expressions array
      *
-     * @param array $values
+     * @param array $expressions
      */
-    public function setValues($values)
+    public function setExpressions(array $expressions)
     {
-        $this->validate($values);
+        $this->validate($expressions);
 
-        foreach ($values as &$value) {
-            if (! $value instanceof AbstractExpression) {
+        foreach ($expressions as &$expression) {
+            if (! $expression instanceof AbstractExpression) {
                 /** @see http://php.net/manual/en/function.preg-quote.php */
-                $value = preg_quote($value, '/');
+                $expression = preg_quote($expression, '/');
             }
         }
 
-        $this->values = $values;
+        $this->expressions = $expressions;
     }
 
     /**
-     * Getter for the values array
+     * Call this method if you want to traverse it and all of it child expression,
+     * no matter how deep they are nested in the tree. You only have to pass a closure,
+     * you do not have to pass an argument for the level parameter.
+     * The callback will have three arguments: The first is the child expression
+     * (an object of type AbstractExpression or a string | int | float),
+     * the second is the level of the that expression and the third tells you if
+     * it has children.
+     *
+     * Example:
+     *
+     * $expression->traverse(function(Closure $expression, int $level, bool $hasChildren)
+     * {
+     *     var_dump($expression, $level, $hasChildren);
+     * });
+     *
+     * @param Closure $callback A callback function
+     * @param int     $level    The current level - starting at 0
+     * @return void
+     */
+    public function traverse(Closure $callback, int $level = 0)
+    {
+        $callback($this, $level, true);
+
+        foreach ($this->expressions as $expression) {
+            if ($expression instanceof AbstractExpression) {
+                $expression->traverse($callback, $level + 1);
+            } else {
+                $callback($expression, $level + 1, false);
+            }
+        }
+    }
+
+    /**
+     * Removes all expressions.
+     *
+     * @return void
+     */
+    public function clear()
+    {
+        $this->expressions = [];
+    }
+
+    /**
+     * Getter for the partial expressions array
      *
      * @return array
      */
-    public function getValues()
+    public function getExpressions()
     {
-        return $this->values;
+        return $this->expressions;
     }
 
     /**
-     * Returns the complete regular expressions as a string.
+     * Returns the complete regular expression as a string.
      * The concrete expression class has to implement this class.
      *
      * @return string
      */
-    abstract public function getRegEx();
+    abstract public function toString();
 
     /**
      * This PHP magic method returns the complete regular expression as a string
@@ -91,6 +142,6 @@ abstract class AbstractExpression
      */
     public function __toString()
     {
-        return $this->getRegEx();
+        return $this->toString();
     }
 }

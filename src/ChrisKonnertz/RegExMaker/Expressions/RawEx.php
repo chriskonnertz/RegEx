@@ -26,7 +26,7 @@ class RawEx extends AbstractExpression
      *
      * @return string
      */
-    public function getRegEx()
+    public function toString()
     {
         $regEx = '(?:';
 
