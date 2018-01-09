@@ -20,7 +20,7 @@ It is possible to use this library without using Composer but then it is necessa
 
 > This library requires PHP 7.0 or higher.
 
-##Usage example
+## Usage example
 
 Here is a minimalistic example. It assumes that there is an autoloader.
 
