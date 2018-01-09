@@ -5,6 +5,9 @@
 Use methods to fluently create a regular expression in PHP. 
 This is more intuitive and understandable than writing plain regular expressions.
 
+
+**State: Pre-alpha**
+
 ## Installation
 
 Through [Composer](https://getcomposer.org/):
@@ -22,7 +25,7 @@ It is possible to use this library without using Composer but then it is necessa
 
 ## Usage example
 
-Here is a minimalistic example. It assumes that there is an autoloader.
+Here is an example. It assumes that there is an autoloader.
 
 ```php
 $regExMaker = new ChrisKonnertz\RegExMaker\RegExMaker();
@@ -35,8 +38,8 @@ $regExMaker->addAnd("http")
 echo $regExMaker;
 ```
 
-This will print out `/^(?:http)(?:s)?(?:\:\/\/)(?:www\.)?/`. There is not much beauty in it but this is a perfect
-regular expression. Note that special characters will be quoted.
+This will print out `/^(?:http)(?:s)?(?:\:\/\/)(?:www\.)?/`. There is not much beauty in this but this is a perfect
+regular expression. Note that special characters will be quoted. You may call the `addRaw()` method to avoid this behaviour.
 
 ## PHPVerbalExpressions
 
