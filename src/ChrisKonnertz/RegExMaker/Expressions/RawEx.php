@@ -10,15 +10,17 @@ class RawEx extends AbstractExpression
 {
 
     /**
-     * Setter for the values array
+     * Setter for the expressions array.
+     * This overwrites the implementation of the abstract base class.
+     * It differs by not quoting the partial expressions.
      *
-     * @param array $values
+     * @param array $expressions
      */
-    public function setValues($values)
+    public function setExpressions(array $expressions)
     {
-        $this->validate($values);
+        $this->validate($expressions);
 
-        $this->values = $values;
+        $this->expressions = $expressions;
     }
 
     /**
@@ -30,8 +32,8 @@ class RawEx extends AbstractExpression
     {
         $regEx = '(?:';
 
-        foreach ($this->values as $value) {
-            $regEx .= $value;
+        foreach ($this->expressions as $expression) {
+            $regEx .= $expression;
         }
 
         return $regEx.')';

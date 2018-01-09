@@ -18,8 +18,8 @@ class AndEx extends AbstractExpression
     {
         $regEx = '(?:';
         
-        foreach ($this->values as $value) {
-            $regEx .= $value;
+        foreach ($this->expressions as $expression) {
+            $regEx .= $expression;
         }
         
         return $regEx.')';

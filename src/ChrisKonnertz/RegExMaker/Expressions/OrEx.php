@@ -10,22 +10,23 @@ class OrEx extends AbstractExpression
 {
 
     /**
-     * Validates the values that are passed to the constructor of the concrete class
+     * Validates the partial expressions that are passed to the constructor of the concrete class.
      * Valid types of the array values are: string|int|float|AbstractExpression
+     * Feel free to override this method if you need enhanced validation.
      *
-     * @param array $values
+     * @param array $expressions
      * @return void
      * @throws \Exception
      */
-    public function validate($values)
+    public function validate(array $expressions)
     {
-        if (count($values) < 2) {
+        if (count($expressions) < 2) {
             throw new \InvalidArgumentException(
                 'You have to pass at least two arguments to the constructor of an object of type"'.gettype($this).'".'
             );
         }
 
-        parent::validate($values);
+        parent::validate($expressions);
     }
     
     /**
@@ -37,13 +38,13 @@ class OrEx extends AbstractExpression
     {
         $regEx = '';
         
-        foreach ($this->values as $value) {
+        foreach ($this->expressions as $expression) {
             if ($regEx === '') {
                 $regEx = '(?:';
             } else {
                 $regEx .= '|';
             }
-            $regEx .= $value;
+            $regEx .= $expression;
         }
 
         return $regEx.')';
