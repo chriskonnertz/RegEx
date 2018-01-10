@@ -13,7 +13,7 @@ This is more intuitive and understandable than writing plain regular expressions
 Through [Composer](https://getcomposer.org/):
 
 ```
-composer require chriskonnertz/regexmaker
+composer require chriskonnertz/regex
 ```
 
 From then on you may run `composer update` to get the latest version of this library.
