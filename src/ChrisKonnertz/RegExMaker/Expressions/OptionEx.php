@@ -1,6 +1,6 @@
 <?php
 
-namespace ChrisKonnertz\RegExMaker\Expressions;
+namespace ChrisKonnertz\RegEx\Expressions;
 
 /**
  * The parts of this expression may or may not exist in the tested string.
