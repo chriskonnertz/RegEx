@@ -1,5 +1,5 @@
 {
-  "name": "chriskonnertz/regexmaker",
+  "name": "chriskonnertz/regex",
   "description": "Use methods to fluently create a regular expression in PHP",
   "keywords": ["regex", "regular expression", "php", "oop", "fluent", "api", "interface"],
   "license": "MIT",
@@ -16,7 +16,7 @@
   },
   "autoload": {
     "psr-0": {
-      "ChrisKonnertz\\RegExMaker": "src/"
+      "ChrisKonnertz\\RegEx": "src/"
     }
   },
   "minimum-stability": "dev"
