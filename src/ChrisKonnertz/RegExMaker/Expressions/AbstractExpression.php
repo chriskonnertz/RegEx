@@ -1,6 +1,6 @@
 <?php
 
-namespace ChrisKonnertz\RegExMaker\Expressions;
+namespace ChrisKonnertz\RegEx\Expressions;
 
 use Closure;
 
