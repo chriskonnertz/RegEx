@@ -1,6 +1,6 @@
-# RegExMaker
+# RegEx
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/chriskonnertz/RegExMaker/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/chriskonnertz/RegEx/master/LICENSE)
 
 Use methods to fluently create a regular expression in PHP. 
 This is more intuitive and understandable than writing plain regular expressions.
@@ -28,14 +28,14 @@ It is possible to use this library without using Composer but then it is necessa
 Here is an example. It assumes that there is an autoloader.
 
 ```php
-$regExMaker = new ChrisKonnertz\RegExMaker\RegExMaker();
+$regEx = new ChrisKonnertz\RegEx\RegEx();
 
-$regExMaker->addAnd("http")
+$regEx->addAnd("http")
       ->addOption("s")
       ->addAnd("://")
       ->addOption("www.");
       
-echo $regExMaker;
+echo $regEx;
 ```
 
 This will print out `/^(?:http)(?:s)?(?:\:\/\/)(?:www\.)?/`. There is not much beauty in this but this is a perfect
@@ -43,8 +43,8 @@ regular expression. Note that special characters will be quoted. You may call th
 
 ## PHPVerbalExpressions
 
-RegExMaker has been inspired by [PHPVerbalExpressions](https://github.com/VerbalExpressions/PHPVerbalExpressions).
-It is not better than VerbalExpressions but different. RegExMaker makes more use of OOP principles. 
+RegEx has been inspired by [PHPVerbalExpressions](https://github.com/VerbalExpressions/PHPVerbalExpressions).
+It is not better than VerbalExpressions but different. RegEx makes more use of OOP principles. 
 Therefore it is more flexible but also more complex.
 
 ## General notes
@@ -54,5 +54,5 @@ Therefore it is more flexible but also more complex.
 * The code of this library is formatted according to the code style defined by the 
 [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) standard.
 
-* Status of this repository: _Maintained_. Create an [issue](https://github.com/chriskonnertz/RegExMaker/issues) 
+* Status of this repository: _Maintained_. Create an [issue](https://github.com/chriskonnertz/RegEx/issues) 
 and you will get a response, usually within 48 hours.
