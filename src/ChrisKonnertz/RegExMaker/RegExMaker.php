@@ -1,16 +1,16 @@
 <?php
 
-namespace ChrisKonnertz\RegExMaker;
+namespace ChrisKonnertz\RegEx;
 
-use ChrisKonnertz\RegExMaker\Expressions\AbstractExpression;
+use ChrisKonnertz\RegEx\Expressions\AbstractExpression;
 use Closure;
 
 /**
- * This is the RegExMaker base class. It is the API frontend of the RegExMaker library.
+ * This is the RegEx base class. It is the API frontend of the RegEx library.
  * Call its add<Something>() methods to add partial expressions.
  * Finally call its toString() method to retrieve the complete regular expression as a string.
  */
-class RegExMaker
+class RegEx
 {
 
     /**
