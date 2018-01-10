@@ -38,7 +38,7 @@ $regEx->addAnd("http")
 echo $regEx;
 ```
 
-This will print out `/^(?:http)(?:s)?(?:\:\/\/)(?:www\.)?/`. There is not much beauty in this but this is a perfect
+This will print out `/^(?:http)(?:s)?(?:\:\/\/)(?:www\.)?/`. There is not much beauty in this but this is a valid
 regular expression. Note that special characters will be quoted. You may call the `addRaw()` method to avoid this behaviour.
 
 ## PHPVerbalExpressions
