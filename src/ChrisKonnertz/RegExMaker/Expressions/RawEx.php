@@ -1,10 +1,10 @@
 <?php
 
-namespace ChrisKonnertz\RegExMaker\Expressions;
+namespace ChrisKonnertz\RegEx\Expressions;
 
 /**
  * This expression will not quote its regular expression characters.
- * Example: ab
+ * Example: a-b
  */
 class RawEx extends AbstractExpression
 {
