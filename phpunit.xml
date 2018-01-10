@@ -12,7 +12,7 @@
 >
     <testsuites>
         <testsuite name="Package Test Suite">
-            <file>tests/RegExMakerTest.php</file>
+            <file>tests/RegExTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

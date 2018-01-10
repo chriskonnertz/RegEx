@@ -7,19 +7,19 @@ if (!class_exists('\PHPUnit\Framework\TestCase')) {
 }
 
 /**
- * Class RegExMakerTest for tests with PHPUnit.
+ * Class RegExTest for tests with PHPUnit.
  */
-class RegExMakerTest extends \PHPUnit\Framework\TestCase
+class RegExTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
      * Creates and returns a new instance
      *
-     * @return ChrisKonnertz\RegExMaker\RegExMaker(
+     * @return ChrisKonnertz\RegEx\RegEx
      */
     protected function getInstance()
     {
-        return new ChrisKonnertz\RegExMaker\RegExMaker();
+        return new ChrisKonnertz\RegEx\RegEx();
     }
 
     // TODO create tests

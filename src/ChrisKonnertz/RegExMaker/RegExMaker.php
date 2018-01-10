@@ -156,7 +156,7 @@ class RegEx
      *
      * Example:
      *
-     * $regExMaker->traverse(function(Closure $expression, int $level, bool $hasChildren)
+     * $regEx->traverse(function(Closure $expression, int $level, bool $hasChildren)
      * {
      *     var_dump($expression, $level, $hasChildren);
      * });
