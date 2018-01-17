@@ -14,6 +14,11 @@ class RegEx
 {
 
     /**
+     * The delimiter indicates the start and the end of a regular expression
+     */
+    const DELIMITER = '/';
+
+    /**
      * Shortcut of the "insensitive" ("i") modifier.
      * If active, letters in the pattern match both upper and lower case letters.
      */
@@ -52,14 +57,14 @@ class RegEx
     /**
      * The current version number
      */
-    const VERSION = '0.6.0';
+    const VERSION = '0.7.0';
 
     /**
-     * The start of the regular expression
+     * The start of the regular expression (=prefix)
      *
      * @var string
      */
-    protected $start = '/';
+    protected $start = self::DELIMITER;
 
     /**
      * Array with all partial expressions
@@ -69,11 +74,11 @@ class RegEx
     protected $expressions = [];
 
     /**
-     * Then end of the regular expression
+     * The end of the regular expression (=suffix)
      *
      * @var string
      */
-    protected $end = '/';
+    protected $end = self::DELIMITER;
 
     /**
      * Array with the active modifier shortcuts.
@@ -110,7 +115,7 @@ class RegEx
      * This expression requires that one of it parts exists in the tested string.
      * TODO Add examples
      *
-     * @param string|int|float|Closure|AbstractExpression $values
+     * @param string|int|float|Closure|AbstractExpression $partialExpressions
      * @return self
      */
     public function addOr(...$partialExpressions)
@@ -132,7 +137,7 @@ class RegEx
      * The parts of this expression may or may not exist in the tested string.
      * TODO Add examples
      *
-     * @param string|int|float|Closure|AbstractExpression $values
+     * @param string|int|float|Closure|AbstractExpression $partialExpressions
      * @return self
      */
     public function addOption(...$partialExpressions)
@@ -155,7 +160,7 @@ class RegEx
      * If you add more than one part these parts are linked by "and".
      * TODO Add examples
      *
-     * @param string|int|float|Closure|AbstractExpression $values
+     * @param string|int|float|Closure|AbstractExpression $partialExpressions
      * @return self
      */
     public function addCapturingGroup(...$partialExpressions)
@@ -177,7 +182,7 @@ class RegEx
      * This expression will not quote its regular expression characters.
      * TODO Add examples
      *
-     * @param string|int|float|Closure|AbstractExpression $values
+     * @param string|int|float|Closure|AbstractExpression $partialExpressions
      * @return self
      */
     public function addRaw(...$partialExpressions)
@@ -198,43 +203,47 @@ class RegEx
      * Activates or deactivates the "insensitive" ("i") modifier.
      * If active, letters in the pattern match both upper and lower case letters.
      *
-     * @param bool $activate
+     * @param bool $active
+     * @return void
      */
-    public function setInsensitiveModifier(bool $activate = true)
+    public function setInsensitiveModifier(bool $active = true)
     {
-        $this->setModifier(self::INSENSITIVE_MODIFIER_SHORTCUT, $activate);
+        $this->setModifier(self::INSENSITIVE_MODIFIER_SHORTCUT, $active);
     }
 
     /**
      * Activates or deactivates the "multi line" ("m") modifier.
      * If active, treats the string being matched against as multiple lines.
      *
-     * @param bool $activate
+     * @param bool $active
+     * @return void
      */
-    public function setMultiLineModifier(bool $activate = true)
+    public function setMultiLineModifier(bool $active = true)
     {
-        $this->setModifier(self::MULTI_LINE_MODIFIER_SHORTCUT, $activate);
+        $this->setModifier(self::MULTI_LINE_MODIFIER_SHORTCUT, $active);
     }
 
     /**
      * Activates or deactivates the "single line" ("s") modifier.
      * If active, a dot metacharacter in the pattern matches all characters, including newlines.
      *
-     * @param bool $activate
+     * @param bool $active
+     * @return void
      */
-    public function setSingleLineModifier(bool $activate = true)
+    public function setSingleLineModifier(bool $active = true)
     {
-        $this->setModifier(self::SINGLE_LINE_MODIFIER_SHORTCUT, $activate);
+        $this->setModifier(self::SINGLE_LINE_MODIFIER_SHORTCUT, $active);
     }
     /**
      * Activates or deactivates the "extended" ("x") modifier.
      * If active, whitespace is permitted.
      *
-     * @param bool $activate
+     * @param bool $active
+     * @return void
      */
-    public function setExtendedModifier(bool $activate = true)
+    public function setExtendedModifier(bool $active = true)
     {
-        $this->setModifier(self::EXTENDED_MODIFIER_SHORTCUT, $activate);
+        $this->setModifier(self::EXTENDED_MODIFIER_SHORTCUT, $active);
     }
 
     /**
@@ -244,10 +253,11 @@ class RegEx
      *
      * @see http://php.net/manual/en/reference.pcre.pattern.modifiers.php
      *
-     * @param string $modifierShortcut The modifier shortcut, a single character
-     * @param bool   $activate         Activate (true) or deactivate (false) the modifier
+     * @param string $modifierShortcut The modifier shortcut, a single character -> self::MODIFIER_SHORTCUTS
+     * @param bool   $active           Activate (true) or deactivate (false) the modifier
+     * @return void
      */
-    public function setModifier(string $modifierShortcut, bool $activate = true)
+    public function setModifier(string $modifierShortcut, bool $active = true)
     {
         if (! in_array($modifierShortcut, self::MODIFIER_SHORTCUTS)) {
             throw new \InvalidArgumentException(
@@ -256,30 +266,36 @@ class RegEx
 
         $index = array_search($modifierShortcut, $this->modifiers);
         if ($index === false) {
-            if ($activate) {
+            if ($active) {
                 $this->modifiers[] = $modifierShortcut;
             }
         } else {
-            if (! $activate) {
+            if (! $active) {
                 unset($this->modifiers[$index]);
             }
         }
     }
 
     /**
-     * Tests a given subject against the regular expression.
+     * Tests a given subject (a string) against the regular expression.
      * Returns the matches.
+     * Throws an exception when there occurs an error while testing.
      *
      * @param string $subject
      * @return array
+     * @throws \Exception
      */
-    public function test(string $subject)
+    public function test(string $subject) : array
     {
         $regEx = $this->toString();
 
         $matches = [];
 
-        preg_match($regEx, $subject, $matches);
+        $result = preg_match($regEx, $subject, $matches);
+
+        if ($result === false) {
+            throw new \Exception('Error when executing PHP\'s preg_match() function');
+        }
 
         return $matches;
     }
@@ -301,6 +317,7 @@ class RegEx
      * });
      *
      * @param Closure $callback
+     * @return void
      */
     public function traverse(Closure $callback)
     {
@@ -326,7 +343,7 @@ class RegEx
      *
      * @return int
      */
-    public function getSize()
+    public function getSize() : int
     {
         return sizeof($this->expressions);
     }
@@ -336,9 +353,61 @@ class RegEx
      *
      * @return AbstractExpression[]
      */
-    public function getExpressions()
+    public function getExpressions() : array
     {
         return $this->expressions;
+    }
+
+    /**
+     * Getter for the "start" property
+     *
+     * @return string
+     */
+    public function getStart() : string
+    {
+        return $this->start;
+    }
+
+    /**
+     * Setter for the "start" property.
+     * This is a raw string.
+     *
+     * @param string $start
+     */
+    public function setStart(string $start)
+    {
+        $this->start = $start;
+    }
+
+    /**
+     * Getter for the "end" property.
+     * This is a raw string - it is not quoted.
+     *
+     * @return string
+     */
+    public function getEnd() : string
+    {
+        return $this->end;
+    }
+
+    /**
+     * Setter for the "end" property
+     *
+     * @param string $end
+     */
+    public function setEnd(string $end)
+    {
+        $this->end = $end;
+    }
+
+    /**
+     * Returns an array with the modifier shortcuts that are currently active
+     *
+     * @return string[]
+     */
+    public function getCurrentModifiers() : array
+    {
+        return $this->modifiers;
     }
     
     /**
@@ -346,7 +415,7 @@ class RegEx
      * 
      * @return string
      */
-    public function toString()
+    public function toString() : string
     {        
         $regEx = $this->start;
         

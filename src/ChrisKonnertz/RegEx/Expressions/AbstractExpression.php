@@ -2,6 +2,7 @@
 
 namespace ChrisKonnertz\RegEx\Expressions;
 
+use ChrisKonnertz\RegEx\RegEx;
 use Closure;
 
 /**
@@ -67,7 +68,7 @@ abstract class AbstractExpression
         foreach ($expressions as &$expression) {
             if (! $expression instanceof AbstractExpression) {
                 /** @see http://php.net/manual/en/function.preg-quote.php */
-                $expression = preg_quote($expression, '/');
+                $expression = preg_quote($expression, RegEx::DELIMITER);
             }
         }
 

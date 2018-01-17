@@ -13,7 +13,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
-     * Creates and returns a new instance
+     * Creates and returns a new instance of the main class
      *
      * @return ChrisKonnertz\RegEx\RegEx
      */
@@ -22,5 +22,37 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         return new ChrisKonnertz\RegEx\RegEx();
     }
 
-    // TODO create tests
+    public function testMagicToString()
+    {
+        $regEx = $this->getInstance();
+
+        $stringyfied = ''.$regEx;
+
+        $this->assertEquals($regEx->toString(), $stringyfied);
+    }
+
+    public function testExample()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addAnd("http")
+            ->addOption("s")
+            ->addAnd("://")
+            ->addOption("www.");
+
+        $expected = '/^(?:http)(?:s)?(?:\:\/\/)(?:www\.)?/';
+        $this->assertEquals($expected, $regEx);
+    }
+
+    public function testAddRaw()
+    {
+        $regEx = $this->getInstance();
+
+        $raw = '.*';
+        $regEx->addRaw($raw);
+
+        $this->assertEquals($raw, $regEx);
+    }
+
+    // TODO create more tests
 }
