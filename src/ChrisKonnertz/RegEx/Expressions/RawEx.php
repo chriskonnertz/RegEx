@@ -4,7 +4,8 @@ namespace ChrisKonnertz\RegEx\Expressions;
 
 /**
  * This expression will not quote its regular expression characters.
- * Example: a-b
+ *
+ * Example resulting regex: a-b
  */
 class RawEx extends AbstractExpression
 {

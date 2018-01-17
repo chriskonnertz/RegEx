@@ -87,11 +87,36 @@ class RegEx
      * @var string[]
      */
     protected $modifiers = [];
-    
+
+    /**
+     * Adds a partial expression that can be any single character (except by default "new line").
+     *
+     * Example resulting regex: .
+     *
+     * @return self
+     */
+    public function addAnyCharacter()
+    {
+        return $this->addRaw('.');
+    }
+
+    /**
+     * Adds a partial expression that can be any characters (except by default "new line").
+     *
+     * Example resulting regex: .*
+     *
+     * @return self
+     */
+    public function addAnyCharacters()
+    {
+        return $this->addRaw('.*');
+    }
+
     /**
      * Add a partial expression to the overall regular expression and wrap it in an "and" expression.
      * This expression requires that all of it parts exist in the tested string.
-     * TODO Add examples
+     *
+     * Example resulting regex: ab
      *
      * @param string|int|float|Closure|AbstractExpression $partialExpressions
      * @return self
@@ -113,7 +138,8 @@ class RegEx
     /**
      * Add at least two partial expressions to the overall regular expression and wrap it in an "or" expression.
      * This expression requires that one of it parts exists in the tested string.
-     * TODO Add examples
+     *
+     * Example resulting regex: (a|b)
      *
      * @param string|int|float|Closure|AbstractExpression $partialExpressions
      * @return self
@@ -135,7 +161,8 @@ class RegEx
     /**
      * Add one ore more partial expressions to the overall regular expression and wrap them in an "optional" expression.
      * The parts of this expression may or may not exist in the tested string.
-     * TODO Add examples
+     *
+     * Example resulting regex: a?
      *
      * @param string|int|float|Closure|AbstractExpression $partialExpressions
      * @return self
@@ -158,7 +185,8 @@ class RegEx
      * Add one ore more partial expressions to the overall regular expression and wrap them in a "capturing group" expression.
      * This expression will be added to the matches when the overall regular expression is tested.
      * If you add more than one part these parts are linked by "and".
-     * TODO Add examples
+     *
+     * Example resulting regex: (a)
      *
      * @param string|int|float|Closure|AbstractExpression $partialExpressions
      * @return self
@@ -180,7 +208,8 @@ class RegEx
     /**
      * Add one ore more partial expressions to the overall regular expression and wrap them in a "raw" expression.
      * This expression will not quote its regular expression characters.
-     * TODO Add examples
+     *
+     * Example resulting regex: a-b
      *
      * @param string|int|float|Closure|AbstractExpression $partialExpressions
      * @return self
@@ -225,7 +254,7 @@ class RegEx
 
     /**
      * Activates or deactivates the "single line" ("s") modifier.
-     * If active, a dot metacharacter in the pattern matches all characters, including newlines.
+     * If active, a dot meta-character in the pattern matches all characters, including newlines.
      *
      * @param bool $active
      * @return void
@@ -247,7 +276,7 @@ class RegEx
     }
 
     /**
-     * Activates or deactivates a modifier. I
+     * Activates or deactivates a modifier.
      * The current state of the modifier does not matter, so for example you can
      * (pseudo-)deactivate a modifier before ever activating it.
      *

@@ -4,7 +4,8 @@ namespace ChrisKonnertz\RegEx\Expressions;
 
 /**
  * This expression requires that one of it parts exists in the tested string.
- * Example: (a|b)
+ *
+ * ExaExample resulting regexmple: (a|b)
  */
 class OrEx extends AbstractExpression
 {

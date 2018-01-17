@@ -54,5 +54,15 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($raw, $regEx);
     }
 
+    public function testAddAnyCharacter()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addAnyCharacter();
+
+        $expected = '(?:*)';
+        $this->assertEquals($expected, $regEx);
+    }
+
     // TODO create more tests
 }

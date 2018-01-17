@@ -23,9 +23,8 @@ abstract class AbstractExpression
 
     /**
      * Constructor of the abstract expression class.
-     * Please do not change the parameters in the concrete expression class.
      *
-     * @param string|int|float|AbstractExpression ...$expressions
+     * @param string|int|float|AbstractExpression ...$expressions The partial expressions
      */
     public function __construct(...$expressions)
     {

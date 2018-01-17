@@ -4,7 +4,8 @@ namespace ChrisKonnertz\RegEx\Expressions;
 
 /**
  * This expression requires that all of it parts exist in the tested string.
- * Example: ab
+ *
+ * Example resulting regex: (ab)
  */
 class AndEx extends AbstractExpression
 {

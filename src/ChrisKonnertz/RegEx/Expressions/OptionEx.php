@@ -5,7 +5,8 @@ namespace ChrisKonnertz\RegEx\Expressions;
 /**
  * The parts of this expression may or may not exist in the tested string.
  * If you add more than one part these parts are linked by "and".
- * Example: (a)?
+ *
+ * Example resulting regex: (a)?
  */
 class OptionEx extends AbstractExpression
 {
