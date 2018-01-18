@@ -60,7 +60,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addAnyChar();
 
-        $expected = '/(?:.)';
+        $expected = '/(?:.)/';
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -70,7 +70,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addAnyChars();
 
-        $expected = '/(?:.*)';
+        $expected = '/(?:.*)/';
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -80,7 +80,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addWordChar();
 
-        $expected = '/(?:\w)';
+        $expected = '/(?:\w)/';
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -90,7 +90,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addWhiteSpaceChar();
 
-        $expected = '/(?:\s)';
+        $expected = '/(?:\s)/';
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -100,7 +100,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addTabChar();
 
-        $expected = '/(?:\t)';
+        $expected = '/(?:\t)/';
         $this->assertEquals($expected, $regEx->toString());
     }
 
