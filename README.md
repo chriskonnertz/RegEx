@@ -1,5 +1,6 @@
 # RegEx
 
+[![Build Status](https://img.shields.io/travis/chriskonnertz/RegEx.svg)](https://travis-ci.org/chriskonnertz/RegEx)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/chriskonnertz/RegEx/master/LICENSE)
 
 Use methods to fluently create a regular expression in PHP. 
@@ -38,7 +39,7 @@ $regEx->addAnd('http')
 echo $regEx;
 ```
 
-This will print out `/^(?:http)(?:s)?(?:\:\/\/)(?:www\.)?/`. There is not much beauty in this but this is a valid
+This will print out `/(?:http)(?:s)?(?:\:\/\/)(?:www\.)?/`. There is not much beauty in this but this is a valid
 regular expression. Note that special characters will be quoted. You may call the `addRaw()` method to avoid this behaviour.
 
 ## PHPVerbalExpressions
