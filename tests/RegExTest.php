@@ -41,17 +41,17 @@ class RegExTest extends \PHPUnit\Framework\TestCase
             ->addOption("www.");
 
         $expected = '/^(?:http)(?:s)?(?:\:\/\/)(?:www\.)?/';
-        $this->assertEquals($expected, $regEx);
+        $this->assertEquals($expected, $regEx->toString());
     }
 
     public function testAddRaw()
     {
         $regEx = $this->getInstance();
 
-        $raw = '.*';
-        $regEx->addRaw($raw);
+        $expected = '.*';
+        $regEx->addRaw($expected);
 
-        $this->assertEquals($raw, $regEx);
+        $this->assertEquals($expected, $regEx->toString());
     }
 
     public function testAddAnyChar()
@@ -61,7 +61,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->addAnyChar();
 
         $expected = '(?:.)';
-        $this->assertEquals($expected, $regEx);
+        $this->assertEquals($expected, $regEx->toString());
     }
 
     public function testAddAnyChars()
@@ -71,7 +71,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->addAnyChars();
 
         $expected = '(?:.*)';
-        $this->assertEquals($expected, $regEx);
+        $this->assertEquals($expected, $regEx->toString());
     }
 
     public function testAddWordChar()
@@ -81,7 +81,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->addWordChar();
 
         $expected = '(?:\w)';
-        $this->assertEquals($expected, $regEx);
+        $this->assertEquals($expected, $regEx->toString());
     }
 
     public function testAdWhiteSpaceChar()
@@ -91,7 +91,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->addWhiteSpaceChar();
 
         $expected = '(?:\s)';
-        $this->assertEquals($expected, $regEx);
+        $this->assertEquals($expected, $regEx->toString());
     }
 
     public function testAddTabChar()
@@ -101,7 +101,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->addTabChar();
 
         $expected = '(?:\w)';
-        $this->assertEquals($expected, $regEx);
+        $this->assertEquals($expected, $regEx->toString());
     }
 
     // TODO create missing method tests
