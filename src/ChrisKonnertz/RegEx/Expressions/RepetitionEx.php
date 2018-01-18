@@ -5,7 +5,7 @@ namespace ChrisKonnertz\RegEx\Expressions;
 /**
  * This expression requires that its inner part exists n to m times in the tested string.
  *
- * Example resulting regex: (a|b)
+ * Example resulting regex: (ab)*
  */
 class RepetitionEx extends AbstractExpression
 {
@@ -31,7 +31,7 @@ class RepetitionEx extends AbstractExpression
     protected $max = 0;
 
     /**
-     * Constructor of the abstract expression class.
+     * Constructor of the repetition expression class.
      *
      * @param int $min The minimum of repetitions. Must be >= 0.
      * @param int $max The maximum of repetitions. Must be >= 0 and >= $min.

@@ -54,15 +54,55 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($raw, $regEx);
     }
 
-    public function testAddAnyCharacter()
+    public function testAddAnyChar()
     {
         $regEx = $this->getInstance();
 
-        $regEx->addAnyCharacter();
+        $regEx->addAnyChar();
 
-        $expected = '(?:*)';
+        $expected = '(?:.)';
         $this->assertEquals($expected, $regEx);
     }
 
-    // TODO create more tests
+    public function testAddAnyChars()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addAnyChars();
+
+        $expected = '(?:.*)';
+        $this->assertEquals($expected, $regEx);
+    }
+
+    public function testAddWordChar()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addWordChar();
+
+        $expected = '(?:\w)';
+        $this->assertEquals($expected, $regEx);
+    }
+
+    public function testAdWhiteSpaceChar()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addWhiteSpaceChar();
+
+        $expected = '(?:\s)';
+        $this->assertEquals($expected, $regEx);
+    }
+
+    public function testAddTabChar()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addTabChar();
+
+        $expected = '(?:\w)';
+        $this->assertEquals($expected, $regEx);
+    }
+
+    // TODO create missing method tests
 }

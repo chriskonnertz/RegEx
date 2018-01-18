@@ -95,7 +95,7 @@ class RegEx
      *
      * @return self
      */
-    public function addAnyCharacter()
+    public function addAnyChar()
     {
         return $this->addRaw('.');
     }
@@ -107,9 +107,48 @@ class RegEx
      *
      * @return self
      */
-    public function addAnyCharacters()
+    public function addAnyChars()
     {
         return $this->addRaw('.*');
+    }
+
+    /**
+     * Adds a partial expression that can be a single word character.
+     * This includes letters, digits and the underscore.
+     * Same as: [a-zA-Z_0-9]
+     *
+     * Example resulting regex: \t
+     *
+     * @return RegEx
+     */
+    public function addWordChar()
+    {
+        return $this->addRaw('\w');
+    }
+
+    /**
+     * Adds a partial expression that can be a white space character.
+     * This includes: space, \f, \n, \r, \t and \v
+     *
+     * Example resulting regex: \t
+     *
+     * @return RegEx
+     */
+    public function addWhiteSpaceChar()
+    {
+        return $this->addRaw('\s');
+    }
+
+    /**
+     * Adds a partial expression that can be a single tabulator (tab).
+     *
+     * Example resulting regex: \t
+     *
+     * @return RegEx
+     */
+    public function addTabChar()
+    {
+        return $this->addRaw('\t');
     }
 
     /**

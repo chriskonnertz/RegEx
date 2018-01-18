@@ -30,10 +30,10 @@ Here is an example. It assumes that there is an autoloader.
 ```php
 $regEx = new ChrisKonnertz\RegEx\RegEx();
 
-$regEx->addAnd("http")
-      ->addOption("s")
-      ->addAnd("://")
-      ->addOption("www.");
+$regEx->addAnd('http')
+      ->addOption('s')
+      ->addAnd('://')
+      ->addOption('www.');
       
 echo $regEx;
 ```
