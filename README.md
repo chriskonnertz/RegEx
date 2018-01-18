@@ -7,7 +7,7 @@ Use methods to fluently create a regular expression in PHP.
 This is more intuitive and understandable than writing plain regular expressions.
 
 
-**State: Pre-alpha**
+**State: Alpha**
 
 ## Installation
 
