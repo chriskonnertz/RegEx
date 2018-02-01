@@ -27,6 +27,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
     public function testMagicToString()
     {
         $regEx = $this->getInstance();
+        $regEx->addAnd('test');
 
         $stringyfied = ''.$regEx;
 
