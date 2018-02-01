@@ -168,9 +168,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
             ->addOption("www.")
             ->addRaw('.*');
 
-        $expected = 2;
+        $expected = 5;
         $this->assertEquals($expected, sizeof($regEx->getExpressions()));
     }
-
-    // TODO create missing method tests
 }
