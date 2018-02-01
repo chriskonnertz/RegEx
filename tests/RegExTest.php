@@ -146,13 +146,10 @@ class RegExTest extends \PHPUnit\Framework\TestCase
     {
         $regEx = $this->getInstance();
 
-        $expected = 0;
+        $expected = [];
         $this->assertEquals($expected, $regEx->getCurrentModifiers());
 
         $regEx->setMultiLineModifier(true);
-
-        $expected = 1;
-        $this->assertEquals($expected, $regEx->getCurrentModifiers());
 
         $expected = [RegEx::MULTI_LINE_MODIFIER_SHORTCUT];
         $this->assertEquals($expected, $regEx->getCurrentModifiers());
