@@ -384,6 +384,8 @@ class RegEx
      *     var_dump($expression, $level, $hasChildren);
      * });
      *
+     * You may also look at the self::getSize() method as another example.
+     *
      * @param Closure $callback
      * @return void
      */
@@ -409,7 +411,10 @@ class RegEx
     /**
      * Returns the number of partial expressions.
      * If $recursive is false, only the partial expressions on the root level are counted.
-     * If $recursive is true, all partial expressions are counted. This includes nested expressions.
+     * If $recursive is true, the method traverses trough all partial expressions and counts
+     * all partial expressions without sub expressions. Or with other words: If you visualize
+     * the regular expression as a tree then this method will only count its leaves.
+     *
      *
      * @return int
      */
@@ -420,7 +425,9 @@ class RegEx
 
             $this->traverse(function($expression, int $level, bool $hasChildren) use (&$size)
             {
-                $size++;
+                if (! $hasChildren) {
+                    $size++;
+                }
             });
 
             return $size;
