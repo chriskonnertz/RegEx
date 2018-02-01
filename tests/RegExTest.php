@@ -119,7 +119,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->traverse(function($expression, int $level, bool $hasChildren)
         {
-            // Do nothing, jsut traverse
+            // Do nothing, just traverse
         });
     }
 
