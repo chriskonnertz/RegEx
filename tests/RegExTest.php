@@ -6,6 +6,8 @@ if (!class_exists('\PHPUnit\Framework\TestCase')) {
     class_alias('\PHPUnit_Framework_TestCase', '\PHPUnit\Framework\TestCase');
 }
 
+use \ChrisKonnertz\RegEx\RegEx;
+
 /**
  * Class RegExTest for tests with PHPUnit.
  */
@@ -19,7 +21,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
      */
     protected function getInstance()
     {
-        return new ChrisKonnertz\RegEx\RegEx();
+        return new RegEx();
     }
 
     public function testMagicToString()
@@ -102,6 +104,71 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $expected = '/(?:\t)/';
         $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testTraverse()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addAnd("http")
+            ->addOption("s")
+            ->addAnd("://")
+            ->addOption("www.")
+            ->addRaw('.*');
+
+        $regEx->traverse(function($expression, int $level, bool $hasChildren)
+        {
+            // Do nothing, jsut traverse
+        });
+    }
+
+    public function getSize()
+    {
+        $regEx = $this->getInstance();
+
+        $expected = 0;
+        $this->assertEquals($expected, $regEx->getSize());
+
+        $regEx->addWordChar();
+
+        $expected = 1;
+        $this->assertEquals($expected, $regEx->getSize());
+
+        $regEx->addWordChar();
+
+        $expected = 2;
+        $this->assertEquals($expected, $regEx->getSize());
+        $this->assertEquals($expected, $regEx->getSize(true));
+    }
+
+    public function testModifiers()
+    {
+        $regEx = $this->getInstance();
+
+        $expected = 0;
+        $this->assertEquals($expected, $regEx->getCurrentModifiers());
+
+        $regEx->setMultiLineModifier(true);
+
+        $expected = 1;
+        $this->assertEquals($expected, $regEx->getCurrentModifiers());
+
+        $expected = [RegEx::MULTI_LINE_MODIFIER_SHORTCUT];
+        $this->assertEquals($expected, $regEx->getCurrentModifiers());
+    }
+
+    public function testGetExpressions()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addAnd("http")
+            ->addOption("s")
+            ->addAnd("://")
+            ->addOption("www.")
+            ->addRaw('.*');
+
+        $expected = 2;
+        $this->assertEquals($expected, sizeof($regEx->getExpressions()));
     }
 
     // TODO create missing method tests

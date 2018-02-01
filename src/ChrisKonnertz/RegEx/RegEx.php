@@ -379,7 +379,7 @@ class RegEx
      *
      * Example:
      *
-     * $regEx->traverse(function(Closure $expression, int $level, bool $hasChildren)
+     * $regEx->traverse(function($expression, int $level, bool $hasChildren)
      * {
      *     var_dump($expression, $level, $hasChildren);
      * });
@@ -407,13 +407,26 @@ class RegEx
     }
 
     /**
-     * Returns the number of partial expressions
+     * Returns the number of partial expressions.
+     * If $recursive is false, only the partial expressions on the root level are counted.
+     * If $recursive is true, all partial expressions are counted. This includes nested expressions.
      *
      * @return int
      */
-    public function getSize() : int
+    public function getSize($recursive = true) : int
     {
-        return sizeof($this->expressions);
+        if ($recursive) {
+            $size = 0;
+
+            $this->traverse(function($expression, int $level, bool $hasChildren) use (&$size)
+            {
+                $size++;
+            });
+
+            return $size;
+        } else {
+            return sizeof($this->expressions);
+        }
     }
 
     /**

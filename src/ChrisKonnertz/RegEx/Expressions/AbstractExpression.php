@@ -85,7 +85,7 @@ abstract class AbstractExpression
      *
      * Example:
      *
-     * $expression->traverse(function(Closure $expression, int $level, bool $hasChildren)
+     * $expression->traverse(function($expression, int $level, bool $hasChildren)
      * {
      *     var_dump($expression, $level, $hasChildren);
      * });
