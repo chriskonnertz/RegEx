@@ -57,7 +57,7 @@ class RegEx
     /**
      * The current version number
      */
-    const VERSION = '0.8.0';
+    const VERSION = '0.8.1';
 
     /**
      * The start of the regular expression (=prefix)
@@ -89,7 +89,7 @@ class RegEx
     protected $modifiers = [];
 
     /**
-     * Adds a partial expression that can be any single character (except by default "new line").
+     * Adds a partial expression that expects any single character (except by default "new line").
      *
      * Example resulting regex: .
      *
@@ -101,7 +101,7 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that can be any characters (except by default "new line").
+     * Adds a partial expression that expects 0..m of any characters (except by default "new line").
      *
      * Example resulting regex: .*
      *
@@ -113,11 +113,11 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that can be a single word character.
+     * Adds a partial expression that expects a single word character.
      * This includes letters, digits and the underscore.
      * Same as: [a-zA-Z_0-9]
      *
-     * Example resulting regex: \t
+     * Example resulting regex: \w
      *
      * @return RegEx
      */
@@ -127,7 +127,21 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that can be a white space character.
+     * Adds a partial expression that expects 0..m of word characters.
+     * This includes letters, digits and the underscore.
+     * Same as: [a-zA-Z_0-9]
+     *
+     * Example resulting regex: \w*
+     *
+     * @return RegEx
+     */
+    public function addWordChars()
+    {
+        return $this->addRaw('\w*');
+    }
+
+    /**
+     * Adds a partial expression that expects a white space character.
      * This includes: space, \f, \n, \r, \t and \v
      *
      * Example resulting regex: \t
@@ -140,7 +154,20 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that can be a single tabulator (tab).
+     * Adds a partial expression that expects 0..m of white space characters.
+     * This includes: space, \f, \n, \r, \t and \v
+     *
+     * Example resulting regex: \s*
+     *
+     * @return RegEx
+     */
+    public function addWhiteSpaceChars()
+    {
+        return $this->addRaw('\s*');
+    }
+
+    /**
+     * Adds a partial expression that expects a single tabulator (tab).
      *
      * Example resulting regex: \t
      *
@@ -149,6 +176,18 @@ class RegEx
     public function addTabChar()
     {
         return $this->addRaw('\t');
+    }
+
+    /**
+     * Adds a partial expression that expects 0..m tabulators (tabs).
+     *
+     * Example resulting regex: \t*
+     *
+     * @return RegEx
+     */
+    public function addTabChars()
+    {
+        return $this->addRaw('\t*');
     }
 
     /**

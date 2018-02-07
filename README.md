@@ -42,6 +42,107 @@ echo $regEx;
 This will print out `/(?:http)(?:s)?(?:\:\/\/)(?:www\.)?/`. There is not much beauty in this but this is a valid
 regular expression. Note that special characters will be quoted. You may call the `addRaw()` method to avoid this behaviour.
 
+## Builder methods
+
+> The example results might differ from the actual output. 
+Some of them are simplified to make it easier to understand them.
+
+### addAnyChar
+
+```php
+$regEx->addAnyChar();
+```
+
+Example result: `.`
+
+### addAnyChars
+
+```php
+$regEx->addAnyChars();
+```
+
+Example result: `.*`
+
+### addWordChar
+
+```php
+$regEx->addWordChar();
+```
+
+Example result: `\w`
+
+### addWordChars
+
+```php
+$regEx->addWordChars();
+```
+
+Example result: `\w*`
+
+### addWhiteSpaceChar
+
+```php
+$regEx->addWhiteSpaceChar();
+```
+
+Example result: `\s`
+
+### addWhiteSpaceChars
+
+```php
+$regEx->addWhiteSpaceChars();
+```
+
+Example result: `\s*`
+
+### testAddTabChar
+
+```php
+$regEx->testAddTabChar();
+```
+
+Example result: `\t`
+
+### testAddTabChars
+
+```php
+$regEx->testAddTabChars();
+```
+
+Example result: `\t*`
+
+### addAnd
+
+```php
+$regEx->addAnd('ht')->addAnd('tp');
+```
+
+Example result: `http`
+
+### addOr
+
+```php
+$regEx->addOr('http', 'https');
+```
+
+Example result: `http|https`
+
+### addOption
+
+```php
+$regEx->addAnd('http')->addAnd('s');
+```
+
+Example result: `https(?:s)?`
+
+### addCapturingGroup
+
+```php
+$regEx->addCapturingGroup('test');
+```
+
+Example result: `(test)`
+
 ## PHPVerbalExpressions
 
 RegEx has been inspired by [PHPVerbalExpressions](https://github.com/VerbalExpressions/PHPVerbalExpressions).
