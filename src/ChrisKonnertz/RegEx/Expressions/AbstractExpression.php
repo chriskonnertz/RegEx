@@ -156,6 +156,20 @@ abstract class AbstractExpression
     }
 
     /**
+     * Returns the name of the expression type that the (concrete) expression class represents
+     *
+     * @return string
+     */
+    public function getTypeName()
+    {
+        $reflecion = new \ReflectionClass($this);
+
+        $shortName = $reflecion->getShortName();
+
+        return $shortName;
+    }
+
+    /**
      * Returns the complete regular expression as a string.
      * The concrete expression class has to implement this class.
      *

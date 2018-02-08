@@ -485,7 +485,7 @@ class RegEx
                     throw new \LogicException('Expected AbstractExpression but got something else');
                 }
 
-                $type = basename(get_class($expression));
+                $type = $expression->getTypeName();
                 $info = ' (Size: '.$expression->getSize().'): ';
                 $value = $expression->toString();
             } else {
