@@ -40,7 +40,7 @@ class RegEx
      * Shortcut of the "extended" ("x") modifier.
      * If active, whitespace is permitted.
      * */
-    const EXTENDED_MODIFIER_SHORTCUT = 'i';
+    const EXTENDED_MODIFIER_SHORTCUT = 'x';
 
     /**
      * Array with all available modifier shortcuts

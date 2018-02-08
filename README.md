@@ -281,7 +281,7 @@ $stringified = $regEx->toString();
 ```
 
 Returns the concatenated partial regular expressions as a string.
-The magic method `__toString` ahs been implemented as well so you may convert the RegEx object to a string.
+The magic method `__toString` has been implemented as well so you may convert the RegEx object to a string.
 
 ## PHPVerbalExpressions
 
