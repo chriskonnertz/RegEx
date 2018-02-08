@@ -248,6 +248,6 @@ class RegExTest extends \PHPUnit\Framework\TestCase
             'OrEx (Size: 2): (?:man|woman)'.PHP_EOL.
             'string: man'.PHP_EOL.
             'string: woman'.PHP_EOL;
-        $this->$expected($expected, $regEx->getVisualisation(false));
+        $this->assertEquals($expected, $regEx->getVisualisation(false));
     }
 }
