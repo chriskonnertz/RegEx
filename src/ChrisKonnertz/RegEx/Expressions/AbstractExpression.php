@@ -128,6 +128,34 @@ abstract class AbstractExpression
     }
 
     /**
+     * Returns the number of partial expressions.
+     * If $recursive is false, only the partial expressions on the root level are counted.
+     * If $recursive is true, the method traverses trough all partial expressions and counts
+     * all partial expressions without sub expressions. Or with other words: If you visualize
+     * the regular expression as a tree then this method will only count its leaves.
+     *
+     * @param bool $recursive If true, also count nested expressions
+     * @return int
+     */
+    public function getSize($recursive = true) : int
+    {
+        if ($recursive) {
+            $size = 0;
+
+            $this->traverse(function($expression, int $level, bool $hasChildren) use (&$size)
+            {
+                if (! $hasChildren) {
+                    $size++;
+                }
+            });
+
+            return $size;
+        } else {
+            return sizeof($this->expressions);
+        }
+    }
+
+    /**
      * Returns the complete regular expression as a string.
      * The concrete expression class has to implement this class.
      *

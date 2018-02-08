@@ -38,10 +38,10 @@ class RegExTest extends \PHPUnit\Framework\TestCase
     {
         $regEx = $this->getInstance();
 
-        $regEx->addAnd("http")
-            ->addOption("s")
-            ->addAnd("://")
-            ->addOption("www.")
+        $regEx->addAnd('http')
+            ->addOption('s')
+            ->addAnd('://')
+            ->addOption('www.')
             ->addWordChars()
             ->addAnd('.')
             ->addWordChars();
@@ -144,10 +144,10 @@ class RegExTest extends \PHPUnit\Framework\TestCase
     {
         $regEx = $this->getInstance();
 
-        $regEx->addAnd("http")
-            ->addOption("s")
-            ->addAnd("://")
-            ->addOption("www.")
+        $regEx->addAnd('http')
+            ->addOption('s')
+            ->addAnd('://')
+            ->addOption('www.')
             ->addRaw('.*');
 
         $regEx->traverse(function($expression, int $level, bool $hasChildren)
@@ -204,10 +204,10 @@ class RegExTest extends \PHPUnit\Framework\TestCase
     {
         $regEx = $this->getInstance();
 
-        $regEx->addAnd("http")
-            ->addOption("s")
-            ->addAnd("://")
-            ->addOption("www.")
+        $regEx->addAnd('http')
+            ->addOption('s')
+            ->addAnd('://')
+            ->addOption('www.')
             ->addRaw('.*');
 
         $expected = 5;
@@ -226,5 +226,20 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals($start, $regEx->getStart());
         $this->assertEquals($end, $regEx->getEnd());
+    }
+
+    public function testVisualisation()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addAnd('some ')
+            ->addOr('man', 'woman');
+
+        $expected = '<pre><strong>AndEx</strong> (Size: 1): <code style="background-color: #DDD">(?:some )</code><br>'.
+            '&nbsp;&nbsp;<strong>string</strong>: <code style="background-color: #DDD">some </code><br><strong>OrEx'.
+            '</strong> (Size: 2): <code style="background-color: #DDD">(?:man|woman)</code><br>&nbsp;&nbsp;<strong>'.
+            'string</strong>: <code style="background-color: #DDD">man</code><br>&nbsp;&nbsp;<strong>string</strong>'.
+            ': <code style="background-color: #DDD">woman</code><br></pre>';
+        $this->assertEquals($expected, $regEx->getVisualisation(false));
     }
 }

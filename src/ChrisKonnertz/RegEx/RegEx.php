@@ -57,7 +57,7 @@ class RegEx
     /**
      * The current version number
      */
-    const VERSION = '0.9.0';
+    const VERSION = '0.9.1';
 
     /**
      * The start of the regular expression (=prefix)
@@ -459,15 +459,56 @@ class RegEx
     }
 
     /**
-     * Removes all partial expressions.
+     * Returns a "visualisation" of the structure of the regular expression.
+     * This might be helpful if you try to understand how the regular expression is built.
+     * If the parameter is set to true, the result may include HTML tags.
      *
-     * @return self
+     * @param bool $html If true, use HTML tags to prettify the visualisation
+     * @return string
      */
-    public function clear()
+    public function getVisualisation(bool $html = true)
     {
-        $this->expressions = [];
+        $output = '';
 
-        return $this;
+        $this->traverse(function($expression, int $level, bool $hasChildren) use (&$output, $html)
+        {
+            $lineBreak = $html ? '<br>' : PHP_EOL;
+            $space = $html ? '&nbsp;' : ' ';
+
+            $type = '';
+            $info = '';
+            $value = '';
+            if ($expression instanceof Closure) {
+                $type = gettype($expression);
+            } elseif (is_object($expression)) {
+                if (! $expression instanceof AbstractExpression) {
+                    throw new \LogicException('Expected AbstractExpression but got something else');
+                }
+
+                $type = basename(get_class($expression));
+                $info = ' (Size: '.$expression->getSize().'): ';
+                $value = $expression->toString();
+            } else {
+                $type = gettype($expression);
+                $info = ': ';
+                $value = $expression;
+            }
+
+            if ($html) {
+                $type = '<strong>'.$type.'</strong>';
+                if ($value !== '') {
+                    $value = '<code style="background-color: #DDD">' . htmlspecialchars($value) . '</code>';
+                }
+            }
+
+            $output .= str_repeat($space, $level * 2).$type.$info.$value.$lineBreak;
+        });
+
+        if ($html) {
+            $output = '<pre>'.$output.'</pre>';
+        }
+
+        return $output;
     }
 
     /**
@@ -506,6 +547,18 @@ class RegEx
     public function getExpressions() : array
     {
         return $this->expressions;
+    }
+
+    /**
+     * Removes all partial expressions.
+     *
+     * @return self
+     */
+    public function clear()
+    {
+        $this->expressions = [];
+
+        return $this;
     }
 
     /**

@@ -281,6 +281,17 @@ $regEx->setEnd('/')
 
 Setter for the "end" property
 
+### getVisualisation
+
+```php
+$visualisation = $regEx->getStructure(true);
+echo $visualisation;
+```
+
+Returns a "visualisation" of the structure of the regular expression. 
+This might be helpful if you try to understand how the regular expression is built. 
+If the parameter is set to true, the result may include HTML tags. 
+
 ### toString
 
 ```php
