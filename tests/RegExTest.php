@@ -240,6 +240,14 @@ class RegExTest extends \PHPUnit\Framework\TestCase
             '</strong> (Size: 2): <code style="background-color: #DDD">(?:man|woman)</code><br>&nbsp;&nbsp;<strong>'.
             'string</strong>: <code style="background-color: #DDD">man</code><br>&nbsp;&nbsp;<strong>string</strong>'.
             ': <code style="background-color: #DDD">woman</code><br></pre>';
-        $this->assertEquals($expected, $regEx->getVisualisation(false));
+        $this->assertEquals($expected, $regEx->getVisualisation());
+        $this->assertEquals($expected, $regEx->getVisualisation(true));
+
+        $expected = 'AndEx (Size: 1): (?:some )'.PHP_EOL.
+            'string: some '.PHP_EOL.
+            'OrEx (Size: 2): (?:man|woman)'.PHP_EOL.
+            'string: man'.PHP_EOL.
+            'string: woman'.PHP_EOL;
+        $this->$expected($expected, $regEx->getVisualisation(false));
     }
 }
