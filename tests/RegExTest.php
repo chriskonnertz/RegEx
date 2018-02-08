@@ -244,10 +244,10 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $regEx->getVisualisation(true));
 
         $expected = 'AndEx (Size: 1): (?:some )'.PHP_EOL.
-            'string: some '.PHP_EOL.
+            '  string: some '.PHP_EOL.
             'OrEx (Size: 2): (?:man|woman)'.PHP_EOL.
-            'string: man'.PHP_EOL.
-            'string: woman'.PHP_EOL;
+            '  string: man'.PHP_EOL.
+            '  string: woman'.PHP_EOL;
         $this->assertEquals($expected, $regEx->getVisualisation(false));
     }
 }
