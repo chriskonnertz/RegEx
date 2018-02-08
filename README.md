@@ -34,13 +34,20 @@ $regEx = new ChrisKonnertz\RegEx\RegEx();
 $regEx->addAnd('http')
       ->addOption('s')
       ->addAnd('://')
-      ->addOption('www.');
+      ->addOption('www.')
+      ->addWordChars()
+      ->addAnd('.')
+      ->addWordChars();
       
 echo $regEx;
 ```
 
-This will print out `/(?:http)(?:s)?(?:\:\/\/)(?:www\.)?/`. There is not much beauty in this but this is a valid
-regular expression. Note that special characters will be quoted. You may call the `addRaw()` method to avoid this behaviour.
+This will print out `/(?:http)(?:s)?(?:\:\/\/)(?:www\.)?(?:\w*)(?:\.)(?:\w*)/` and  
+match for example `https://www.example.org`. 
+There is not much beauty in this regular expression. However, it is valid.
+
+Note that special characters will be quoted. 
+You may call the `addRaw()` method to avoid this behaviour.
 
 ## Builder methods
 

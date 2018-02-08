@@ -41,9 +41,12 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->addAnd("http")
             ->addOption("s")
             ->addAnd("://")
-            ->addOption("www.");
+            ->addOption("www.")
+            ->addWordChars()
+            ->addAnd('.')
+            ->addWordChars();
 
-        $expected = '/(?:http)(?:s)?(?:\:\/\/)(?:www\.)?/';
+        $expected = '/(?:http)(?:s)?(?:\:\/\/)(?:www\.)?(?:\w*)(?:\.)(?:\w*)/';
         $this->assertEquals($expected, $regEx->toString());
     }
 
