@@ -177,12 +177,24 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx = $this->getInstance();
 
         $expected = [];
-        $this->assertEquals($expected, $regEx->getCurrentModifiers());
+        $this->assertEquals($expected, $regEx->getActiveModifiers());
 
         $regEx->setMultiLineModifier(true);
+        $regEx->setSingleLineModifier(true);
+        $regEx->setInsensitiveModifier(true);
+        $regEx->setExtendedModifier(true);
 
-        $expected = [RegEx::MULTI_LINE_MODIFIER_SHORTCUT];
-        $this->assertEquals($expected, $regEx->getCurrentModifiers());
+        $expected = [
+            RegEx::MULTI_LINE_MODIFIER_SHORTCUT,
+            RegEx::SINGLE_LINE_MODIFIER_SHORTCUT,
+            RegEx::INSENSITIVE_MODIFIER_SHORTCUT,
+            RegEx::EXTENDED_MODIFIER_SHORTCUT,
+        ];
+        $this->assertEquals($expected, $regEx->getActiveModifiers());
+
+        $this->assertEquals(true, $regEx->isModifierActive(RegEx::MULTI_LINE_MODIFIER_SHORTCUT));
+        $regEx->setMultiLineModifier(false);
+        $this->assertEquals(false, $regEx->isModifierActive(RegEx::MULTI_LINE_MODIFIER_SHORTCUT));
     }
 
     public function testGetExpressions()
@@ -197,5 +209,19 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $expected = 5;
         $this->assertEquals($expected, sizeof($regEx->getExpressions()));
+    }
+
+    public function testStartAndEnd()
+    {
+        $regEx = $this->getInstance();
+
+        $start = $regEx->getStart().'start';
+        $end = $regEx->getEnd().'end';
+
+        $regEx->setStart($start);
+        $regEx->setEnd($end);
+
+        $this->assertEquals($start, $regEx->getStart());
+        $this->assertEquals($end, $regEx->getEnd());
     }
 }

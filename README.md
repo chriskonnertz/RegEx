@@ -7,7 +7,7 @@ Use methods to fluently create a regular expression in PHP.
 This is more intuitive and understandable than writing plain regular expressions.
 
 
-**State: Alpha**
+**Current state: beta**
 
 ## Installation
 
@@ -142,6 +142,145 @@ $regEx->addCapturingGroup('test');
 ```
 
 Example result: `(test)`
+
+## Miscellaneous methods
+
+### setModifier
+
+```php
+$regEx->setModifier(RegEx::MULTI_LINE_MODIFIER_SHORTCUT, true);
+```
+
+Activates or deactivates a modifier. 
+The current state of the modifier does not matter, so for example you can 
+(pseudo-)deactivate a modifier before ever activating it.
+
+[Learn more about modifiers...](http://php.net/manual/en/reference.pcre.pattern.modifiers.php)
+
+### setInsensitiveModifier etc.
+
+```php
+$regEx->setInsensitiveModifier();
+$regEx->setInsensitiveModifier(true);
+$regEx->setInsensitiveModifier(false);
+```
+
+Activates or deactivates the "insensitive" ("i") modifier.
+There are setters for all modifiers.
+
+### getActiveModifiers
+
+```php
+$modifiers = $regEx->getActiveModifiers();
+```
+
+Returns an array with the modifier shortcuts that are currently active.
+
+### isModifierActive()
+
+```php
+$active = $regEx->isModifierActive(RegEx::MULTI_LINE_MODIFIER_SHORTCUT);
+```
+
+Decides if a modifier is active or not
+
+### test
+
+```php
+$matches = $regEx->test('https//www.example.com/');
+```
+
+Tests a given subject (a string) against the regular expression.
+Returns the matches.
+Throws an exception when there occurs an error while testing.
+
+### traverse
+
+```php
+$regEx->traverse(function($expression, int $level, bool $hasChildren)
+{
+    var_dump($expression, $level, $hasChildren);
+});
+```
+
+Call this method if you want to traverse it and all of it child expression, 
+no matter how deep they are nested in the tree. You only have to pass a closure, 
+you do not have to pass an argument for the level parameter. 
+The callback will have three arguments: The first is the child expression 
+(an object of type AbstractExpression or a string | int | float), 
+the second is the level of the that expression and the third tells you if 
+it has children.
+
+### clear
+
+```php
+$regEx->clear();
+```
+
+Removes all partial expressions.
+
+### getSize
+
+```php
+$flatSize = $regEx->getSize();
+$deepSize = $regEx->getSize(true);
+```
+Returns the number of partial expressions. 
+If the parameter is false, only the partial expressions on the root level are counted. 
+If the parameter is true, the method traverses trough all partial expressions and counts 
+all partial expressions without sub expressions. Or with other words: If you visualize 
+the regular expression as a tree then this method will only count its leaves.
+
+### getExpressions
+
+```php
+$expressions = $regEx->getExpressions();
+```
+
+Getter for the partial expressions array.
+
+
+### getStart
+
+```php
+$start = $regEx->getStart()
+```
+
+Getter for the "start" property
+
+### setStart
+
+```php
+$regEx->setStart('/')
+```
+
+Setter for the "start" property. 
+This is a raw string.
+
+### getEnd
+
+```php
+$end = $regEx->getEnd()
+```
+
+Getter for the "end" property. 
+This is a raw string - it is not quoted.
+
+### setEnd
+
+```php
+$regEx->setEnd('/')
+```
+
+Setter for the "end" property
+
+### toString
+
+```php
+$stringified = $regEx->toString();
+```
+
+Returns the concatenated partial regular expressions as a string.
 
 ## PHPVerbalExpressions
 

@@ -57,7 +57,7 @@ class RegEx
     /**
      * The current version number
      */
-    const VERSION = '0.8.1';
+    const VERSION = '0.9.0';
 
     /**
      * The start of the regular expression (=prefix)
@@ -119,7 +119,7 @@ class RegEx
      *
      * Example resulting regex: \w
      *
-     * @return RegEx
+     * @return self
      */
     public function addWordChar()
     {
@@ -133,7 +133,7 @@ class RegEx
      *
      * Example resulting regex: \w*
      *
-     * @return RegEx
+     * @return self
      */
     public function addWordChars()
     {
@@ -146,7 +146,7 @@ class RegEx
      *
      * Example resulting regex: \t
      *
-     * @return RegEx
+     * @return self
      */
     public function addWhiteSpaceChar()
     {
@@ -159,7 +159,7 @@ class RegEx
      *
      * Example resulting regex: \s*
      *
-     * @return RegEx
+     * @return self
      */
     public function addWhiteSpaceChars()
     {
@@ -171,7 +171,7 @@ class RegEx
      *
      * Example resulting regex: \t
      *
-     * @return RegEx
+     * @return self
      */
     public function addTabChar()
     {
@@ -183,7 +183,7 @@ class RegEx
      *
      * Example resulting regex: \t*
      *
-     * @return RegEx
+     * @return self
      */
     public function addTabChars()
     {
@@ -384,11 +384,34 @@ class RegEx
     }
 
     /**
+     * Returns an array with the modifier shortcuts that are currently active
+     *
+     * @return string[]
+     */
+    public function getActiveModifiers() : array
+    {
+        return $this->modifiers;
+    }
+
+    /**
+     * Decides if a modifier is active or not
+     *
+     * @param string $modifierShortcut The modifier shortcut, a single character -> self::MODIFIER_SHORTCUTS
+     * @return bool
+     */
+    public function isModifierActive(string $modifierShortcut) : bool
+    {
+        $activeModifiers = $this->getActiveModifiers();
+
+        return in_array($modifierShortcut, $activeModifiers);
+    }
+
+    /**
      * Tests a given subject (a string) against the regular expression.
      * Returns the matches.
      * Throws an exception when there occurs an error while testing.
      *
-     * @param string $subject
+     * @param string $subject The subject to test
      * @return array
      * @throws \Exception
      */
@@ -425,7 +448,7 @@ class RegEx
      *
      * You may also look at the self::getSize() method as another example.
      *
-     * @param Closure $callback
+     * @param Closure $callback The callback closure
      * @return void
      */
     public function traverse(Closure $callback)
@@ -454,7 +477,7 @@ class RegEx
      * all partial expressions without sub expressions. Or with other words: If you visualize
      * the regular expression as a tree then this method will only count its leaves.
      *
-     *
+     * @param bool $recursive If true, also count nested expressions
      * @return int
      */
     public function getSize($recursive = true) : int
@@ -525,16 +548,6 @@ class RegEx
     public function setEnd(string $end)
     {
         $this->end = $end;
-    }
-
-    /**
-     * Returns an array with the modifier shortcuts that are currently active
-     *
-     * @return string[]
-     */
-    public function getCurrentModifiers() : array
-    {
-        return $this->modifiers;
     }
     
     /**
