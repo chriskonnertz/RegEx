@@ -29,9 +29,9 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx = $this->getInstance();
         $regEx->addAnd('test');
 
-        $stringyfied = ''.$regEx;
+        $stringified = ''.$regEx;
 
-        $this->assertEquals($regEx->toString(), $stringyfied);
+        $this->assertEquals($regEx->toString(), $stringified);
     }
 
     public function testExample()
@@ -87,6 +87,26 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->addAnyChars();
 
         $expected = '/(?:.*)/';
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddDigit()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addDigit();
+
+        $expected = '/(?:\d)/';
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddDigits()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addDigits();
+
+        $expected = '/(?:\d*)/';
         $this->assertEquals($expected, $regEx->toString());
     }
 

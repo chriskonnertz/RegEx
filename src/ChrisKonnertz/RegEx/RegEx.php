@@ -127,6 +127,32 @@ class RegEx
     }
 
     /**
+     * Adds a partial expression that expects a single digit.
+     * Same as: [0-9]
+     *
+     * Example resulting regex: \d
+     *
+     * @return self
+     */
+    public function addDigit()
+    {
+        return $this->addRaw('\d');
+    }
+
+    /**
+     * Adds a partial expression that expects 0..m of digits.
+     * Same as: [0-9]*
+     *
+     * Example resulting regex: \d*
+     *
+     * @return self
+     */
+    public function addDigits()
+    {
+        return $this->addRaw('\d*');
+    }
+
+    /**
      * Adds a partial expression that expects a single word character.
      * This includes letters, digits and the underscore.
      * Same as: [a-zA-Z_0-9]
@@ -143,7 +169,7 @@ class RegEx
     /**
      * Adds a partial expression that expects 0..m of word characters.
      * This includes letters, digits and the underscore.
-     * Same as: [a-zA-Z_0-9]
+     * Same as: [a-zA-Z_0-9]*
      *
      * Example resulting regex: \w*
      *

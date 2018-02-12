@@ -71,6 +71,22 @@ $regEx->addAnyChars();
 
 Example result: `.*`
 
+### addDigit
+
+```php
+$regEx->addDigit();
+```
+
+Example result: `\d`
+
+### addDigits
+
+```php
+$regEx->addDigits();
+```
+
+Example result: `\d*`
+
 ### addWordChar
 
 ```php
