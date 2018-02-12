@@ -8,7 +8,8 @@ This is more intuitive and understandable than writing plain regular expressions
 
 
 **Current state: beta**
-** To do: Add ^ and $ support, add [] support 
+
+**To do**: Add ^ and $ support, add [] support 
 
 ## Installation
 
