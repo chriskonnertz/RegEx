@@ -166,7 +166,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         });
     }
 
-    public function getSize()
+    public function testGetSize()
     {
         $regEx = $this->getInstance();
 
