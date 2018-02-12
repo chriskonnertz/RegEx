@@ -50,14 +50,24 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $regEx->toString());
     }
 
+    public function testAddComment()
+    {
+        $regEx = $this->getInstance();
+
+        $comment = 'Hello.';
+        $regEx->addComment($comment);
+
+        $this->assertEquals('/(?#'.$comment.')/', $regEx->toString());
+    }
+
     public function testAddRaw()
     {
         $regEx = $this->getInstance();
 
-        $expected = '.*';
-        $regEx->addRaw($expected);
+        $raw = '.*';
+        $regEx->addRaw($raw);
 
-        $this->assertEquals('/(?:'.$expected.')/', $regEx->toString());
+        $this->assertEquals('/(?:'.$raw.')/', $regEx->toString());
     }
 
     public function testAddAnyChar()

@@ -35,7 +35,7 @@ class RepetitionEx extends AbstractExpression
      *
      * @param int $min The minimum of repetitions. Must be >= 0.
      * @param int $max The maximum of repetitions. Must be >= 0 and >= $min.
-     * @param string|int|float|AbstractExpression ...$expressions The partial expressions
+     * @param string|int|float|bool|AbstractExpression ...$expressions The partial expressions
      */
     public function __construct(int $min, int $max, ...$expressions)
     {
@@ -59,7 +59,7 @@ class RepetitionEx extends AbstractExpression
 
     /**
      * Validates the partial expressions that are passed to the constructor of the concrete class.
-     * Valid types of the array values are: string|int|float|AbstractExpression
+     * Valid types of the array values are: string|int|float|bool|AbstractExpression
      * Feel free to override this method if you need enhanced validation.
      *
      * @param array $expressions

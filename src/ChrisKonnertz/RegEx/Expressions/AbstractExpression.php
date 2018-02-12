@@ -15,7 +15,7 @@ abstract class AbstractExpression
 
     /**
      * Array with all partial expressions (at least one) of the overall expression.
-     * Valid types of the array values are: string|int|float|AbstractExpression
+     * Valid types of the array values are: string|int|float|bool|AbstractExpression
      *
      * @var array
      */
@@ -24,7 +24,7 @@ abstract class AbstractExpression
     /**
      * Constructor of the abstract expression class.
      *
-     * @param string|int|float|AbstractExpression ...$expressions The partial expressions
+     * @param string|int|float|bool|AbstractExpression ...$expressions The partial expressions
      */
     public function __construct(...$expressions)
     {
@@ -33,7 +33,7 @@ abstract class AbstractExpression
 
     /**
      * Validates the partial expressions that are passed to the constructor of the concrete class.
-     * Valid types of the array values are: string|int|float|AbstractExpression
+     * Valid types of the array values are: string|int|float|bool|AbstractExpression
      * Feel free to override this method if you need enhanced validation.
      *
      * @param array $expressions
@@ -74,7 +74,7 @@ abstract class AbstractExpression
     }
 
     /**
-     * Quotes regular expression characters and returns the result.
+     * Quotes (escapes) regular expression characters and returns the result.
      * Example: "Hello." => "Hello\."
      *
      * @see http://php.net/manual/en/function.preg-quote.php
@@ -92,7 +92,7 @@ abstract class AbstractExpression
      * no matter how deep they are nested in the tree. You only have to pass a closure,
      * you do not have to pass an argument for the level parameter.
      * The callback will have three arguments: The first is the child expression
-     * (an object of type AbstractExpression or a string | int | float),
+     * (an object of type AbstractExpression or a string | int | float | bool),
      * the second is the level of the that expression and the third tells you if
      * it has children.
      *

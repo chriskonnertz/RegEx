@@ -89,6 +89,20 @@ class RegEx
     protected $modifiers = [];
 
     /**
+     * Quotes (escapes) regular expression characters and returns the result.
+     * Example: "Hello." => "Hello\."
+     *
+     * @see http://php.net/manual/en/function.preg-quote.php
+     *
+     * @param int|float|bool|string $expression
+     * @return string
+     */
+    public function quote($expression)
+    {
+        return preg_quote($expression, RegEx::DELIMITER);
+    }
+
+    /**
      * Adds a partial expression that expects any single character (except by default "new line").
      *
      * Example resulting regex: .
@@ -196,7 +210,7 @@ class RegEx
      *
      * Example resulting regex: ab
      *
-     * @param string|int|float|Closure|AbstractExpression $partialExpressions
+     * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
      */
     public function addAnd(...$partialExpressions)
@@ -219,7 +233,7 @@ class RegEx
      *
      * Example resulting regex: (a|b)
      *
-     * @param string|int|float|Closure|AbstractExpression $partialExpressions
+     * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
      */
     public function addOr(...$partialExpressions)
@@ -242,7 +256,7 @@ class RegEx
      *
      * Example resulting regex: a?
      *
-     * @param string|int|float|Closure|AbstractExpression $partialExpressions
+     * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
      */
     public function addOption(...$partialExpressions)
@@ -266,7 +280,7 @@ class RegEx
      *
      * Example resulting regex: (a)
      *
-     * @param string|int|float|Closure|AbstractExpression $partialExpressions
+     * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
      */
     public function addCapturingGroup(...$partialExpressions)
@@ -284,12 +298,47 @@ class RegEx
     }
 
     /**
+     * Add one ore more comments to the overall regular expression and wrap them in a "comment" expression.
+     * This expression will not quote its regular expression characters.
+     * ATTENTION: Comments are not allowed to include any closing brackets ( ")" )! Quoting them will not work.
+     *
+     * Example resulting regex: (#this is a comment)
+     *
+     * @param string|int|float|bool $comments
+     * @return self
+     */
+    public function addComment(...$comments)
+    {
+        foreach ($comments as $key => $comment) {
+            if (! is_scalar($comment)) {
+                throw new \InvalidArgumentException(
+                    'Expected the '.($key + 1).'. comment to be scalar (int / float / string / boolean) but it is: '.
+                    gettype($comment)
+                );
+            }
+
+            $pos = mb_strpos($comment, ')');
+            if ($pos !== false) {
+                throw new \InvalidArgumentException(
+                    'Comments are not allowed to include a closing bracket but there is one in the '.($key + 1)
+                    .'. comment at position '.$pos
+                );
+            }
+        }
+
+        $wrapperExpression = new Expressions\CommentEx(...$comments);
+        $this->expressions[] = $wrapperExpression;
+
+        return $this;
+    }
+
+    /**
      * Add one ore more partial expressions to the overall regular expression and wrap them in a "raw" expression.
      * This expression will not quote its regular expression characters.
      *
      * Example resulting regex: a-b
      *
-     * @param string|int|float|Closure|AbstractExpression $partialExpressions
+     * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
      */
     public function addRaw(...$partialExpressions)
@@ -435,7 +484,7 @@ class RegEx
      * no matter how deep they are nested in the tree. You only have to pass a closure,
      * you do not have to pass an argument for the level parameter.
      * The callback will have three arguments: The first is the child expression
-     * (an object of type AbstractExpression or a string | int | float),
+     * (an object of type AbstractExpression or a string | int | float | bool),
      * the second is the level of the that expression and the third tells you if
      * it has children.
      *

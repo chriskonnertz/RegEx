@@ -12,7 +12,7 @@ class OrEx extends AbstractExpression
 
     /**
      * Validates the partial expressions that are passed to the constructor of the concrete class.
-     * Valid types of the array values are: string|int|float|AbstractExpression
+     * Valid types of the array values are: string|int|float|bool|AbstractExpression
      * Feel free to override this method if you need enhanced validation.
      *
      * @param array $expressions

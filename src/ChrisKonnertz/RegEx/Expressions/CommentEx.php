@@ -7,7 +7,7 @@ namespace ChrisKonnertz\RegEx\Expressions;
  *
  * Example resulting regex: a-b
  */
-class RawEx extends AbstractExpression
+class CommentEx extends AbstractExpression
 {
 
     /**
@@ -31,7 +31,7 @@ class RawEx extends AbstractExpression
      */
     public function toString()
     {
-        $regEx = '(?:';
+        $regEx = '(?#';
 
         foreach ($this->expressions as $expression) {
             $regEx .= $expression;

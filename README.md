@@ -150,7 +150,26 @@ $regEx->addCapturingGroup('test');
 
 Example result: `(test)`
 
+### addComment
+
+```php
+$regEx->addComment('Hello world');
+```
+
+Example result: `(?#hello world)`
+
+> Consider to use a PHP comment instead.
+
 ## Miscellaneous methods
+
+### quote
+
+```php
+$quoted = $regEx->quote('Hello.')
+```
+
+Quotes (escapes) regular expression characters and returns the result. 
+Example: "Hello." => "Hello\\."
 
 ### setModifier
 
