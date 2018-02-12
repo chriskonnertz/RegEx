@@ -66,12 +66,25 @@ abstract class AbstractExpression
 
         foreach ($expressions as &$expression) {
             if (! $expression instanceof AbstractExpression) {
-                /** @see http://php.net/manual/en/function.preg-quote.php */
-                $expression = preg_quote($expression, RegEx::DELIMITER);
+                $expression = $this->quote($expression);
             }
         }
 
         $this->expressions = $expressions;
+    }
+
+    /**
+     * Quotes regular expression characters and returns the result.
+     * Example: "Hello." => "Hello\."
+     *
+     * @see http://php.net/manual/en/function.preg-quote.php
+     *
+     * @param int|float|bool|string $expression
+     * @return string
+     */
+    public function quote($expression)
+    {
+        return preg_quote($expression, RegEx::DELIMITER);
     }
 
     /**
