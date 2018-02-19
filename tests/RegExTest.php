@@ -33,7 +33,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
      */
     protected function wrapPartialRegEx($content)
     {
-        return '/(?:'.$content.'.)/';
+        return '/(?:'.$content.')/';
     }
 
     public function testMagicToString()
