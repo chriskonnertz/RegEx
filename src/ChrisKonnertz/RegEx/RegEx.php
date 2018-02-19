@@ -512,6 +512,8 @@ class RegEx
      * Returns the matches.
      * Throws an exception when there occurs an error while testing.
      *
+     * @see preg_match()
+     *
      * @param string $subject The subject to test
      * @return array
      * @throws \Exception
@@ -529,6 +531,32 @@ class RegEx
         }
 
         return $matches;
+    }
+
+    /**
+     * Perform search and replace with the regular expression.
+     * Returns the modified string.
+     *
+     * @see preg_replace()
+     *
+     * @param string|string[] $replacement The string or an array with strings to replace.
+     * @param string|string[] $source      The string or an array with strings to search and replace.
+     * @param int             $limit       The maximum possible replacements for each pattern. -1 = no limit
+     * @param int             $count       If specified, this param will be filled with the number of replacements done.
+     * @return string|\string[]
+     * @throws \Exception
+     */
+    public function replace(string $replacement, string $source, $limit = -1, &$count = -1)
+    {
+        $regEx = $this->toString();
+
+        $result = preg_replace($regEx, $replacement, $source, $limit, $count);
+
+        if ($result === null) {
+            throw new \Exception('Error when executing PHP\'s preg_replace() function');
+        }
+
+        return $result;
     }
 
     /**

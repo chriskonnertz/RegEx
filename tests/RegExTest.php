@@ -202,6 +202,19 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $regEx->toString());
     }
 
+    public function testReplace()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addAnd('hate');
+
+        $expected = 'We like to like code';
+        $this->assertEquals($expected, $regEx->replace('like', 'We hate to hate code'));
+
+        $this->assertEquals($expected, $regEx->replace('like', 'We hate to hate code', PHP_INT_MAX, $count));
+        $this->assertEquals(1, $count);
+    }
+
     public function testTraverse()
     {
         $regEx = $this->getInstance();

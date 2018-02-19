@@ -9,7 +9,7 @@ This is more intuitive and understandable than writing plain regular expressions
 
 **Current state: beta**
 
-**To do**: Add builder method descriptions, add [] support 
+**To do**: Add [] support 
 
 ## Installation
 
