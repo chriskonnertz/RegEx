@@ -325,4 +325,16 @@ class RegExTest extends \PHPUnit\Framework\TestCase
             '  string: woman'.PHP_EOL;
         $this->assertEquals($expected, $regEx->getVisualisation(false));
     }
+
+    public function testClear()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addAnd('Some random stuff');
+        $regEx->setExtendedModifier(true);
+        $regEx->clear();
+
+        $this->assertEquals(0, sizeof($regEx->getExpressions()));
+        $this->assertEquals(0, sizeof($regEx->getActiveModifiers()));
+    }
 }

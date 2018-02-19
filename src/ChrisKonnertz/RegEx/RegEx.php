@@ -687,6 +687,7 @@ class RegEx
     public function clear()
     {
         $this->expressions = [];
+        $this->modifiers = [];
 
         return $this;
     }
