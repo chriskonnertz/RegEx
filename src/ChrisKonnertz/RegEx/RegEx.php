@@ -57,7 +57,7 @@ class RegEx
     /**
      * The current version number
      */
-    const VERSION = '0.9.3';
+    const VERSION = '0.9.4';
 
     /**
      * The start of the regular expression (=prefix)
@@ -680,7 +680,7 @@ class RegEx
     }
 
     /**
-     * Removes all partial expressions.
+     * Resets the regular expression.
      *
      * @return self
      */
@@ -688,6 +688,8 @@ class RegEx
     {
         $this->expressions = [];
         $this->modifiers = [];
+        $this->start = self::DELIMITER;
+        $this->end = self::DELIMITER;
 
         return $this;
     }
