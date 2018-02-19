@@ -212,7 +212,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $regEx->replace('like', 'We hate to hate code'));
 
         $this->assertEquals($expected, $regEx->replace('like', 'We hate to hate code', PHP_INT_MAX, $count));
-        $this->assertEquals(1, $count);
+        $this->assertEquals(2, $count);
     }
 
     public function testTraverse()

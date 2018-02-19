@@ -534,8 +534,9 @@ class RegEx
     }
 
     /**
-     * Perform search and replace with the regular expression.
+     * Performs search and replace with the regular expression.
      * Returns the modified string.
+     * Throws an exception when there occurs an error while replacing.
      *
      * @see preg_replace()
      *

@@ -305,6 +305,16 @@ Tests a given subject (a string) against the regular expression.
 Returns the matches.
 Throws an exception when there occurs an error while testing.
 
+### replace
+
+```php
+$modified = $regEx->replace('like', 'We hate to hate code');
+```
+
+Performs search and replace with the regular expression.
+Returns the modified string.
+Throws an exception when there occurs an error while replacing.
+
 ### traverse
 
 ```php
