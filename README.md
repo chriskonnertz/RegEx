@@ -62,6 +62,8 @@ Some of them are simplified to make it easier to understand them.
 $regEx->addAnyChar();
 ```
 
+Adds a partial expression that expects any single character (except by default "new line").
+
 Example result: `.`
 
 ### addAnyChars
@@ -69,6 +71,8 @@ Example result: `.`
 ```php
 $regEx->addAnyChars();
 ```
+
+Adds a partial expression that expects 0..m of any characters (except by default "new line").
 
 Example result: `.*`
 
@@ -78,6 +82,9 @@ Example result: `.*`
 $regEx->addDigit();
 ```
 
+Adds a partial expression that expects a single digit.
+Same as: [0-9]
+
 Example result: `\d`
 
 ### addDigits
@@ -85,6 +92,9 @@ Example result: `\d`
 ```php
 $regEx->addDigits();
 ```
+
+Adds a partial expression that expects 0..m of digits.
+Same as: [0-9]*
 
 Example result: `\d*`
 
@@ -94,6 +104,10 @@ Example result: `\d*`
 $regEx->addWordChar();
 ```
 
+Adds a partial expression that expects a single word character.
+This includes letters, digits and the underscore.
+Same as: [a-zA-Z_0-9]
+
 Example result: `\w`
 
 ### addWordChars
@@ -101,6 +115,10 @@ Example result: `\w`
 ```php
 $regEx->addWordChars();
 ```
+
+Adds a partial expression that expects 0..m of word characters.
+This includes letters, digits and the underscore.
+Same as: [a-zA-Z_0-9]*
 
 Example result: `\w*`
 
@@ -110,6 +128,9 @@ Example result: `\w*`
 $regEx->addWhiteSpaceChar();
 ```
 
+Adds a partial expression that expects a white space character.
+This includes: space, \f, \n, \r, \t and \v
+
 Example result: `\s`
 
 ### addWhiteSpaceChars
@@ -117,6 +138,9 @@ Example result: `\s`
 ```php
 $regEx->addWhiteSpaceChars();
 ```
+
+Adds a partial expression that expects 0..m of white space characters.
+This includes: space, \f, \n, \r, \t and \v
 
 Example result: `\s*`
 
@@ -126,6 +150,8 @@ Example result: `\s*`
 $regEx->addTabChar();
 ```
 
+Adds a partial expression that expects a single tabulator (tab).
+
 Example result: `\t`
 
 ### addTabChars
@@ -133,6 +159,8 @@ Example result: `\t`
 ```php
 $regEx->addTabChars();
 ```
+
+Adds a partial expression that expects 0..m tabulators (tabs).
 
 Example result: `\t*`
 
@@ -142,6 +170,9 @@ Example result: `\t*`
 $regEx->addLineBeginning();
 ```
 
+Adds a partial expression that expects the beginning of a line.
+Line breaks mark the beginning of a line.
+
 Example result: `^`
 
 ### addLineEnd
@@ -149,6 +180,9 @@ Example result: `^`
 ```php
 $regEx->addLineEnd();
 ```
+
+Adds a partial expression that expects the end of a line.
+ Line breaks mark the end of a line.
 
 Example result: `$`
 
@@ -158,6 +192,9 @@ Example result: `$`
 $regEx->addAnd('ht')->addAnd('tp');
 ```
 
+Add a partial expression to the overall regular expression and wrap it in an "and" expression.
+This expression requires that all of its parts exist in the tested string.
+
 Example result: `http`
 
 ### addOr
@@ -165,6 +202,9 @@ Example result: `http`
 ```php
 $regEx->addOr('http', 'https');
 ```
+
+Add at least two partial expressions to the overall regular expression and wrap it in an "or" expression.
+This expression requires that one of its parts exists in the tested string.
 
 Example result: `http|https`
 
@@ -174,7 +214,10 @@ Example result: `http|https`
 $regEx->addAnd('http')->addAnd('s');
 ```
 
-Example result: `https(?:s)?`
+Add one ore more partial expressions to the overall regular expression and wrap them in an "optional" expression.
+The parts of this expression may or may not exist in the tested string.
+
+Example result: `https(s)?`
 
 ### addCapturingGroup
 
@@ -182,15 +225,23 @@ Example result: `https(?:s)?`
 $regEx->addCapturingGroup('test');
 ```
 
+Add one ore more partial expressions to the overall regular expression and wrap them in a "capturing group" expression.
+This expression will be added to the matches when the overall regular expression is tested.
+If you add more than one part these parts are linked by "and".
+
 Example result: `(test)`
 
 ### addComment
 
 ```php
-$regEx->addComment('Hello world');
+$regEx->addComment('This is a comment');
 ```
 
-Example result: `(?#hello world)`
+Add one ore more comments to the overall regular expression and wrap them in a "comment" expression.
+This expression will not quote its regular expression characters.
+ATTENTION: Comments are not allowed to include any closing brackets ( ")" )! Quoting them will not work.
+
+Example result: `(?#This is a comment)`
 
 > Consider to use a PHP comment instead.
 

@@ -57,7 +57,7 @@ class RegEx
     /**
      * The current version number
      */
-    const VERSION = '0.9.1';
+    const VERSION = '0.9.3';
 
     /**
      * The start of the regular expression (=prefix)
@@ -184,7 +184,7 @@ class RegEx
      * Adds a partial expression that expects a white space character.
      * This includes: space, \f, \n, \r, \t and \v
      *
-     * Example resulting regex: \t
+     * Example resulting regex: \s
      *
      * @return self
      */
@@ -244,7 +244,7 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that expects the end of a line
+     * Adds a partial expression that expects the end of a line.
      * Line breaks mark the end of a line.
      *
      * Example resulting regex: $
@@ -260,7 +260,7 @@ class RegEx
      * Add a partial expression to the overall regular expression and wrap it in an "and" expression.
      * This expression requires that all of its parts exist in the tested string.
      *
-     * Example resulting regex: ab
+     * Example resulting regex: http
      *
      * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
@@ -283,7 +283,7 @@ class RegEx
      * Add at least two partial expressions to the overall regular expression and wrap it in an "or" expression.
      * This expression requires that one of its parts exists in the tested string.
      *
-     * Example resulting regex: (a|b)
+     * Example resulting regex: (http|https)
      *
      * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
@@ -306,7 +306,7 @@ class RegEx
      * Add one ore more partial expressions to the overall regular expression and wrap them in an "optional" expression.
      * The parts of this expression may or may not exist in the tested string.
      *
-     * Example resulting regex: a?
+     * Example resulting regex: https(s)?
      *
      * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
@@ -330,7 +330,7 @@ class RegEx
      * This expression will be added to the matches when the overall regular expression is tested.
      * If you add more than one part these parts are linked by "and".
      *
-     * Example resulting regex: (a)
+     * Example resulting regex: (test)
      *
      * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
@@ -354,7 +354,7 @@ class RegEx
      * This expression will not quote its regular expression characters.
      * ATTENTION: Comments are not allowed to include any closing brackets ( ")" )! Quoting them will not work.
      *
-     * Example resulting regex: (#this is a comment)
+     * Example resulting regex: (?#This is a comment)
      *
      * @param string|int|float|bool $comments
      * @return self
