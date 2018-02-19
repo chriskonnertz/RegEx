@@ -24,6 +24,18 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         return new RegEx();
     }
 
+    /**
+     * Enhances a partial regular expression to a complete regular expression.
+     * Returns that regular expression as a string.
+     *
+     * @param $content
+     * @return string
+     */
+    protected function wrapPartialRegEx($content)
+    {
+        return '/(?:'.$content.'.)/';
+    }
+
     public function testMagicToString()
     {
         $regEx = $this->getInstance();
@@ -67,7 +79,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $raw = '.*';
         $regEx->addRaw($raw);
 
-        $this->assertEquals('/(?:'.$raw.')/', $regEx->toString());
+        $this->assertEquals($this->wrapPartialRegEx($raw), $regEx->toString());
     }
 
     public function testAddAnyChar()
@@ -76,7 +88,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addAnyChar();
 
-        $expected = '/(?:.)/';
+        $expected = $this->wrapPartialRegEx('.');
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -86,7 +98,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addAnyChars();
 
-        $expected = '/(?:.*)/';
+        $expected = $this->wrapPartialRegEx('.*');
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -96,7 +108,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addDigit();
 
-        $expected = '/(?:\d)/';
+        $expected = $this->wrapPartialRegEx('\d');
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -106,7 +118,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addDigits();
 
-        $expected = '/(?:\d*)/';
+        $expected = $this->wrapPartialRegEx('\d*');
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -116,7 +128,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addWordChar();
 
-        $expected = '/(?:\w)/';
+        $expected = $this->wrapPartialRegEx('\w');
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -126,7 +138,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addWordChars();
 
-        $expected = '/(?:\w*)/';
+        $expected = $this->wrapPartialRegEx('\w*');
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -136,7 +148,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addWhiteSpaceChar();
 
-        $expected = '/(?:\s)/';
+        $expected = $this->wrapPartialRegEx('\s');
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -146,7 +158,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addWhiteSpaceChars();
 
-        $expected = '/(?:\s*)/';
+        $expected = $this->wrapPartialRegEx('\s*');
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -156,7 +168,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addTabChar();
 
-        $expected = '/(?:\t)/';
+        $expected = $this->wrapPartialRegEx('\t');
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -166,7 +178,27 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addTabChars();
 
-        $expected = '/(?:\t*)/';
+        $expected = $this->wrapPartialRegEx('\t*');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddLineBeginning()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addLineBeginning();
+
+        $expected = $this->wrapPartialRegEx('^');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddLineEnd()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addLineEnd();
+
+        $expected = $this->wrapPartialRegEx('$');
         $this->assertEquals($expected, $regEx->toString());
     }
 

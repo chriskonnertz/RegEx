@@ -120,21 +120,37 @@ $regEx->addWhiteSpaceChars();
 
 Example result: `\s*`
 
-### testAddTabChar
+### addTabChar
 
 ```php
-$regEx->testAddTabChar();
+$regEx->addTabChar();
 ```
 
 Example result: `\t`
 
-### testAddTabChars
+### addTabChars
 
 ```php
-$regEx->testAddTabChars();
+$regEx->addTabChars();
 ```
 
 Example result: `\t*`
+
+### addLineBeginning
+
+```php
+$regEx->addLineBeginning();
+```
+
+Example result: `^`
+
+### addLineEnd
+
+```php
+$regEx->addLineEnd();
+```
+
+Example result: `$`
 
 ### addAnd
 

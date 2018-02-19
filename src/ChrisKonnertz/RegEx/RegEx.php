@@ -231,8 +231,34 @@ class RegEx
     }
 
     /**
+     * Adds a partial expression that expects the beginning of a line.
+     * Line breaks mark the beginning of a line.
+     *
+     * Example resulting regex: ^
+     *
+     * @return self
+     */
+    public function addLineBeginning()
+    {
+        return $this->addRaw('^');
+    }
+
+    /**
+     * Adds a partial expression that expects the end of a line
+     * Line breaks mark the end of a line.
+     *
+     * Example resulting regex: $
+     *
+     * @return self
+     */
+    public function addLineEnd()
+    {
+        return $this->addRaw('$');
+    }
+
+    /**
      * Add a partial expression to the overall regular expression and wrap it in an "and" expression.
-     * This expression requires that all of it parts exist in the tested string.
+     * This expression requires that all of its parts exist in the tested string.
      *
      * Example resulting regex: ab
      *
@@ -255,7 +281,7 @@ class RegEx
 
     /**
      * Add at least two partial expressions to the overall regular expression and wrap it in an "or" expression.
-     * This expression requires that one of it parts exists in the tested string.
+     * This expression requires that one of its parts exists in the tested string.
      *
      * Example resulting regex: (a|b)
      *
