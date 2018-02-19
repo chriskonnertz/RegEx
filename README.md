@@ -303,7 +303,7 @@ $matches = $regEx->test('https//www.example.com/');
 
 Tests a given subject (a string) against the regular expression.
 Returns the matches.
-Throws an exception when there occurs an error while testing.
+Throws an exception if an error occurs while testing.
 
 ### replace
 
@@ -313,7 +313,7 @@ $modified = $regEx->replace('like', 'We hate to hate code');
 
 Performs search and replace with the regular expression.
 Returns the modified string.
-Throws an exception when there occurs an error while replacing.
+Throws an exception if an error occurs while replacing.
 
 ### traverse
 
