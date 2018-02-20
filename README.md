@@ -44,7 +44,7 @@ $regEx->addAnd('http')
 echo $regEx;
 ```
 
-This will print out `/(?:http)(?:s)?(?:\:\/\/)(?:www\.)?(?:\w*)(?:\.)(?:\w*)/` and  
+This will print out `/(?:http)(?:s)?(?:\:\/\/)(?:www\.)?(?:\w+)(?:\.)(?:\w+)/` and  
 match for example `https://www.example.org`. 
 There is not much beauty in this regular expression. However, it is valid.
 
