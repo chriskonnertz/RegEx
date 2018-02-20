@@ -58,7 +58,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
             ->addAnd('.')
             ->addWordChars();
 
-        $expected = '/(?:http)(?:s)?(?:\:\/\/)(?:www\.)?(?:\w*)(?:\.)(?:\w*)/';
+        $expected = '/(?:http)(?:s)?(?:\:\/\/)(?:www\.)?(?:\w+)(?:\.)(?:\w+)/';
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -102,7 +102,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $regEx->toString());
     }
 
-    public function testaddMaybeAnyChars()
+    public function testAddMaybeAnyChars()
     {
         $regEx = $this->getInstance();
 
