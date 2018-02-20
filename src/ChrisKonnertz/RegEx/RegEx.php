@@ -115,13 +115,25 @@ class RegEx
     }
 
     /**
+     * Adds a partial expression that expects 1..m of any characters (except by default "new line").
+     *
+     * Example resulting regex: .+
+     *
+     * @return self
+     */
+    public function addAnyChars()
+    {
+        return $this->addRaw('.+');
+    }
+
+    /**
      * Adds a partial expression that expects 0..m of any characters (except by default "new line").
      *
      * Example resulting regex: .*
      *
      * @return self
      */
-    public function addAnyChars()
+    public function addAnyOrNoneChars()
     {
         return $this->addRaw('.*');
     }

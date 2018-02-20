@@ -102,6 +102,16 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $regEx->toString());
     }
 
+    public function testAddAnyOrNoneChars()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addAnyOrNoneChars();
+
+        $expected = $this->wrapPartialRegEx('.+');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
     public function testAddDigit()
     {
         $regEx = $this->getInstance();

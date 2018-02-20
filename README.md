@@ -9,7 +9,7 @@ This is more intuitive and understandable than writing plain regular expressions
 
 **Current state: beta**
 
-**To do**: Add [] support 
+**To do**: Add negation, add [] support 
 
 ## Installation
 
@@ -70,6 +70,26 @@ Example result: `.`
 
 ```php
 $regEx->addAnyChars();
+```
+
+Adds a partial expression that expects 0..m of any characters (except by default "new line").
+
+Example result: `.*`
+
+### addAnyChars
+
+```php
+$regEx->addAnyChars();
+```
+
+Adds a partial expression that expects 1..m of any characters (except by default "new line").
+
+Example result: `.+`
+
+### addAnyOrNoneChars
+
+```php
+$regEx->addAnyOrNoneChars();
 ```
 
 Adds a partial expression that expects 0..m of any characters (except by default "new line").
@@ -338,7 +358,7 @@ it has children.
 $regEx->clear();
 ```
 
-Removes all partial expressions.
+Resets the regular expression.
 
 ### getSize
 
