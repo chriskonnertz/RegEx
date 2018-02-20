@@ -48,7 +48,7 @@ This will print out `/(?:http)(?:s)?(?:\:\/\/)(?:www\.)?(?:\w+)(?:\.)(?:\w+)/` a
 match for example `https://www.example.org`. 
 There is not much beauty in this regular expression. However, it is valid.
 
-Note that special characters will be quoted. 
+Note that special characters will be quoted: `123-456` will become `123\-456`. 
 You may call the `addRaw()` method to avoid this behaviour.
 
 ## Builder methods
