@@ -98,17 +98,17 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addAnyChars();
 
-        $expected = $this->wrapPartialRegEx('.*');
+        $expected = $this->wrapPartialRegEx('.+');
         $this->assertEquals($expected, $regEx->toString());
     }
 
-    public function testAddAnyOrNoneChars()
+    public function testaddMaybeAnyChars()
     {
         $regEx = $this->getInstance();
 
-        $regEx->addAnyOrNoneChars();
+        $regEx->addMaybeAnyChars();
 
-        $expected = $this->wrapPartialRegEx('.+');
+        $expected = $this->wrapPartialRegEx('.*');
         $this->assertEquals($expected, $regEx->toString());
     }
 
@@ -127,6 +127,16 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx = $this->getInstance();
 
         $regEx->addDigits();
+
+        $expected = $this->wrapPartialRegEx('\d+');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddMaybeDigits()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addMaybeDigits();
 
         $expected = $this->wrapPartialRegEx('\d*');
         $this->assertEquals($expected, $regEx->toString());
@@ -148,6 +158,16 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addWordChars();
 
+        $expected = $this->wrapPartialRegEx('\w+');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddMaybeWordChars()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addMaybeWordChars();
+
         $expected = $this->wrapPartialRegEx('\w*');
         $this->assertEquals($expected, $regEx->toString());
     }
@@ -162,11 +182,21 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $regEx->toString());
     }
 
-    public function testAdWhiteSpaceChars()
+    public function testAddWhiteSpaceChars()
     {
         $regEx = $this->getInstance();
 
         $regEx->addWhiteSpaceChars();
+
+        $expected = $this->wrapPartialRegEx('\s+');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddMaybeWhiteSpaceChars()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addMaybeWhiteSpaceChars();
 
         $expected = $this->wrapPartialRegEx('\s*');
         $this->assertEquals($expected, $regEx->toString());
@@ -187,6 +217,16 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx = $this->getInstance();
 
         $regEx->addTabChars();
+
+        $expected = $this->wrapPartialRegEx('\t+');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddMaybeTabChars()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addMaybeTabChars();
 
         $expected = $this->wrapPartialRegEx('\t*');
         $this->assertEquals($expected, $regEx->toString());

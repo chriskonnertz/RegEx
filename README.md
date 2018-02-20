@@ -86,10 +86,10 @@ Adds a partial expression that expects 1..m of any characters (except by default
 
 Example result: `.+`
 
-### addAnyOrNoneChars
+### addMaybeAnyChars
 
 ```php
-$regEx->addAnyOrNoneChars();
+$regEx->addMaybeAnyChars();
 ```
 
 Adds a partial expression that expects 0..m of any characters (except by default "new line").
@@ -111,6 +111,17 @@ Example result: `\d`
 
 ```php
 $regEx->addDigits();
+```
+
+Adds a partial expression that expects 1..m of digits.
+Same as: [0-9]+
+
+Example result: `\d+`
+
+### addMaybeDigits
+
+```php
+$regEx->addMaybeDigits();
 ```
 
 Adds a partial expression that expects 0..m of digits.
@@ -136,6 +147,18 @@ Example result: `\w`
 $regEx->addWordChars();
 ```
 
+Adds a partial expression that expects 1..m of word characters.
+This includes letters, digits and the underscore.
+Same as: [a-zA-Z_0-9]+
+
+Example result: `\w+`
+
+### addMaybeWordChars
+
+```php
+$regEx->addMaybeWordChars();
+```
+
 Adds a partial expression that expects 0..m of word characters.
 This includes letters, digits and the underscore.
 Same as: [a-zA-Z_0-9]*
@@ -159,6 +182,17 @@ Example result: `\s`
 $regEx->addWhiteSpaceChars();
 ```
 
+Adds a partial expression that expects 1..m of white space characters.
+This includes: space, \f, \n, \r, \t and \v
+
+Example result: `\s+`
+
+### addMaybeWhiteSpaceChars
+
+```php
+$regEx->addMaybeWhiteSpaceChars();
+```
+
 Adds a partial expression that expects 0..m of white space characters.
 This includes: space, \f, \n, \r, \t and \v
 
@@ -178,6 +212,16 @@ Example result: `\t`
 
 ```php
 $regEx->addTabChars();
+```
+
+Adds a partial expression that expects 1..m tabulators (tabs).
+
+Example result: `\t+`
+
+### addMaybeTabChars
+
+```php
+$regEx->addMaybeTabChars();
 ```
 
 Adds a partial expression that expects 0..m tabulators (tabs).

@@ -133,7 +133,7 @@ class RegEx
      *
      * @return self
      */
-    public function addAnyOrNoneChars()
+    public function addMaybeAnyChars()
     {
         return $this->addRaw('.*');
     }
@@ -152,6 +152,19 @@ class RegEx
     }
 
     /**
+     * Adds a partial expression that expects 1..m of digits.
+     * Same as: [0-9]+
+     *
+     * Example resulting regex: \d*
+     *
+     * @return self
+     */
+    public function addDigits()
+    {
+        return $this->addRaw('\d+');
+    }
+
+    /**
      * Adds a partial expression that expects 0..m of digits.
      * Same as: [0-9]*
      *
@@ -159,7 +172,7 @@ class RegEx
      *
      * @return self
      */
-    public function addDigits()
+    public function addMaybeDigits()
     {
         return $this->addRaw('\d*');
     }
@@ -179,6 +192,20 @@ class RegEx
     }
 
     /**
+     * Adds a partial expression that expects 1..m of word characters.
+     * This includes letters, digits and the underscore.
+     * Same as: [a-zA-Z_0-9]+
+     *
+     * Example resulting regex: \w+
+     *
+     * @return self
+     */
+    public function addWordChars()
+    {
+        return $this->addRaw('\w+');
+    }
+
+    /**
      * Adds a partial expression that expects 0..m of word characters.
      * This includes letters, digits and the underscore.
      * Same as: [a-zA-Z_0-9]*
@@ -187,7 +214,7 @@ class RegEx
      *
      * @return self
      */
-    public function addWordChars()
+    public function addMaybeWordChars()
     {
         return $this->addRaw('\w*');
     }
@@ -206,6 +233,19 @@ class RegEx
     }
 
     /**
+     * Adds a partial expression that expects 1..m of white space characters.
+     * This includes: space, \f, \n, \r, \t and \v
+     *
+     * Example resulting regex: \s+
+     *
+     * @return self
+     */
+    public function addWhiteSpaceChars()
+    {
+        return $this->addRaw('\s+');
+    }
+
+    /**
      * Adds a partial expression that expects 0..m of white space characters.
      * This includes: space, \f, \n, \r, \t and \v
      *
@@ -213,7 +253,7 @@ class RegEx
      *
      * @return self
      */
-    public function addWhiteSpaceChars()
+    public function addMaybeWhiteSpaceChars()
     {
         return $this->addRaw('\s*');
     }
@@ -231,13 +271,25 @@ class RegEx
     }
 
     /**
+     * Adds a partial expression that expects 1..m tabulators (tabs).
+     *
+     * Example resulting regex: \t+
+     *
+     * @return self
+     */
+    public function addTabChars()
+    {
+        return $this->addRaw('\t+');
+    }
+
+    /**
      * Adds a partial expression that expects 0..m tabulators (tabs).
      *
      * Example resulting regex: \t*
      *
      * @return self
      */
-    public function addTabChars()
+    public function addMaybeTabChars()
     {
         return $this->addRaw('\t*');
     }
