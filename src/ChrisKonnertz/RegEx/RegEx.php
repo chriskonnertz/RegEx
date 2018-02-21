@@ -299,6 +299,8 @@ class RegEx
      * Per default \n and \r\n will be recognized.
      * You may pass a parameter to define a specific line break pattern.
      *
+     * Example resulting regex: \r?\n
+     *
      * @param string|null $which The line break pattern, null = default (\n or \r\n)
      * @return self
      */
@@ -311,9 +313,11 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that expects 1..n line break.
+     * Adds a partial expression that expects 1..n line breaks.
      * Per default \n and \r\n will be recognized.
      * You may pass a parameter to define a specific line break pattern.
+     *
+     * Example resulting regex: (\r?\n)+
      *
      * @param string|null $which The line break pattern, null = default (\n or \r\n)
      * @return self
@@ -327,9 +331,11 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that expects a 0..n line breaks.
+     * Adds a partial expression that expects 0..n line breaks.
      * Per default \n and \r\n will be recognized.
      * You may pass a parameter to define a specific line break pattern.
+     *
+     * Example resulting regex: (\r?\n)*
      *
      * @param string|null $which The line break pattern, null = default (\n or \r\n)
      * @return self

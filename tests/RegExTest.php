@@ -275,7 +275,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $matches = $regEx->test("line\n\nbreak");
         $this->assertEquals(1, sizeof($matches));
 
-        $regEx->addAnd('line')->addLineBreaks()->addAnd('break');
+        $regEx->clear()->addAnd('line')->addLineBreaks()->addAnd('break');
         $matches = $regEx->test("linebreak");
         $this->assertEquals(0, sizeof($matches));
     }
@@ -288,7 +288,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $matches = $regEx->test("line\n\nbreak");
         $this->assertEquals(1, sizeof($matches));
 
-        $regEx->addAnd('line')->addMaybeLineBreaks()->addAnd('break');
+        $regEx->clear()->addAnd('line')->addMaybeLineBreaks()->addAnd('break');
         $matches = $regEx->test("linebreak");
         $this->assertEquals(1, sizeof($matches));
     }

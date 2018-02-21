@@ -239,7 +239,33 @@ Adds a partial expression that expects a line break.
 Per default `\n` and `\r\n` will be recognized.
 You may pass a parameter to define a specific line break pattern.
 
-Example result: `\r?\n*`
+Example result: `\r?\n`
+
+### addLineBreaks
+
+```php
+$regEx->addLineBreaks();
+$regEx->addLineBreaks(PHP_EOL);
+```
+
+Adds a partial expression that expects a 1..n line breaks.
+Per default \n and \r\n will be recognized.
+You may pass a parameter to define a specific line break pattern.
+
+Example resulting regex: (\r?\n)+
+
+### addMaybeLineBreaks
+
+```php
+$regEx->addMaybeLineBreaks();
+$regEx->addMaybeLineBreaks(PHP_EOL);
+```
+
+Adds a partial expression that expects a 0..n line breaks.
+Per default \n and \r\n will be recognized.
+You may pass a parameter to define a specific line break pattern.
+
+Example resulting regex: (\r?\n)*
 
 ### addLineBeginning
 
