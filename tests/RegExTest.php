@@ -409,11 +409,14 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->addAnd('some ')
             ->addOr('man', 'woman');
 
-        $expected = '<pre><strong>AndEx</strong> (Size: 1): <code style="background-color: #DDD">(?:some )</code><br>'.
-            '&nbsp;&nbsp;<strong>string</strong>: <code style="background-color: #DDD">some </code><br><strong>OrEx'.
-            '</strong> (Size: 2): <code style="background-color: #DDD">(?:man|woman)</code><br>&nbsp;&nbsp;<strong>'.
-            'string</strong>: <code style="background-color: #DDD">man</code><br>&nbsp;&nbsp;<strong>string</strong>'.
-            ': <code style="background-color: #DDD">woman</code><br></pre>';
+        $expected = '<pre class="regex-vis"><strong class="regex-vis-type">AndEx</strong> (Size: 1): '.
+            '<code class="regex-vis-value" style="background-color: #DDD">(?:some )</code><br>&nbsp;&nbsp;'.
+            '<strong>string</strong>: <code class="regex-vis-value" style="background-color: #DDD">some </code><br>'.
+            '<strong class="regex-vis-type">OrEx</strong> (Size: 2): <code class="regex-vis-value" '.
+            'style="background-color: #DDD">(?:man|woman)</code><br>&nbsp;&nbsp;<strong class="regex-vis-type">'.
+            'string</strong>: <code class="regex-vis-value" style="background-color: #DDD">man</code><br>&nbsp;&nbsp;'.
+            '<strong class="regex-vis-type">string</strong>: <code class="regex-vis-value" '.
+            'style="background-color: #DDD">woman</code><br></pre>';
         $this->assertEquals($expected, $regEx->getVisualisation());
         $this->assertEquals($expected, $regEx->getVisualisation(true));
 

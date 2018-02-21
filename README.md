@@ -300,6 +300,9 @@ This expression requires that all of its parts exist in the tested string.
 
 Example result: `http`
 
+> The `RegEx` class has a constructor that is an alias of the `addAnd` method: 
+`new RegEx('ab')` will generate the same regular expression as `regEx->andAdd('ab')`.
+
 ### addOr
 
 ```php
