@@ -57,7 +57,7 @@ class RegEx
     /**
      * The current version number
      */
-    const VERSION = '0.9.4';
+    const VERSION = '0.9.5';
 
     /**
      * The start of the regular expression (=prefix)
@@ -327,7 +327,7 @@ class RegEx
         if ($which === null) {
             $which = '\r?\n';
         }
-        return $this->addRaw('(?:'.$which.')+');
+        return $this->addRaw($which.'+');
     }
 
     /**
@@ -345,7 +345,7 @@ class RegEx
         if ($which === null) {
             $which = '\r?\n';
         }
-        return $this->addRaw('(?:'.$which.')*');
+        return $this->addRaw($which.'*');
     }
 
     /**
