@@ -252,6 +252,21 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $regEx->toString());
     }
 
+    public function testAddLineBreaks()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addAnd('line')->addLineBreak()->addAnd('break');
+        $matches = $regEx->test("line\nbreak");
+        $this->assertEquals(1, sizeof($matches));
+        $matches = $regEx->test("line\r\nbreak");
+        $this->assertEquals(1, sizeof($matches));
+
+        $regEx->addAnd('line')->addLineBreak("\r\n")->addAnd('break');
+        $matches = $regEx->test("line\nbreak");
+        $this->assertEquals(0, sizeof($matches));
+    }
+
     public function testReplace()
     {
         $regEx = $this->getInstance();

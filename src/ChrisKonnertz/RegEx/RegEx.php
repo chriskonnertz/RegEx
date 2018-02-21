@@ -109,7 +109,7 @@ class RegEx
      *
      * @return self
      */
-    public function addAnyChar()
+    public function addAnyChar() : self
     {
         return $this->addRaw('.');
     }
@@ -121,7 +121,7 @@ class RegEx
      *
      * @return self
      */
-    public function addAnyChars()
+    public function addAnyChars() : self
     {
         return $this->addRaw('.+');
     }
@@ -133,7 +133,7 @@ class RegEx
      *
      * @return self
      */
-    public function addMaybeAnyChars()
+    public function addMaybeAnyChars() : self
     {
         return $this->addRaw('.*');
     }
@@ -146,7 +146,7 @@ class RegEx
      *
      * @return self
      */
-    public function addDigit()
+    public function addDigit() : self
     {
         return $this->addRaw('\d');
     }
@@ -159,7 +159,7 @@ class RegEx
      *
      * @return self
      */
-    public function addDigits()
+    public function addDigits() : self
     {
         return $this->addRaw('\d+');
     }
@@ -172,7 +172,7 @@ class RegEx
      *
      * @return self
      */
-    public function addMaybeDigits()
+    public function addMaybeDigits() : self
     {
         return $this->addRaw('\d*');
     }
@@ -186,7 +186,7 @@ class RegEx
      *
      * @return self
      */
-    public function addWordChar()
+    public function addWordChar() : self
     {
         return $this->addRaw('\w');
     }
@@ -200,7 +200,7 @@ class RegEx
      *
      * @return self
      */
-    public function addWordChars()
+    public function addWordChars() : self
     {
         return $this->addRaw('\w+');
     }
@@ -214,7 +214,7 @@ class RegEx
      *
      * @return self
      */
-    public function addMaybeWordChars()
+    public function addMaybeWordChars() : self
     {
         return $this->addRaw('\w*');
     }
@@ -227,7 +227,7 @@ class RegEx
      *
      * @return self
      */
-    public function addWhiteSpaceChar()
+    public function addWhiteSpaceChar() : self
     {
         return $this->addRaw('\s');
     }
@@ -240,7 +240,7 @@ class RegEx
      *
      * @return self
      */
-    public function addWhiteSpaceChars()
+    public function addWhiteSpaceChars() : self
     {
         return $this->addRaw('\s+');
     }
@@ -253,7 +253,7 @@ class RegEx
      *
      * @return self
      */
-    public function addMaybeWhiteSpaceChars()
+    public function addMaybeWhiteSpaceChars() : self
     {
         return $this->addRaw('\s*');
     }
@@ -265,7 +265,7 @@ class RegEx
      *
      * @return self
      */
-    public function addTabChar()
+    public function addTabChar() : self
     {
         return $this->addRaw('\t');
     }
@@ -277,7 +277,7 @@ class RegEx
      *
      * @return self
      */
-    public function addTabChars()
+    public function addTabChars() : self
     {
         return $this->addRaw('\t+');
     }
@@ -289,9 +289,25 @@ class RegEx
      *
      * @return self
      */
-    public function addMaybeTabChars()
+    public function addMaybeTabChars() : self
     {
         return $this->addRaw('\t*');
+    }
+
+    /**
+     * Adds a partial expression that expects a line break.
+     * Per default \n and \r\n will be recognized.
+     * You may pass a parameter to define a specific line break pattern.
+     *
+     * @param string|null $which The line break pattern, null = default (\n or \r\n)
+     * @return self
+     */
+    public function addLineBreak(string $which = null) : self
+    {
+        if ($which === null) {
+            $which = '\r?\n';
+        }
+        return $this->addRaw($which);
     }
 
     /**
@@ -302,7 +318,7 @@ class RegEx
      *
      * @return self
      */
-    public function addLineBeginning()
+    public function addLineBeginning() : self
     {
         return $this->addRaw('^');
     }
@@ -315,7 +331,7 @@ class RegEx
      *
      * @return self
      */
-    public function addLineEnd()
+    public function addLineEnd() : self
     {
         return $this->addRaw('$');
     }
@@ -329,7 +345,7 @@ class RegEx
      * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
      */
-    public function addAnd(...$partialExpressions)
+    public function addAnd(...$partialExpressions) : self
     {
         foreach ($partialExpressions as &$partialExpression) {
             if ($partialExpression instanceof Closure) {
@@ -352,7 +368,7 @@ class RegEx
      * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
      */
-    public function addOr(...$partialExpressions)
+    public function addOr(...$partialExpressions) : self
     {
         foreach ($partialExpressions as &$partialExpression) {
             if ($partialExpression instanceof Closure) {
@@ -375,7 +391,7 @@ class RegEx
      * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
      */
-    public function addOption(...$partialExpressions)
+    public function addOption(...$partialExpressions) : self
     {
         foreach ($partialExpressions as &$partialExpression) {
             if ($partialExpression instanceof Closure) {
@@ -399,7 +415,7 @@ class RegEx
      * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
      */
-    public function addCapturingGroup(...$partialExpressions)
+    public function addCapturingGroup(...$partialExpressions) : self
     {
         foreach ($partialExpressions as &$partialExpression) {
             if ($partialExpression instanceof Closure) {
@@ -423,7 +439,7 @@ class RegEx
      * @param string|int|float|bool $comments
      * @return self
      */
-    public function addComment(...$comments)
+    public function addComment(...$comments) : self
     {
         foreach ($comments as $key => $comment) {
             if (! is_scalar($comment)) {
@@ -457,7 +473,7 @@ class RegEx
      * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
      */
-    public function addRaw(...$partialExpressions)
+    public function addRaw(...$partialExpressions) : self
     {
         foreach ($partialExpressions as &$partialExpression) {
             if ($partialExpression instanceof Closure) {
@@ -476,11 +492,13 @@ class RegEx
      * If active, letters in the pattern match both upper and lower case letters.
      *
      * @param bool $active
-     * @return void
+     * @return self
      */
-    public function setInsensitiveModifier(bool $active = true)
+    public function setInsensitiveModifier(bool $active = true) : self
     {
         $this->setModifier(self::INSENSITIVE_MODIFIER_SHORTCUT, $active);
+
+        return $this;
     }
 
     /**
@@ -488,11 +506,13 @@ class RegEx
      * If active, treats the string being matched against as multiple lines.
      *
      * @param bool $active
-     * @return void
+     * @return self
      */
-    public function setMultiLineModifier(bool $active = true)
+    public function setMultiLineModifier(bool $active = true) : self
     {
         $this->setModifier(self::MULTI_LINE_MODIFIER_SHORTCUT, $active);
+
+        return $this;
     }
 
     /**
@@ -500,22 +520,26 @@ class RegEx
      * If active, a dot meta-character in the pattern matches all characters, including newlines.
      *
      * @param bool $active
-     * @return void
+     * @return self
      */
-    public function setSingleLineModifier(bool $active = true)
+    public function setSingleLineModifier(bool $active = true) : self
     {
         $this->setModifier(self::SINGLE_LINE_MODIFIER_SHORTCUT, $active);
+
+        return $this;
     }
     /**
      * Activates or deactivates the "extended" ("x") modifier.
      * If active, whitespace is permitted.
      *
      * @param bool $active
-     * @return void
+     * @return self
      */
-    public function setExtendedModifier(bool $active = true)
+    public function setExtendedModifier(bool $active = true) : self
     {
         $this->setModifier(self::EXTENDED_MODIFIER_SHORTCUT, $active);
+
+        return $this;
     }
 
     /**
@@ -527,9 +551,9 @@ class RegEx
      *
      * @param string $modifierShortcut The modifier shortcut, a single character -> self::MODIFIER_SHORTCUTS
      * @param bool   $active           Activate (true) or deactivate (false) the modifier
-     * @return void
+     * @return self
      */
-    public function setModifier(string $modifierShortcut, bool $active = true)
+    public function setModifier(string $modifierShortcut, bool $active = true) : self
     {
         if (! in_array($modifierShortcut, self::MODIFIER_SHORTCUTS)) {
             throw new \InvalidArgumentException(
@@ -546,6 +570,8 @@ class RegEx
                 unset($this->modifiers[$index]);
             }
         }
+
+        return $this;
     }
 
     /**
@@ -630,8 +656,8 @@ class RegEx
      * you do not have to pass an argument for the level parameter.
      * The callback will have three arguments: The first is the child expression
      * (an object of type AbstractExpression or a string | int | float | bool),
-     * the second is the level of the that expression and the third tells you if
-     * it has children.
+     * the second is the level of that expression and the third tells you if it has
+     * children.
      *
      * Example:
      *
@@ -748,7 +774,7 @@ class RegEx
      *
      * @return self
      */
-    public function clear()
+    public function clear() : self
     {
         $this->expressions = [];
         $this->modifiers = [];
@@ -773,10 +799,13 @@ class RegEx
      * This is a raw string.
      *
      * @param string $start
+     * @return self
      */
-    public function setStart(string $start)
+    public function setStart(string $start) : self
     {
         $this->start = $start;
+
+        return $this;
     }
 
     /**
@@ -794,10 +823,13 @@ class RegEx
      * Setter for the "end" property
      *
      * @param string $end
+     * @return self
      */
-    public function setEnd(string $end)
+    public function setEnd(string $end) : self
     {
         $this->end = $end;
+
+        return $this;
     }
     
     /**
@@ -823,7 +855,7 @@ class RegEx
      *
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->toString();
     }

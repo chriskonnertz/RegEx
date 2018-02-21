@@ -228,6 +228,19 @@ Adds a partial expression that expects 0..m tabulators (tabs).
 
 Example result: `\t*`
 
+### addLineBreak
+
+```php
+$regEx->addLineBreak();
+$regEx->addLineBreak(PHP_EOL);
+```
+
+Adds a partial expression that expects a line break.
+Per default `\n` and `\r\n` will be recognized.
+You may pass a parameter to define a specific line break pattern.
+
+Example result: `\r?\n*`
+
 ### addLineBeginning
 
 ```php
@@ -393,7 +406,7 @@ no matter how deep they are nested in the tree. You only have to pass a closure,
 you do not have to pass an argument for the level parameter. 
 The callback will have three arguments: The first is the child expression 
 (an object of type AbstractExpression or a string | int | float), 
-the second is the level of the that expression and the third tells you if 
+the second is the level of that expression and the third tells you if 
 it has children.
 
 ### clear
