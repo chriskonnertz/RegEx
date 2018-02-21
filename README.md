@@ -526,6 +526,11 @@ Therefore it is more flexible but also more complex.
 
 ## General notes
 
+* Contributions welcome. Do nt hesitate to create issues and pull requests.
+
+* Why the extensive use of (not capturing) groups? Well, to me it is not very intuitive that "ab*" is the same as
+"(?:ab)*". Always using (non capturing) groups emphasizes the structure of a regular expression.
+
 * Official PHP documentation about the syntax of regular expressions: http://php.net/manual/de/reference.pcre.pattern.syntax.php
 
 * The code of this library is formatted according to the code style defined by the 
