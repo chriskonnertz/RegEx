@@ -509,6 +509,16 @@ Returns a "visualisation" of the structure of the regular expression.
 This might be helpful if you try to understand how the regular expression is built. 
 If the parameter is set to true, the result may include HTML tags. 
 
+Example:
+```
+AndEx (Size: 1): (?:line)
+  string: line
+RawEx (Size: 1): (?:\r?\n*)
+  string: \r?\n*
+AndEx (Size: 1): (?:break)
+  string: break
+```
+
 ### toString
 
 ```php
@@ -522,11 +532,11 @@ The magic method `__toString` has been implemented as well so you may convert th
 
 RegEx has been inspired by [PHPVerbalExpressions](https://github.com/VerbalExpressions/PHPVerbalExpressions).
 It is not better than VerbalExpressions but different. RegEx makes more use of OOP principles. 
-Therefore it is more flexible but also more complex.
+Therefore it is better suited to mimic the structure of a regular expression but it is also more complex.
 
 ## General notes
 
-* Contributions welcome. Do nt hesitate to create issues and pull requests.
+* Contributions welcome. Do not hesitate to create issues and pull requests.
 
 * Why the extensive use of (not capturing) groups? Well, to me it is not very intuitive that "ab*" is the same as
 "(?:ab)*". Always using (non capturing) groups emphasizes the structure of a regular expression.
