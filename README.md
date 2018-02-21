@@ -509,7 +509,7 @@ Returns a "visualisation" of the structure of the regular expression.
 This might be helpful if you try to understand how the regular expression is built. 
 If the parameter is set to true, the result may include HTML tags. 
 
-Example:
+Example result:
 ```
 AndEx (Size: 1): (?:line)
   string: line

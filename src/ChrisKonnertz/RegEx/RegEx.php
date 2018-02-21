@@ -753,9 +753,10 @@ class RegEx
             }
 
             if ($html) {
-                $type = '<strong>'.$type.'</strong>';
+                $type = '<strong class="regex-vis-type">'.$type.'</strong>';
                 if ($value !== '') {
-                    $value = '<code style="background-color: #DDD">' . htmlspecialchars($value) . '</code>';
+                    $value = '<code class="regex-vis-value" style="background-color: #DDD">'.
+                        htmlspecialchars($value).'</code>';
                 }
             }
 
@@ -763,7 +764,7 @@ class RegEx
         });
 
         if ($html) {
-            $output = '<pre>'.$output.'</pre>';
+            $output = '<pre class="regex-vis">'.$output.'</pre>';
         }
 
         return $output;
