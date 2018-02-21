@@ -252,7 +252,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $regEx->toString());
     }
 
-    public function testAddLineBreaks()
+    public function testAddLineBreak()
     {
         $regEx = $this->getInstance();
 
@@ -265,6 +265,32 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->addAnd('line')->addLineBreak("\r\n")->addAnd('break');
         $matches = $regEx->test("line\nbreak");
         $this->assertEquals(0, sizeof($matches));
+    }
+
+    public function testAddLineBreaks()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addAnd('line')->addLineBreaks()->addAnd('break');
+        $matches = $regEx->test("line\n\nbreak");
+        $this->assertEquals(1, sizeof($matches));
+
+        $regEx->addAnd('line')->addLineBreaks()->addAnd('break');
+        $matches = $regEx->test("linebreak");
+        $this->assertEquals(0, sizeof($matches));
+    }
+
+    public function testAddMaybeLineBreaks()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addAnd('line')->addMaybeLineBreaks()->addAnd('break');
+        $matches = $regEx->test("line\n\nbreak");
+        $this->assertEquals(1, sizeof($matches));
+
+        $regEx->addAnd('line')->addMaybeLineBreaks()->addAnd('break');
+        $matches = $regEx->test("linebreak");
+        $this->assertEquals(1, sizeof($matches));
     }
 
     public function testReplace()

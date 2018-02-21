@@ -115,7 +115,7 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that expects 1..m of any characters (except by default "new line").
+     * Adds a partial expression that expects 1..n of any characters (except by default "new line").
      *
      * Example resulting regex: .+
      *
@@ -127,7 +127,7 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that expects 0..m of any characters (except by default "new line").
+     * Adds a partial expression that expects 0..n of any characters (except by default "new line").
      *
      * Example resulting regex: .*
      *
@@ -152,7 +152,7 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that expects 1..m of digits.
+     * Adds a partial expression that expects 1..n of digits.
      * Same as: [0-9]+
      *
      * Example resulting regex: \d*
@@ -165,7 +165,7 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that expects 0..m of digits.
+     * Adds a partial expression that expects 0..n of digits.
      * Same as: [0-9]*
      *
      * Example resulting regex: \d*
@@ -192,7 +192,7 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that expects 1..m of word characters.
+     * Adds a partial expression that expects 1..n of word characters.
      * This includes letters, digits and the underscore.
      * Same as: [a-zA-Z_0-9]+
      *
@@ -206,7 +206,7 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that expects 0..m of word characters.
+     * Adds a partial expression that expects 0..n of word characters.
      * This includes letters, digits and the underscore.
      * Same as: [a-zA-Z_0-9]*
      *
@@ -233,7 +233,7 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that expects 1..m of white space characters.
+     * Adds a partial expression that expects 1..n of white space characters.
      * This includes: space, \f, \n, \r, \t and \v
      *
      * Example resulting regex: \s+
@@ -246,7 +246,7 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that expects 0..m of white space characters.
+     * Adds a partial expression that expects 0..n of white space characters.
      * This includes: space, \f, \n, \r, \t and \v
      *
      * Example resulting regex: \s*
@@ -271,7 +271,7 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that expects 1..m tabulators (tabs).
+     * Adds a partial expression that expects 1..n tabulators (tabs).
      *
      * Example resulting regex: \t+
      *
@@ -283,7 +283,7 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression that expects 0..m tabulators (tabs).
+     * Adds a partial expression that expects 0..n tabulators (tabs).
      *
      * Example resulting regex: \t*
      *
@@ -308,6 +308,38 @@ class RegEx
             $which = '\r?\n';
         }
         return $this->addRaw($which);
+    }
+
+    /**
+     * Adds a partial expression that expects 1..n line break.
+     * Per default \n and \r\n will be recognized.
+     * You may pass a parameter to define a specific line break pattern.
+     *
+     * @param string|null $which The line break pattern, null = default (\n or \r\n)
+     * @return self
+     */
+    public function addLineBreaks(string $which = null) : self
+    {
+        if ($which === null) {
+            $which = '\r?\n';
+        }
+        return $this->addRaw('(?:'.$which.')+');
+    }
+
+    /**
+     * Adds a partial expression that expects a 0..n line breaks.
+     * Per default \n and \r\n will be recognized.
+     * You may pass a parameter to define a specific line break pattern.
+     *
+     * @param string|null $which The line break pattern, null = default (\n or \r\n)
+     * @return self
+     */
+    public function addMaybeLineBreaks(string $which = null) : self
+    {
+        if ($which === null) {
+            $which = '\r?\n';
+        }
+        return $this->addRaw('(?:'.$which.')*');
     }
 
     /**

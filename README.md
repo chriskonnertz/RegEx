@@ -72,7 +72,7 @@ Example result: `.`
 $regEx->addAnyChars();
 ```
 
-Adds a partial expression that expects 0..m of any characters (except by default "new line").
+Adds a partial expression that expects 0..n of any characters (except by default "new line").
 
 Example result: `.*`
 
@@ -82,7 +82,7 @@ Example result: `.*`
 $regEx->addAnyChars();
 ```
 
-Adds a partial expression that expects 1..m of any characters (except by default "new line").
+Adds a partial expression that expects 1..n of any characters (except by default "new line").
 
 Example result: `.+`
 
@@ -92,7 +92,7 @@ Example result: `.+`
 $regEx->addMaybeAnyChars();
 ```
 
-Adds a partial expression that expects 0..m of any characters (except by default "new line").
+Adds a partial expression that expects 0..n of any characters (except by default "new line").
 
 Example result: `.*`
 
@@ -113,7 +113,7 @@ Example result: `\d`
 $regEx->addDigits();
 ```
 
-Adds a partial expression that expects 1..m of digits.
+Adds a partial expression that expects 1..n of digits.
 Same as: [0-9]+
 
 Example result: `\d+`
@@ -124,7 +124,7 @@ Example result: `\d+`
 $regEx->addMaybeDigits();
 ```
 
-Adds a partial expression that expects 0..m of digits.
+Adds a partial expression that expects 0..n of digits.
 Same as: [0-9]*
 
 Example result: `\d*`
@@ -147,7 +147,7 @@ Example result: `\w`
 $regEx->addWordChars();
 ```
 
-Adds a partial expression that expects 1..m of word characters.
+Adds a partial expression that expects 1..n of word characters.
 This includes letters, digits and the underscore.
 Same as: [a-zA-Z_0-9]+
 
@@ -159,7 +159,7 @@ Example result: `\w+`
 $regEx->addMaybeWordChars();
 ```
 
-Adds a partial expression that expects 0..m of word characters.
+Adds a partial expression that expects 0..n of word characters.
 This includes letters, digits and the underscore.
 Same as: [a-zA-Z_0-9]*
 
@@ -182,7 +182,7 @@ Example result: `\s`
 $regEx->addWhiteSpaceChars();
 ```
 
-Adds a partial expression that expects 1..m of white space characters.
+Adds a partial expression that expects 1..n of white space characters.
 This includes: space, \f, \n, \r, \t and \v
 
 Example result: `\s+`
@@ -193,7 +193,7 @@ Example result: `\s+`
 $regEx->addMaybeWhiteSpaceChars();
 ```
 
-Adds a partial expression that expects 0..m of white space characters.
+Adds a partial expression that expects 0..n of white space characters.
 This includes: space, \f, \n, \r, \t and \v
 
 Example result: `\s*`
@@ -214,7 +214,7 @@ Example result: `\t`
 $regEx->addTabChars();
 ```
 
-Adds a partial expression that expects 1..m tabulators (tabs).
+Adds a partial expression that expects 1..n tabulators (tabs).
 
 Example result: `\t+`
 
@@ -224,7 +224,7 @@ Example result: `\t+`
 $regEx->addMaybeTabChars();
 ```
 
-Adds a partial expression that expects 0..m tabulators (tabs).
+Adds a partial expression that expects 0..n tabulators (tabs).
 
 Example result: `\t*`
 
