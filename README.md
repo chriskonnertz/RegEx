@@ -9,7 +9,7 @@ This is more intuitive and understandable than writing plain regular expressions
 
 **Current state: beta**
 
-**To do**: Add missing addAnd test, Add negation, add [] support 
+**To do**: Add missing addAnd test, add \D ..., add negation, add [] support 
 
 ## Installation
 
