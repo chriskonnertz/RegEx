@@ -17,11 +17,12 @@ class RegExTest extends \PHPUnit\Framework\TestCase
     /**
      * Creates and returns a new instance of the main class
      *
-     * @return ChrisKonnertz\RegEx\RegEx
+     * @param mixed[] ...$params
+     * @return RegEx
      */
-    protected function getInstance()
+    protected function getInstance(...$params)
     {
-        return new RegEx();
+        return new RegEx(...$params);
     }
 
     /**
@@ -62,6 +63,16 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $regEx->toString());
     }
 
+    public function testAddRaw()
+    {
+        $regEx = $this->getInstance();
+
+        $raw = '.*';
+        $regEx->addRaw($raw);
+
+        $this->assertEquals($this->wrapPartialRegEx($raw), $regEx->toString());
+    }
+
     public function testAddComment()
     {
         $regEx = $this->getInstance();
@@ -72,14 +83,11 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('/(?#'.$comment.')/', $regEx->toString());
     }
 
-    public function testAddRaw()
+    public function testConstructor()
     {
-        $regEx = $this->getInstance();
+        $regEx = $this->getInstance('a', 'b');
 
-        $raw = '.*';
-        $regEx->addRaw($raw);
-
-        $this->assertEquals($this->wrapPartialRegEx($raw), $regEx->toString());
+        $this->assertEquals($this->wrapPartialRegEx('ab'), $regEx->toString());
     }
 
     public function testAddAnyChar()

@@ -89,6 +89,20 @@ class RegEx
     protected $modifiers = [];
 
     /**
+     * RegEx constructor.
+     * You can call the constructor with partial expressions as arguments.
+     * They will be wrapped in an "and" expression.
+     *
+     * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
+     */
+    public function __construct(...$partialExpressions)
+    {
+        if (sizeof($partialExpressions) > 0) {
+            $this->addAnd(...$partialExpressions);
+        }
+    }
+
+    /**
      * Quotes (escapes) regular expression characters and returns the result.
      * Example: "Hello." => "Hello\."
      *
@@ -380,7 +394,7 @@ class RegEx
      *
      * Example resulting regex: http
      *
-     * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
+     * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
      * @return self
      */
     public function addAnd(...$partialExpressions) : self
@@ -403,7 +417,7 @@ class RegEx
      *
      * Example resulting regex: (http|https)
      *
-     * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
+     * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
      * @return self
      */
     public function addOr(...$partialExpressions) : self
@@ -426,7 +440,7 @@ class RegEx
      *
      * Example resulting regex: https(s)?
      *
-     * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
+     * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
      * @return self
      */
     public function addOption(...$partialExpressions) : self
@@ -450,7 +464,7 @@ class RegEx
      *
      * Example resulting regex: (test)
      *
-     * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
+     * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
      * @return self
      */
     public function addCapturingGroup(...$partialExpressions) : self
@@ -474,7 +488,7 @@ class RegEx
      *
      * Example resulting regex: (?#This is a comment)
      *
-     * @param string|int|float|bool $comments
+     * @param string|int|float|bool ...$comments
      * @return self
      */
     public function addComment(...$comments) : self
