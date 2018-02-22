@@ -111,7 +111,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addOption('s');
 
-        $this->assertEquals($this->wrapPartialRegEx('(?:http|https)?', false), $regEx->toString());
+        $this->assertEquals($this->wrapPartialRegEx('(?:s)?', false), $regEx->toString());
     }
 
     public function testAddCapturingGroup()
