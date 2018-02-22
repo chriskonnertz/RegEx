@@ -20,7 +20,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
      * @param mixed[] ...$params
      * @return RegEx
      */
-    protected function getInstance(...$params)
+    protected function getInstance(...$params) : RegEx
     {
         return new RegEx(...$params);
     }
@@ -29,12 +29,16 @@ class RegExTest extends \PHPUnit\Framework\TestCase
      * Enhances a partial regular expression to a complete regular expression.
      * Returns that regular expression as a string.
      *
-     * @param $content
+     * @param mixed $content     Content of the partial expression
+     * @param bool  $wrapInGroup Optional: Wrap it in a non-capturing group?
      * @return string
      */
-    protected function wrapPartialRegEx($content)
+    protected function wrapPartialRegEx($content, bool $wrapInGroup = true) : string
     {
-        return '/(?:'.$content.')/';
+        if ($wrapInGroup) {
+            $content = '(?:'.$content.')';
+        }
+        return '/'.$content.'/';
     }
 
     public function testMagicToString()
@@ -81,6 +85,42 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->addComment($comment);
 
         $this->assertEquals('/(?#'.$comment.')/', $regEx->toString());
+    }
+
+    public function testAddAnd()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addAnd('ht', 'tp');
+
+        $this->assertEquals($this->wrapPartialRegEx('http'), $regEx->toString());
+    }
+
+    public function testAddOr()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addOr('http', 'https');
+
+        $this->assertEquals($this->wrapPartialRegEx('http|https'), $regEx->toString());
+    }
+
+    public function testAddOption()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addOption('s');
+
+        $this->assertEquals($this->wrapPartialRegEx('(?:http|https)?', false), $regEx->toString());
+    }
+
+    public function testAddCapturingGroup()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addCapturingGroup('test');
+
+        $this->assertEquals($this->wrapPartialRegEx('(test)', false), $regEx->toString());
     }
 
     public function testConstructor()
