@@ -57,7 +57,7 @@ class RegEx
     /**
      * The current version number
      */
-    const VERSION = '0.9.5';
+    const VERSION = '0.9.6';
 
     /**
      * The start of the regular expression (=prefix)
@@ -479,6 +479,19 @@ class RegEx
         $this->expressions[] = $wrapperExpression;
 
         return $this;
+    }
+
+    /**
+     * Alias for the addAnd() method.
+     *
+     * @see addAnd()
+     *
+     * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
+     * @return self
+     */
+    public function addNonCapturingGroup(...$partialExpressions) : self
+    {
+        return $this->addAnd(...$partialExpressions);
     }
 
     /**
