@@ -9,7 +9,7 @@ This is more intuitive and understandable than writing plain regular expressions
 
 **Current state: beta**
 
-**To do**: Add missing addAnd test, add \D ..., add negation, add [] support 
+**To do**: Add negation, add [] support 
 
 ## Installation
 
@@ -129,6 +129,39 @@ Same as: [0-9]*
 
 Example result: `\d*`
 
+### addNonDigit
+
+```php
+$regEx->addNonDigit();
+```
+
+Adds a partial expression that expects a character that is not a digit.
+Same as: [^0-9]
+
+Example result: `\D`
+
+### addNonDigits
+
+```php
+$regEx->addNonDigits();
+```
+
+Adds a partial expression that expects 1..n of characters that are not digits.
+Same as: [^0-9]+
+
+Example result: `\D+`
+
+### addMaybeNonDigits
+
+```php
+$regEx->addMaybeNonDigits();
+```
+
+Adds a partial expression that expects 0..n of characters that are not digits.
+Same as: [^0-9]*
+
+Example result: `\D*`
+
 ### addWordChar
 
 ```php
@@ -164,6 +197,42 @@ This includes letters, digits and the underscore.
 Same as: [a-zA-Z_0-9]*
 
 Example result: `\w*`
+
+### addNonWordChar
+
+```php
+$regEx->addNonWordChar();
+```
+
+Adds a partial expression that expects a character that is not a word character.
+This includes letters, digits and the underscore.
+Same as: [^a-zA-Z_0-9]
+
+Example result: `\W`
+
+### addNonWordChars
+
+```php
+$regEx->addNonWordChars();
+```
+
+Adds a partial expression that expects 1..n of characters that are not word characters.
+This includes letters, digits and the underscore.
+Same as: [^a-zA-Z_0-9]+
+
+Example result: `\W+`
+
+### addMaybeNonWordChars
+
+```php
+$regEx->addMaybeNonWordChars();
+```
+
+Adds a partial expression that expects 0..n of characters that are not word characters.
+This includes letters, digits and the underscore.
+Same as: [^a-zA-Z_0-9]*
+
+Example result: `\W*`
 
 ### addWhiteSpaceChar
 
