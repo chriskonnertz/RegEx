@@ -1,11 +1,5 @@
 <?php
 
-// Ensure backward compatibility
-// @see http://stackoverflow.com/questions/42811164/class-phpunit-framework-testcase-not-found#answer-42828632
-//if (!class_exists('\PHPUnit\Framework\TestCase')) {
-//    class_alias('\PHPUnit_Framework_TestCase', '\PHPUnit\Framework\TestCase');
-//}
-
 use \ChrisKonnertz\RegEx\RegEx;
 
 /**
@@ -75,6 +69,17 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->addRaw($raw);
 
         $this->assertEquals($this->wrapPartialRegEx($raw), $regEx->toString());
+    }
+
+    public function testAddRange()
+    {
+        $regEx = $this->getInstance();
+
+        $rangeOne = 'a-z';
+        $rangeTwo = '123';
+        $regEx->addRange($rangeOne, $rangeTwo);
+
+        $this->assertEquals($this->wrapPartialRegEx($rangeOne.$rangeTwo), $regEx->toString());
     }
 
     public function testAddComment()
