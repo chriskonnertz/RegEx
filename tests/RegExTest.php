@@ -190,6 +190,36 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $regEx->toString());
     }
 
+    public function testAddNonDigit()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addNonDigit();
+
+        $expected = $this->wrapPartialRegEx('\D');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddNonDigits()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addNonDigits();
+
+        $expected = $this->wrapPartialRegEx('\D+');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddMaybeNonDigits()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addMaybeNonDigits();
+
+        $expected = $this->wrapPartialRegEx('\D*');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
     public function testAddWordChar()
     {
         $regEx = $this->getInstance();
@@ -220,7 +250,37 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $regEx->toString());
     }
 
-    public function testAdWhiteSpaceChar()
+    public function testAddNonWordChar()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addNonWordChar();
+
+        $expected = $this->wrapPartialRegEx('\W');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddNonWordChars()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addNonWordChars();
+
+        $expected = $this->wrapPartialRegEx('\W+');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddNonMaybeWordChars()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addMaybeNonWordChars();
+
+        $expected = $this->wrapPartialRegEx('\W*');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddWhiteSpaceChar()
     {
         $regEx = $this->getInstance();
 
