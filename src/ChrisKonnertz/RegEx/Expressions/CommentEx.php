@@ -3,9 +3,9 @@
 namespace ChrisKonnertz\RegEx\Expressions;
 
 /**
- * This expression will not quote its regular expression characters.
+ * This expression will add a comment.
  *
- * Example resulting regex: a-b
+ * Example resulting regex: (?#This is a comment)
  */
 class CommentEx extends AbstractExpression
 {
