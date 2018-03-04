@@ -57,7 +57,7 @@ class RegEx
     /**
      * The current version number
      */
-    const VERSION = '0.9.6';
+    const VERSION = '0.9.7';
 
     /**
      * The start of the regular expression (=prefix)
@@ -169,7 +169,7 @@ class RegEx
      * Adds a partial expression that expects 1..n of digits.
      * Same as: [0-9]+
      *
-     * Example resulting regex: \d*
+     * Example resulting regex: \d+
      *
      * @return self
      */
@@ -189,6 +189,45 @@ class RegEx
     public function addMaybeDigits() : self
     {
         return $this->addRaw('\d*');
+    }
+
+    /**
+     * Adds a partial expression that expects a character that is not a digit.
+     * Same as: [^0-9]
+     *
+     * Example resulting regex: \D
+     *
+     * @return self
+     */
+    public function addNonDigit() : self
+    {
+        return $this->addRaw('\D');
+    }
+
+    /**
+     * Adds a partial expression that expects 1..n of characters that are not digits
+     * Same as: [^0-9]+
+     *
+     * Example resulting regex: \D*
+     *
+     * @return self
+     */
+    public function addNonDigits() : self
+    {
+        return $this->addRaw('\D+');
+    }
+
+    /**
+     * Adds a partial expression that expects 0..n of characters that are not digits
+     * Same as: [^0-9]*
+     *
+     * Example resulting regex: \D*
+     *
+     * @return self
+     */
+    public function addMaybeNonDigits() : self
+    {
+        return $this->addRaw('\D*');
     }
 
     /**
@@ -231,6 +270,48 @@ class RegEx
     public function addMaybeWordChars() : self
     {
         return $this->addRaw('\w*');
+    }
+
+    /**
+     * Adds a partial expression that expects a single character that is not a word character.
+     * This includes letters, digits and the underscore.
+     * Same as: [^a-zA-Z_0-9]
+     *
+     * Example resulting regex: \W
+     *
+     * @return self
+     */
+    public function addNonWordChar() : self
+    {
+        return $this->addRaw('\W');
+    }
+
+    /**
+     * Adds a partial expression that expects 1..n of characters that are not word characters.
+     * This includes letters, digits and the underscore.
+     * Same as: [^a-zA-Z_0-9]+
+     *
+     * Example resulting regex: \W+
+     *
+     * @return self
+     */
+    public function addNonWordChars() : self
+    {
+        return $this->addRaw('\W+');
+    }
+
+    /**
+     * Adds a partial expression that expects 0..n of characters that are not word characters.
+     * This includes letters, digits and the underscore.
+     * Same as: [^a-zA-Z_0-9]*
+     *
+     * Example resulting regex: \W*
+     *
+     * @return self
+     */
+    public function addMaybeNonWordChars() : self
+    {
+        return $this->addRaw('\W*');
     }
 
     /**
