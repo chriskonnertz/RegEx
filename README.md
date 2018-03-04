@@ -7,9 +7,7 @@ Use methods to fluently create a regular expression in PHP.
 This is more intuitive and understandable than writing plain regular expressions.
 
 
-**Current state: beta**
-
-**To do**: Add negation, add [] support 
+**Current state: release candidate**
 
 ## Installation
 
@@ -358,6 +356,18 @@ Adds a partial expression that expects the end of a line.
 
 Example result: `$`
 
+### addRange
+
+```php
+$regEx->addRange('a-z', '123'. '\-');
+```
+
+Add one ore more ranges to the overall regular expression and wrap them in a "range" expression.
+Available from-to-ranges: `a-z`, `A-Z`, `0-9`
+ATTENTION: This expression will not automatically quote its inner parts.
+
+Example result: `[a-z123\-]`
+
 ### addAnd
 
 ```php
@@ -413,7 +423,7 @@ $regEx->addComment('This is a comment');
 ```
 
 Add one ore more comments to the overall regular expression and wrap them in a "comment" expression.
-This expression will not quote its regular expression characters.
+This expression will not automatically  quote its its inner parts.
 ATTENTION: Comments are not allowed to include any closing brackets ( ")" )! Quoting them will not work.
 
 Example result: `(?#This is a comment)`
