@@ -57,7 +57,7 @@ class RegEx
     /**
      * The current version number
      */
-    const VERSION = '0.9.7';
+    const VERSION = '0.9.8';
 
     /**
      * The start of the regular expression (=prefix)
@@ -402,8 +402,10 @@ class RegEx
     public function addLineBreak(string $which = null) : self
     {
         if ($which === null) {
+            // Note: We could use \R instead but then the $which-thing would not be possible
             $which = '\r?\n';
         }
+
         return $this->addRaw($which);
     }
 
@@ -420,8 +422,10 @@ class RegEx
     public function addLineBreaks(string $which = null) : self
     {
         if ($which === null) {
+            // Note: We could use \R instead but then the $which-thing would not be possible
             $which = '\r?\n';
         }
+
         return $this->addRaw($which.'+');
     }
 
@@ -438,8 +442,10 @@ class RegEx
     public function addMaybeLineBreaks(string $which = null) : self
     {
         if ($which === null) {
+            // Note: We could use \R instead but then the $which-thing would not be possible
             $which = '\r?\n';
         }
+
         return $this->addRaw($which.'*');
     }
 
@@ -467,6 +473,55 @@ class RegEx
     public function addLineEnd() : self
     {
         return $this->addRaw('$');
+    }
+
+    /**
+     * Add one ore more ranges to the overall regular expression and wrap them in a "range" expression.
+     * Available from-to-ranges: a-z, A-Z, 0-9
+     * ATTENTION: This expression will not automatically quote its inner parts.
+     *
+     * Example resulting regex: [a-z123\-]
+     *
+     * @param string|int|float|bool ...$ranges
+     * @return self
+     */
+    public function addRange(...$ranges) : self
+    {
+        foreach ($ranges as $key => $range) {
+            if (! is_scalar($range)) {
+                throw new \InvalidArgumentException(
+                    'Expected the '.($key + 1).'. range to be scalar (int / float / string / boolean) but it is: '.
+                    gettype($range)
+                );
+            }
+
+            $countOpeningBrackets = substr_count($range, ']');
+            $countQuotedOpeningBrackets = substr_count($range, '\]');
+            if ($countOpeningBrackets > $countQuotedOpeningBrackets) {
+                throw new \InvalidArgumentException('Opening square brackets have to be escaped');
+            }
+
+            $countClosingBrackets = substr_count($range, ']');
+            $countQuotedClosingBrackets = substr_count($range, '\]');
+            if ($countClosingBrackets > $countQuotedClosingBrackets) {
+                throw new \InvalidArgumentException('Closing square brackets have to be escaped');
+            }
+        }
+
+        $wrapperExpression = new Expressions\RangeEx(...$ranges);
+        $this->expressions[] = $wrapperExpression;
+
+        return $this;
+    }
+
+
+    public function addInvertedRange(...$ranges) : self
+    {
+        $this->addRange(...$ranges);
+
+        /** @var RangeEx $rangeEx */
+        $rangeEx = $this->expressions[sizeof($this->expressions) - 1];
+
     }
 
     /**
@@ -577,7 +632,7 @@ class RegEx
 
     /**
      * Add one ore more comments to the overall regular expression and wrap them in a "comment" expression.
-     * This expression will not quote its regular expression characters.
+     * This expression will not automatically quote its inner parts.
      * ATTENTION: Comments are not allowed to include any closing brackets ( ")" )! Quoting them will not work.
      *
      * Example resulting regex: (?#This is a comment)
