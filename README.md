@@ -488,7 +488,7 @@ ATTENTION: Comments are not allowed to include any closing brackets ( ")" )! Quo
 
 Example of the resulting regex string: `(?#This is a comment)`
 
-> Consider to use a PHP comment instead.
+> Consider to use PHP comments in favor of regular expression comments.
 
 ## Miscellaneous methods
 
