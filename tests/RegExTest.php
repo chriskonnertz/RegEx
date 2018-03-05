@@ -88,7 +88,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $rangeOne = 'a-z';
         $rangeTwo = '123';
-        $regEx->addRange($rangeOne, $rangeTwo);
+        $regEx->addInvertedRange($rangeOne, $rangeTwo);
 
         $this->assertEquals($this->wrapPartialRegEx('[^'.$rangeOne.$rangeTwo.']', false), $regEx->toString());
     }
