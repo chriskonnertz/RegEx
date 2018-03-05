@@ -79,7 +79,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $rangeTwo = '123';
         $regEx->addRange($rangeOne, $rangeTwo);
 
-        $this->assertEquals($this->wrapPartialRegEx($rangeOne.$rangeTwo), $regEx->toString());
+        $this->assertEquals($this->wrapPartialRegEx('['.$rangeOne.$rangeTwo.']', false), $regEx->toString());
     }
 
     public function testAddComment()
