@@ -1,6 +1,6 @@
 <?php
 
-use \ChrisKonnertz\RegEx\RegEx;
+use ChrisKonnertz\RegEx\RegEx;
 
 /**
  * Class RegExTest for tests with PHPUnit.
@@ -80,6 +80,17 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->addRange($rangeOne, $rangeTwo);
 
         $this->assertEquals($this->wrapPartialRegEx('['.$rangeOne.$rangeTwo.']', false), $regEx->toString());
+    }
+
+    public function testAddInvertedRange()
+    {
+        $regEx = $this->getInstance();
+
+        $rangeOne = 'a-z';
+        $rangeTwo = '123';
+        $regEx->addRange($rangeOne, $rangeTwo);
+
+        $this->assertEquals($this->wrapPartialRegEx('[^'.$rangeOne.$rangeTwo.']', false), $regEx->toString());
     }
 
     public function testAddComment()

@@ -62,17 +62,8 @@ $regEx->addAnyChar();
 
 Adds a partial expression that expects any single character (except by default "new line").
 
-Example result: `.`
-
-### addAnyChars
-
-```php
-$regEx->addAnyChars();
-```
-
-Adds a partial expression that expects 0..n of any characters (except by default "new line").
-
-Example result: `.*`
+Example of the resulting regex string: `.`
+Examples of matching strings: `a`, `1`
 
 ### addAnyChars
 
@@ -82,7 +73,8 @@ $regEx->addAnyChars();
 
 Adds a partial expression that expects 1..n of any characters (except by default "new line").
 
-Example result: `.+`
+Example of the resulting regex string: `.+`
+Examples of matching strings: `a`, `a1`
 
 ### addMaybeAnyChars
 
@@ -92,7 +84,8 @@ $regEx->addMaybeAnyChars();
 
 Adds a partial expression that expects 0..n of any characters (except by default "new line").
 
-Example result: `.*`
+Example of the resulting regex string: `.*`
+Examples of matching strings: `a`, `a1`, empty string
 
 ### addDigit
 
@@ -103,7 +96,8 @@ $regEx->addDigit();
 Adds a partial expression that expects a single digit.
 Same as: [0-9]
 
-Example result: `\d`
+Example of the resulting regex string: `\d`
+Examples of matching strings: `1`, `0`
 
 ### addDigits
 
@@ -114,7 +108,8 @@ $regEx->addDigits();
 Adds a partial expression that expects 1..n of digits.
 Same as: [0-9]+
 
-Example result: `\d+`
+Example of the resulting regex string: `\d+`
+Examples of matching strings: `1`, `12`
 
 ### addMaybeDigits
 
@@ -125,7 +120,8 @@ $regEx->addMaybeDigits();
 Adds a partial expression that expects 0..n of digits.
 Same as: [0-9]*
 
-Example result: `\d*`
+Example of the resulting regex string: `\d*`
+Examples of matching strings: `1`, `12`, empty string
 
 ### addNonDigit
 
@@ -136,7 +132,8 @@ $regEx->addNonDigit();
 Adds a partial expression that expects a character that is not a digit.
 Same as: [^0-9]
 
-Example result: `\D`
+Example of the resulting regex string: `\D`
+Examples of matching strings: `a`, `-`
 
 ### addNonDigits
 
@@ -147,7 +144,8 @@ $regEx->addNonDigits();
 Adds a partial expression that expects 1..n of characters that are not digits.
 Same as: [^0-9]+
 
-Example result: `\D+`
+Example of the resulting regex string: `\D+`
+Examples of matching strings: `a`, `ab`
 
 ### addMaybeNonDigits
 
@@ -158,7 +156,8 @@ $regEx->addMaybeNonDigits();
 Adds a partial expression that expects 0..n of characters that are not digits.
 Same as: [^0-9]*
 
-Example result: `\D*`
+Example of the resulting regex string: `\D*`
+Examples of matching strings: `a`, `ab`, empty string
 
 ### addWordChar
 
@@ -170,7 +169,8 @@ Adds a partial expression that expects a single word character.
 This includes letters, digits and the underscore.
 Same as: [a-zA-Z_0-9]
 
-Example result: `\w`
+Example of the resulting regex string: `\w`
+Examples of matching strings: `a`, `B`, `1`
 
 ### addWordChars
 
@@ -182,7 +182,8 @@ Adds a partial expression that expects 1..n of word characters.
 This includes letters, digits and the underscore.
 Same as: [a-zA-Z_0-9]+
 
-Example result: `\w+`
+Example of the resulting regex string: `\w+`
+Examples of matching strings: `a`, `ab`
 
 ### addMaybeWordChars
 
@@ -194,7 +195,8 @@ Adds a partial expression that expects 0..n of word characters.
 This includes letters, digits and the underscore.
 Same as: [a-zA-Z_0-9]*
 
-Example result: `\w*`
+Example of the resulting regex string: `\w*`
+Examples of matching strings: `a`, `ab`, empty string
 
 ### addNonWordChar
 
@@ -206,7 +208,8 @@ Adds a partial expression that expects a character that is not a word character.
 This includes letters, digits and the underscore.
 Same as: [^a-zA-Z_0-9]
 
-Example result: `\W`
+Example of the resulting regex string: `\W`
+Example of matching string: `-`
 
 ### addNonWordChars
 
@@ -218,7 +221,8 @@ Adds a partial expression that expects 1..n of characters that are not word char
 This includes letters, digits and the underscore.
 Same as: [^a-zA-Z_0-9]+
 
-Example result: `\W+`
+Example of the resulting regex string: `\W+`
+Examples of matching strings: `-`, `-=`
 
 ### addMaybeNonWordChars
 
@@ -230,7 +234,8 @@ Adds a partial expression that expects 0..n of characters that are not word char
 This includes letters, digits and the underscore.
 Same as: [^a-zA-Z_0-9]*
 
-Example result: `\W*`
+Example of the resulting regex string: `\W*`
+Examples of matching strings: `-`, `-=`, empty string
 
 ### addWhiteSpaceChar
 
@@ -241,7 +246,8 @@ $regEx->addWhiteSpaceChar();
 Adds a partial expression that expects a white space character.
 This includes: space, \f, \n, \r, \t and \v
 
-Example result: `\s`
+Example of the resulting regex string: `\s`
+Example of matching string: ` `
 
 ### addWhiteSpaceChars
 
@@ -252,7 +258,8 @@ $regEx->addWhiteSpaceChars();
 Adds a partial expression that expects 1..n of white space characters.
 This includes: space, \f, \n, \r, \t and \v
 
-Example result: `\s+`
+Example of the resulting regex string: `\s+`
+Examples of matching strings: ` `, `  `
 
 ### addMaybeWhiteSpaceChars
 
@@ -263,7 +270,8 @@ $regEx->addMaybeWhiteSpaceChars();
 Adds a partial expression that expects 0..n of white space characters.
 This includes: space, \f, \n, \r, \t and \v
 
-Example result: `\s*`
+Example of the resulting regex string: `\s*`
+Examples of matching strings: ` `, `  `, empty string
 
 ### addTabChar
 
@@ -273,7 +281,8 @@ $regEx->addTabChar();
 
 Adds a partial expression that expects a single tabulator (tab).
 
-Example result: `\t`
+Example of the resulting regex string: `\t`
+Examples of matching strings: `\t`
 
 ### addTabChars
 
@@ -283,7 +292,8 @@ $regEx->addTabChars();
 
 Adds a partial expression that expects 1..n tabulators (tabs).
 
-Example result: `\t+`
+Example of the resulting regex string: `\t+`
+Examples of matching strings: `\t`, `\t\t`
 
 ### addMaybeTabChars
 
@@ -293,7 +303,8 @@ $regEx->addMaybeTabChars();
 
 Adds a partial expression that expects 0..n tabulators (tabs).
 
-Example result: `\t*`
+Example of the resulting regex string: `\t*`
+Examples of matching strings: `\t`, `\t\t`, empty string
 
 ### addLineBreak
 
@@ -306,7 +317,8 @@ Adds a partial expression that expects a line break.
 Per default `\n` and `\r\n` will be recognized.
 You may pass a parameter to define a specific line break pattern.
 
-Example result: `\r?\n`
+Example of the resulting regex string: `\r?\n`
+Examples of matching strings: `\n`, `\r\n`
 
 ### addLineBreaks
 
@@ -319,7 +331,8 @@ Adds a partial expression that expects a 1..n line breaks.
 Per default \n and \r\n will be recognized.
 You may pass a parameter to define a specific line break pattern.
 
-Example resulting regex: (\r?\n)+
+Example resulting regex: `(\r?\n)+`
+Examples of matching strings: `\n`, `\n\n`
 
 ### addMaybeLineBreaks
 
@@ -332,7 +345,8 @@ Adds a partial expression that expects a 0..n line breaks.
 Per default \n and \r\n will be recognized.
 You may pass a parameter to define a specific line break pattern.
 
-Example resulting regex: (\r?\n)*
+Example resulting regex: `(\r?\n)*`
+Examples of matching strings: `\n`, `\n\n`, empty string
 
 ### addLineBeginning
 
@@ -343,7 +357,7 @@ $regEx->addLineBeginning();
 Adds a partial expression that expects the beginning of a line.
 Line breaks mark the beginning of a line.
 
-Example result: `^`
+Example of the resulting regex string: `^`
 
 ### addLineEnd
 
@@ -351,10 +365,10 @@ Example result: `^`
 $regEx->addLineEnd();
 ```
 
-Adds a partial expression that expects the end of a line.
- Line breaks mark the end of a line.
+Adds a partial expression that expects the end of a line. 
+Line breaks mark the end of a line.
 
-Example result: `$`
+Example of the resulting regex string: `$`
 
 ### addRange
 
@@ -362,11 +376,25 @@ Example result: `$`
 $regEx->addRange('a-z', '123'. '\-');
 ```
 
-Add one ore more ranges to the overall regular expression and wrap them in a "range" expression.
+Adds one ore more ranges to the overall regular expression and wrap them in a "range" expression.
 Available from-to-ranges: `a-z`, `A-Z`, `0-9`
 ATTENTION: This expression will not automatically quote its inner parts.
 
-Example result: `[a-z123\-]`
+Example of the resulting regex string: `[a-z123\-]`
+Examples of matching strings: `a`, `1`, `-`
+
+### addInvertedRange
+
+```php
+$regEx->addInvertedRange('a-z', '123'. '\-');
+```
+
+Adds one ore more ranges to the overall regular expression and wrap them in an inverted "range" expression.
+Available from-to-ranges: `a-z`, `A-Z`, `0-9`
+ATTENTION: This expression will not automatically quote its inner parts.
+
+Example of the resulting regex string: `[^a-z123\-]`
+Examples of matching strings: `A`, `4`, `=`
 
 ### addAnd
 
@@ -377,7 +405,8 @@ $regEx->addAnd('ht')->addAnd('tp');
 Add a partial expression to the overall regular expression and wrap it in an "and" expression.
 This expression requires that all of its parts exist in the tested string.
 
-Example result: `http`
+Example of the resulting regex string: `http`
+Example of matching string: `http`
 
 > The `RegEx` class has a constructor that is an alias of the `addAnd` method: 
 `new RegEx('ab')` will generate the same regular expression as `regEx->andAdd('ab')`.
@@ -391,7 +420,8 @@ $regEx->addOr('http', 'https');
 Add at least two partial expressions to the overall regular expression and wrap it in an "or" expression.
 This expression requires that one of its parts exists in the tested string.
 
-Example result: `http|https`
+Example of the resulting regex string: `http|https`
+Examples of matching strings: `http`, `https`
 
 ### addOption
 
@@ -402,7 +432,8 @@ $regEx->addAnd('http')->addAnd('s');
 Add one ore more partial expressions to the overall regular expression and wrap them in an "optional" expression.
 The parts of this expression may or may not exist in the tested string.
 
-Example result: `https(s)?`
+Example of the resulting regex string: `https(s)?`
+Examples of matching strings: `http`, `https`
 
 ### addCapturingGroup
 
@@ -414,7 +445,7 @@ Add one ore more partial expressions to the overall regular expression and wrap 
 This expression will be added to the matches when the overall regular expression is tested.
 If you add more than one part these parts are linked by "and".
 
-Example result: `(test)`
+Example of the resulting regex string: `(test)`
 
 ### addComment
 
@@ -426,7 +457,7 @@ Add one ore more comments to the overall regular expression and wrap them in a "
 This expression will not automatically  quote its its inner parts.
 ATTENTION: Comments are not allowed to include any closing brackets ( ")" )! Quoting them will not work.
 
-Example result: `(?#This is a comment)`
+Example of the resulting regex string: `(?#This is a comment)`
 
 > Consider to use a PHP comment instead.
 
@@ -439,7 +470,7 @@ $quoted = $regEx->quote('Hello.')
 ```
 
 Quotes (escapes) regular expression characters and returns the result. 
-Example: "Hello." => "Hello\\."
+Example: `Hello.` => `Hello\.`
 
 ### setModifier
 
@@ -591,7 +622,7 @@ Returns a "visualisation" of the structure of the regular expression.
 This might be helpful if you try to understand how the regular expression is built. 
 If the parameter is set to true, the result may include HTML tags. 
 
-Example result:
+Example output:
 ```
 AndEx (Size: 1): (?:line)
   string: line

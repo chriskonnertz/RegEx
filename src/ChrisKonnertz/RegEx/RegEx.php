@@ -119,7 +119,7 @@ class RegEx
     /**
      * Adds a partial expression that expects any single character (except by default "new line").
      *
-     * Example resulting regex: .
+     * Example of the resulting regex string: .
      *
      * @return self
      */
@@ -131,7 +131,7 @@ class RegEx
     /**
      * Adds a partial expression that expects 1..n of any characters (except by default "new line").
      *
-     * Example resulting regex: .+
+     * Example of the resulting regex string: .+
      *
      * @return self
      */
@@ -143,7 +143,7 @@ class RegEx
     /**
      * Adds a partial expression that expects 0..n of any characters (except by default "new line").
      *
-     * Example resulting regex: .*
+     * Example of the resulting regex string: .*
      *
      * @return self
      */
@@ -156,7 +156,7 @@ class RegEx
      * Adds a partial expression that expects a single digit.
      * Same as: [0-9]
      *
-     * Example resulting regex: \d
+     * Example of the resulting regex string: \d
      *
      * @return self
      */
@@ -169,7 +169,7 @@ class RegEx
      * Adds a partial expression that expects 1..n of digits.
      * Same as: [0-9]+
      *
-     * Example resulting regex: \d+
+     * Example of the resulting regex string: \d+
      *
      * @return self
      */
@@ -182,7 +182,7 @@ class RegEx
      * Adds a partial expression that expects 0..n of digits.
      * Same as: [0-9]*
      *
-     * Example resulting regex: \d*
+     * Example of the resulting regex string: \d*
      *
      * @return self
      */
@@ -195,7 +195,7 @@ class RegEx
      * Adds a partial expression that expects a character that is not a digit.
      * Same as: [^0-9]
      *
-     * Example resulting regex: \D
+     * Example of the resulting regex string: \D
      *
      * @return self
      */
@@ -208,7 +208,7 @@ class RegEx
      * Adds a partial expression that expects 1..n of characters that are not digits
      * Same as: [^0-9]+
      *
-     * Example resulting regex: \D*
+     * Example of the resulting regex string: \D*
      *
      * @return self
      */
@@ -221,7 +221,7 @@ class RegEx
      * Adds a partial expression that expects 0..n of characters that are not digits
      * Same as: [^0-9]*
      *
-     * Example resulting regex: \D*
+     * Example of the resulting regex string: \D*
      *
      * @return self
      */
@@ -235,7 +235,7 @@ class RegEx
      * This includes letters, digits and the underscore.
      * Same as: [a-zA-Z_0-9]
      *
-     * Example resulting regex: \w
+     * Example of the resulting regex string: \w
      *
      * @return self
      */
@@ -249,7 +249,7 @@ class RegEx
      * This includes letters, digits and the underscore.
      * Same as: [a-zA-Z_0-9]+
      *
-     * Example resulting regex: \w+
+     * Example of the resulting regex string: \w+
      *
      * @return self
      */
@@ -263,7 +263,7 @@ class RegEx
      * This includes letters, digits and the underscore.
      * Same as: [a-zA-Z_0-9]*
      *
-     * Example resulting regex: \w*
+     * Example of the resulting regex string: \w*
      *
      * @return self
      */
@@ -277,7 +277,7 @@ class RegEx
      * This includes letters, digits and the underscore.
      * Same as: [^a-zA-Z_0-9]
      *
-     * Example resulting regex: \W
+     * Example of the resulting regex string: \W
      *
      * @return self
      */
@@ -291,7 +291,7 @@ class RegEx
      * This includes letters, digits and the underscore.
      * Same as: [^a-zA-Z_0-9]+
      *
-     * Example resulting regex: \W+
+     * Example of the resulting regex string: \W+
      *
      * @return self
      */
@@ -305,7 +305,7 @@ class RegEx
      * This includes letters, digits and the underscore.
      * Same as: [^a-zA-Z_0-9]*
      *
-     * Example resulting regex: \W*
+     * Example of the resulting regex string: \W*
      *
      * @return self
      */
@@ -318,7 +318,7 @@ class RegEx
      * Adds a partial expression that expects a white space character.
      * This includes: space, \f, \n, \r, \t and \v
      *
-     * Example resulting regex: \s
+     * Example of the resulting regex string: \s
      *
      * @return self
      */
@@ -331,7 +331,7 @@ class RegEx
      * Adds a partial expression that expects 1..n of white space characters.
      * This includes: space, \f, \n, \r, \t and \v
      *
-     * Example resulting regex: \s+
+     * Example of the resulting regex string: \s+
      *
      * @return self
      */
@@ -344,7 +344,7 @@ class RegEx
      * Adds a partial expression that expects 0..n of white space characters.
      * This includes: space, \f, \n, \r, \t and \v
      *
-     * Example resulting regex: \s*
+     * Example of the resulting regex string: \s*
      *
      * @return self
      */
@@ -356,7 +356,7 @@ class RegEx
     /**
      * Adds a partial expression that expects a single tabulator (tab).
      *
-     * Example resulting regex: \t
+     * Example of the resulting regex string: \t
      *
      * @return self
      */
@@ -368,7 +368,7 @@ class RegEx
     /**
      * Adds a partial expression that expects 1..n tabulators (tabs).
      *
-     * Example resulting regex: \t+
+     * Example of the resulting regex string: \t+
      *
      * @return self
      */
@@ -380,7 +380,7 @@ class RegEx
     /**
      * Adds a partial expression that expects 0..n tabulators (tabs).
      *
-     * Example resulting regex: \t*
+     * Example of the resulting regex string: \t*
      *
      * @return self
      */
@@ -394,7 +394,7 @@ class RegEx
      * Per default \n and \r\n will be recognized.
      * You may pass a parameter to define a specific line break pattern.
      *
-     * Example resulting regex: \r?\n
+     * Example of the resulting regex string: \r?\n
      *
      * @param string|null $which The line break pattern, null = default (\n or \r\n)
      * @return self
@@ -414,7 +414,7 @@ class RegEx
      * Per default \n and \r\n will be recognized.
      * You may pass a parameter to define a specific line break pattern.
      *
-     * Example resulting regex: (\r?\n)+
+     * Example of the resulting regex string: (\r?\n)+
      *
      * @param string|null $which The line break pattern, null = default (\n or \r\n)
      * @return self
@@ -434,7 +434,7 @@ class RegEx
      * Per default \n and \r\n will be recognized.
      * You may pass a parameter to define a specific line break pattern.
      *
-     * Example resulting regex: (\r?\n)*
+     * Example of the resulting regex string: (\r?\n)*
      *
      * @param string|null $which The line break pattern, null = default (\n or \r\n)
      * @return self
@@ -453,7 +453,7 @@ class RegEx
      * Adds a partial expression that expects the beginning of a line.
      * Line breaks mark the beginning of a line.
      *
-     * Example resulting regex: ^
+     * Example of the resulting regex string: ^
      *
      * @return self
      */
@@ -466,7 +466,7 @@ class RegEx
      * Adds a partial expression that expects the end of a line.
      * Line breaks mark the end of a line.
      *
-     * Example resulting regex: $
+     * Example of the resulting regex string: $
      *
      * @return self
      */
@@ -480,7 +480,7 @@ class RegEx
      * Available from-to-ranges: a-z, A-Z, 0-9
      * ATTENTION: This expression will not automatically quote its inner parts.
      *
-     * Example resulting regex: [a-z123\-]
+     * Example of the resulting regex string: [a-z123\-]
      *
      * @param string|int|float|bool ...$ranges
      * @return self
@@ -514,21 +514,32 @@ class RegEx
         return $this;
     }
 
-
+    /**
+     * Adds one ore more ranges to the overall regular expression and wrap them in an inverted "range" expression.
+     * Available from-to-ranges: a-z, A-Z, 0-9
+     * ATTENTION: This expression will not automatically quote its inner parts.
+     *
+     * Example of the resulting regex string: [^a-z123\-]
+     *
+     * @param string|int|float|bool ...$ranges
+     * @return self
+     */
     public function addInvertedRange(...$ranges) : self
     {
         $this->addRange(...$ranges);
 
-        /** @var RangeEx $rangeEx */
+        /** @var Expressions\RangeEx $rangeEx */
         $rangeEx = $this->expressions[sizeof($this->expressions) - 1];
+        $rangeEx->makeInverted();
 
+        return $this;
     }
 
     /**
-     * Add a partial expression to the overall regular expression and wrap it in an "and" expression.
+     * Adds a partial expression to the overall regular expression and wrap it in an "and" expression.
      * This expression requires that all of its parts exist in the tested string.
      *
-     * Example resulting regex: http
+     * Example of the resulting regex string: http
      *
      * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
      * @return self
@@ -551,7 +562,7 @@ class RegEx
      * Add at least two partial expressions to the overall regular expression and wrap it in an "or" expression.
      * This expression requires that one of its parts exists in the tested string.
      *
-     * Example resulting regex: (http|https)
+     * Example of the resulting regex string: (http|https)
      *
      * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
      * @return self
@@ -574,7 +585,7 @@ class RegEx
      * Add one ore more partial expressions to the overall regular expression and wrap them in an "optional" expression.
      * The parts of this expression may or may not exist in the tested string.
      *
-     * Example resulting regex: https(s)?
+     * Example of the resulting regex string: https(s)?
      *
      * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
      * @return self
@@ -598,7 +609,7 @@ class RegEx
      * This expression will be added to the matches when the overall regular expression is tested.
      * If you add more than one part these parts are linked by "and".
      *
-     * Example resulting regex: (test)
+     * Example of the resulting regex string: (test)
      *
      * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
      * @return self
@@ -635,7 +646,7 @@ class RegEx
      * This expression will not automatically quote its inner parts.
      * ATTENTION: Comments are not allowed to include any closing brackets ( ")" )! Quoting them will not work.
      *
-     * Example resulting regex: (?#This is a comment)
+     * Example of the resulting regex string: (?#This is a comment)
      *
      * @param string|int|float|bool ...$comments
      * @return self
@@ -669,7 +680,7 @@ class RegEx
      * Add one ore more partial expressions to the overall regular expression and wrap them in a "raw" expression.
      * This expression will not quote its regular expression characters.
      *
-     * Example resulting regex: a-b
+     * Example of the resulting regex string: a-b
      *
      * @param string|int|float|bool|Closure|AbstractExpression $partialExpressions
      * @return self
