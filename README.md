@@ -6,9 +6,6 @@
 Use methods to fluently create a regular expression in PHP. 
 This is more intuitive and understandable than writing plain regular expressions.
 
-
-**Current state: release candidate**
-
 ## Installation
 
 Through [Composer](https://getcomposer.org/):

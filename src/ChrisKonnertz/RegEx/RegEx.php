@@ -57,7 +57,7 @@ class RegEx
     /**
      * The current version number
      */
-    const VERSION = '0.9.9';
+    const VERSION = '1.0.0';
 
     /**
      * The start of the regular expression (=prefix)
