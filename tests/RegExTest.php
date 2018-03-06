@@ -139,7 +139,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->clear();
 
         $regEx->addRepetition(1, 1, 'ab');
-        $this->assertEquals($this->wrapPartialRegEx('(?:ab)'), $regEx->toString());
+        $this->assertEquals($this->wrapPartialRegEx('ab'), $regEx->toString());
         $regEx->clear();
 
         $regEx->addRepetition(1, 2, 'ab');
