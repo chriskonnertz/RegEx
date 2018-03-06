@@ -139,23 +139,23 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->clear();
 
         $regEx->addRepetition(1, 1, 'ab');
-        $this->assertEquals($this->wrapPartialRegEx('ab', false), $regEx->toString());
+        $this->assertEquals($this->wrapPartialRegEx('(?:ab)'), $regEx->toString());
         $regEx->clear();
 
         $regEx->addRepetition(1, 2, 'ab');
-        $this->assertEquals($this->wrapPartialRegEx('ab{1,2}', false), $regEx->toString());
+        $this->assertEquals($this->wrapPartialRegEx('ab{1,2}'), $regEx->toString());
         $regEx->clear();
 
         $regEx->addRepetition(0, \ChrisKonnertz\RegEx\Expressions\RepetitionEx::INFINITE, 'ab');
-        $this->assertEquals($this->wrapPartialRegEx('ab*', false), $regEx->toString());
+        $this->assertEquals($this->wrapPartialRegEx('ab*'), $regEx->toString());
         $regEx->clear();
 
         $regEx->addRepetition(1, \ChrisKonnertz\RegEx\Expressions\RepetitionEx::INFINITE, 'ab');
-        $this->assertEquals($this->wrapPartialRegEx('ab+', false), $regEx->toString());
+        $this->assertEquals($this->wrapPartialRegEx('ab+'), $regEx->toString());
         $regEx->clear();
 
         $regEx->addRepetition(1, \ChrisKonnertz\RegEx\Expressions\RepetitionEx::INFINITE, 'ab');
-        $this->assertEquals($this->wrapPartialRegEx('ab{2,}', false), $regEx->toString());
+        $this->assertEquals($this->wrapPartialRegEx('ab{2,}'), $regEx->toString());
         $regEx->clear();
     }
 
@@ -241,7 +241,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
 
         $regEx->addLetter();
 
-        $expected = $this->wrapPartialRegEx('[a-zA-Z]');
+        $expected = $this->wrapPartialRegEx('[a-zA-Z]', false);
         $this->assertEquals($expected, $regEx->toString());
     }
 
