@@ -130,6 +130,35 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($this->wrapPartialRegEx('(?:s)?', false), $regEx->toString());
     }
 
+    public function testAddRepetition()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addRepetition(0, 1, 'ab');
+        $this->assertEquals($this->wrapPartialRegEx('(?:ab)?', false), $regEx->toString());
+        $regEx->clear();
+
+        $regEx->addRepetition(1, 1, 'ab');
+        $this->assertEquals($this->wrapPartialRegEx('ab', false), $regEx->toString());
+        $regEx->clear();
+
+        $regEx->addRepetition(1, 2, 'ab');
+        $this->assertEquals($this->wrapPartialRegEx('ab{1,2}', false), $regEx->toString());
+        $regEx->clear();
+
+        $regEx->addRepetition(0, \ChrisKonnertz\RegEx\Expressions\RepetitionEx::INFINITE, 'ab');
+        $this->assertEquals($this->wrapPartialRegEx('ab*', false), $regEx->toString());
+        $regEx->clear();
+
+        $regEx->addRepetition(1, \ChrisKonnertz\RegEx\Expressions\RepetitionEx::INFINITE, 'ab');
+        $this->assertEquals($this->wrapPartialRegEx('ab+', false), $regEx->toString());
+        $regEx->clear();
+
+        $regEx->addRepetition(1, \ChrisKonnertz\RegEx\Expressions\RepetitionEx::INFINITE, 'ab');
+        $this->assertEquals($this->wrapPartialRegEx('ab{2,}', false), $regEx->toString());
+        $regEx->clear();
+    }
+
     public function testAddCapturingGroup()
     {
         $regEx = $this->getInstance();
@@ -203,6 +232,36 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->addMaybeDigits();
 
         $expected = $this->wrapPartialRegEx('\d*');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddLetter()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addLetter();
+
+        $expected = $this->wrapPartialRegEx('[a-zA-Z]');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddLetters()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addLetters();
+
+        $expected = $this->wrapPartialRegEx('[a-zA-Z]+');
+        $this->assertEquals($expected, $regEx->toString());
+    }
+
+    public function testAddMaybeLetters()
+    {
+        $regEx = $this->getInstance();
+
+        $regEx->addMaybeLetters();
+
+        $expected = $this->wrapPartialRegEx('[a-zA-Z]*');
         $this->assertEquals($expected, $regEx->toString());
     }
 

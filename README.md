@@ -49,6 +49,21 @@ There is not much beauty in this regular expression. However, it is valid.
 Note that special characters will be quoted: `123-456` will become `123\-456`. 
 You may call the `addRaw()` method to avoid this behaviour.
 
+## Sophisticated example
+
+Here is an example how to create a nested regular expression:
+
+```
+$regEx = new ChrisKonnertz\RegEx\RegEx();
+
+$regEx->addRaw(new RangeEx('a-zA-Z'), '+');
+
+echo $regEx;
+```
+
+This will print out `[a-zA-Z]+` (with some extras).
+
+
 ## Builder methods
 
 > The example results might differ from the actual output. 
@@ -168,6 +183,42 @@ Example of the resulting regex string: `\D*`
 
 Examples of matching strings: `a`, `ab`, empty string
 
+### addLetter
+
+```php
+$regEx->addLetter();
+```
+
+Adds a partial expression that expects a single letter.
+
+Example of the resulting regex string: `[a-zA-Z]`
+
+Examples of matching strings: `a`, `Z`
+
+### addLetters
+
+```php
+$regEx->addLetters();
+```
+
+Adds a partial expression that expects 1..n of letters.
+
+Example of the resulting regex string: `[a-zA-Z]+`
+
+Examples of matching strings: `a`, `aB`
+
+### addMaybeLetters
+
+```php
+$regEx->addMaybeLetters();
+```
+
+Adds a partial expression that expects 0..n of letters.
+
+Example of the resulting regex string: `[a-zA-Z]*`
+
+Examples of matching strings: `a`, `aB`, empty string
+
 ### addWordChar
 
 ```php
@@ -263,7 +314,7 @@ This includes: space, \f, \n, \r, \t and \v
 
 Example of the resulting regex string: `\s`
 
-Example of matching string: ` `
+Example of matching string: ` ` (one space)
 
 ### addWhiteSpaceChars
 
@@ -276,7 +327,7 @@ This includes: space, \f, \n, \r, \t and \v
 
 Example of the resulting regex string: `\s+`
 
-Examples of matching strings: ` `, `  `
+Examples of matching strings: ` ` (one space), `  ` (two spaces)
 
 ### addMaybeWhiteSpaceChars
 
@@ -289,7 +340,7 @@ This includes: space, \f, \n, \r, \t and \v
 
 Example of the resulting regex string: `\s*`
 
-Examples of matching strings: ` `, `  `, empty string
+Examples of matching strings: ` ` (one space), `  ` (two spaces), empty string
 
 ### addTabChar
 
@@ -428,7 +479,7 @@ Examples of matching strings: `A`, `4`, `=`
 $regEx->addAnd('ht')->addAnd('tp');
 ```
 
-Add a partial expression to the overall regular expression and wrap it in an "and" expression.
+Adds a partial expression to the overall regular expression and wrap it in an "and" expression.
 This expression requires that all of its parts exist in the tested string.
 
 Example of the resulting regex string: `http`
@@ -444,7 +495,7 @@ Example of matching string: `http`
 $regEx->addOr('http', 'https');
 ```
 
-Add at least two partial expressions to the overall regular expression and wrap it in an "or" expression.
+Adds at least two partial expressions to the overall regular expression and wrap it in an "or" expression.
 This expression requires that one of its parts exists in the tested string.
 
 Example of the resulting regex string: `http|https`
@@ -457,12 +508,27 @@ Examples of matching strings: `http`, `https`
 $regEx->addAnd('http')->addAnd('s');
 ```
 
-Add one ore more partial expressions to the overall regular expression and wrap them in an "optional" expression.
+Adds one ore more partial expressions to the overall regular expression and wrap them in an "optional" expression.
 The parts of this expression may or may not exist in the tested string.
 
 Example of the resulting regex string: `https(s)?`
 
 Examples of matching strings: `http`, `https`
+
+### addRepetition
+
+```php
+$regEx->addRepetition(0, 1, "ab"); // Produces "ab?" and matches "ab" and empty string
+$regEx->addRepetition(1, 1, "ab"); // Produces "ab" and matches "ab"
+$regEx->addRepetition(1, 2, "ab"); // Produces "ab{1,2}" and matches "ab" and "abab".
+$regEx->addRepetition(0, RepetitionEx::INFINITE, "ab"); // Produces "ab*" and matches 0..n "ab"
+$regEx->addRepetition(1, RepetitionEx::INFINITE, "ab"); // Produces "ab+" and matches 1..n "ab"
+$regEx->addRepetition(2, RepetitionEx::INFINITE, "ab"); // Produces "ab{2,}" and matches 2..n "ab"
+```
+
+Adds one ore more partial expressions to the total regular expression and wrap them in a "repetition" expression.
+Expects the minimum and the maximum of repetitions as the first two arguments.
+The parts of this expression have to appear $min to $max times in the testes string.
 
 ### addCapturingGroup
 
@@ -674,11 +740,14 @@ The magic method `__toString` has been implemented as well so you may convert th
 
 RegEx has been inspired by [PHPVerbalExpressions](https://github.com/VerbalExpressions/PHPVerbalExpressions).
 It is not better than VerbalExpressions but different. RegEx makes more use of OOP principles. 
-Therefore it is better suited to mimic the structure of a regular expression but it is also more complex.
+Therefore it is better suited to mimic the structure of a regular expression. 
+On the downside it is more complex.
 
 ## General notes
 
 * Contributions welcome. Do not hesitate to create issues and pull requests.
+
+* If you want to test your regular expression, you may try an [online regex tester](http://www.phpliveregex.com/).
 
 * Why the extensive use of (not capturing) groups? Well, to me it is not very intuitive that "ab*" is the same as
 "(?:ab)*". Always using (non capturing) groups emphasizes the structure of a regular expression.

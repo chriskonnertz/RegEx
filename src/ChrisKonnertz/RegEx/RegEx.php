@@ -57,7 +57,7 @@ class RegEx
     /**
      * The current version number
      */
-    const VERSION = '0.9.8';
+    const VERSION = '0.9.9';
 
     /**
      * The start of the regular expression (=prefix)
@@ -120,6 +120,7 @@ class RegEx
      * Adds a partial expression that expects any single character (except by default "new line").
      *
      * Example of the resulting regex string: .
+     * Examples of matching strings: "a", "1"
      *
      * @return self
      */
@@ -132,6 +133,7 @@ class RegEx
      * Adds a partial expression that expects 1..n of any characters (except by default "new line").
      *
      * Example of the resulting regex string: .+
+     * Examples of matching strings: "a", "a1"
      *
      * @return self
      */
@@ -144,6 +146,7 @@ class RegEx
      * Adds a partial expression that expects 0..n of any characters (except by default "new line").
      *
      * Example of the resulting regex string: .*
+     * Examples of matching strings: "a", "a1", empty string
      *
      * @return self
      */
@@ -157,6 +160,7 @@ class RegEx
      * Same as: [0-9]
      *
      * Example of the resulting regex string: \d
+     * Examples of matching strings: "1", "0"
      *
      * @return self
      */
@@ -170,6 +174,7 @@ class RegEx
      * Same as: [0-9]+
      *
      * Example of the resulting regex string: \d+
+     * Examples of matching strings: "1", "12"
      *
      * @return self
      */
@@ -183,6 +188,7 @@ class RegEx
      * Same as: [0-9]*
      *
      * Example of the resulting regex string: \d*
+     * Examples of matching strings: "1", "12", empty string
      *
      * @return self
      */
@@ -196,6 +202,7 @@ class RegEx
      * Same as: [^0-9]
      *
      * Example of the resulting regex string: \D
+     * Examples of matching strings: "a", "-"
      *
      * @return self
      */
@@ -208,7 +215,8 @@ class RegEx
      * Adds a partial expression that expects 1..n of characters that are not digits
      * Same as: [^0-9]+
      *
-     * Example of the resulting regex string: \D*
+     * Example of the resulting regex string: \D+
+     * Examples of matching strings: "a", "ab"
      *
      * @return self
      */
@@ -222,6 +230,7 @@ class RegEx
      * Same as: [^0-9]*
      *
      * Example of the resulting regex string: \D*
+     * Examples of matching strings: "a", "ab", empty string
      *
      * @return self
      */
@@ -231,11 +240,51 @@ class RegEx
     }
 
     /**
+     * Adds a partial expression that expects a letter.
+     *
+     * Example of the resulting regex string: [a-zA-Z]
+     * Examples of matching strings: "a", "Z"
+     *
+     * @return self
+     */
+    public function addLetter() : self
+    {
+        return $this->addRange('a-zA-Z');
+    }
+
+    /**
+     * Adds a partial expression that expects 1..n of letters.
+     *
+     * Example of the resulting regex string: [a-zA-Z]+
+     * Examples of matching strings: "a", "aB"
+     *
+     * @return self
+     */
+    public function addLetters() : self
+    {
+        return $this->addRaw(new Expressions\RangeEx('a-zA-Z'), '+');
+    }
+
+    /**
+     * Adds a partial expression that expects 0..n of letters.
+     *
+     * Example of the resulting regex string: [a-zA-Z]*
+     * Examples of matching strings: "a", "aB", empty string
+     *
+     * @return self
+     */
+    public function addMaybeLetters() : self
+    {
+        return $this->addRaw(new Expressions\RangeEx('a-zA-Z'), '*');
+    }
+
+    /**
      * Adds a partial expression that expects a single word character.
      * This includes letters, digits and the underscore.
      * Same as: [a-zA-Z_0-9]
      *
      * Example of the resulting regex string: \w
+     * Examples of matching strings: "a", "B", "1"
      *
      * @return self
      */
@@ -250,6 +299,7 @@ class RegEx
      * Same as: [a-zA-Z_0-9]+
      *
      * Example of the resulting regex string: \w+
+     * Examples of matching strings: "a", "ab"
      *
      * @return self
      */
@@ -264,6 +314,7 @@ class RegEx
      * Same as: [a-zA-Z_0-9]*
      *
      * Example of the resulting regex string: \w*
+     * Examples of matching strings: "a", "ab", empty string
      *
      * @return self
      */
@@ -278,6 +329,7 @@ class RegEx
      * Same as: [^a-zA-Z_0-9]
      *
      * Example of the resulting regex string: \W
+     * Example of matching string: "-"
      *
      * @return self
      */
@@ -292,6 +344,7 @@ class RegEx
      * Same as: [^a-zA-Z_0-9]+
      *
      * Example of the resulting regex string: \W+
+     * Examples of matching strings: "-", "-="
      *
      * @return self
      */
@@ -306,6 +359,7 @@ class RegEx
      * Same as: [^a-zA-Z_0-9]*
      *
      * Example of the resulting regex string: \W*
+     * Examples of matching strings: "-", "-=", empty string
      *
      * @return self
      */
@@ -319,6 +373,7 @@ class RegEx
      * This includes: space, \f, \n, \r, \t and \v
      *
      * Example of the resulting regex string: \s
+     * Example of matching string: " "
      *
      * @return self
      */
@@ -332,6 +387,7 @@ class RegEx
      * This includes: space, \f, \n, \r, \t and \v
      *
      * Example of the resulting regex string: \s+
+     * Example of matching string: " ", "  "
      *
      * @return self
      */
@@ -345,6 +401,7 @@ class RegEx
      * This includes: space, \f, \n, \r, \t and \v
      *
      * Example of the resulting regex string: \s*
+     * Example of matching string: " ", "  ", empty string
      *
      * @return self
      */
@@ -357,6 +414,7 @@ class RegEx
      * Adds a partial expression that expects a single tabulator (tab).
      *
      * Example of the resulting regex string: \t
+     * Examples of matching strings: "\t"
      *
      * @return self
      */
@@ -369,6 +427,7 @@ class RegEx
      * Adds a partial expression that expects 1..n tabulators (tabs).
      *
      * Example of the resulting regex string: \t+
+     * Examples of matching strings: "\t", "\t\t"
      *
      * @return self
      */
@@ -381,6 +440,7 @@ class RegEx
      * Adds a partial expression that expects 0..n tabulators (tabs).
      *
      * Example of the resulting regex string: \t*
+     * Examples of matching strings: "\t", "\t\t", empty string
      *
      * @return self
      */
@@ -395,6 +455,7 @@ class RegEx
      * You may pass a parameter to define a specific line break pattern.
      *
      * Example of the resulting regex string: \r?\n
+     * Examples of matching strings: "\n", "\r\n"
      *
      * @param string|null $which The line break pattern, null = default (\n or \r\n)
      * @return self
@@ -415,6 +476,7 @@ class RegEx
      * You may pass a parameter to define a specific line break pattern.
      *
      * Example of the resulting regex string: (\r?\n)+
+     * Examples of matching strings: "\n", "\n\n"
      *
      * @param string|null $which The line break pattern, null = default (\n or \r\n)
      * @return self
@@ -435,6 +497,7 @@ class RegEx
      * You may pass a parameter to define a specific line break pattern.
      *
      * Example of the resulting regex string: (\r?\n)*
+     * Examples of matching strings: "\n", "\n\n", empty string
      *
      * @param string|null $which The line break pattern, null = default (\n or \r\n)
      * @return self
@@ -481,6 +544,7 @@ class RegEx
      * ATTENTION: This expression will not automatically quote its inner parts.
      *
      * Example of the resulting regex string: [a-z123\-]
+     * Examples of matching strings: "a", "1", "-"
      *
      * @param string|int|float|bool ...$ranges
      * @return self
@@ -520,6 +584,7 @@ class RegEx
      * ATTENTION: This expression will not automatically quote its inner parts.
      *
      * Example of the resulting regex string: [^a-z123\-]
+     * Examples of matching strings: "A", "4", "="
      *
      * @param string|int|float|bool ...$ranges
      * @return self
@@ -540,6 +605,7 @@ class RegEx
      * This expression requires that all of its parts exist in the tested string.
      *
      * Example of the resulting regex string: http
+     * Example of matching string: "http"
      *
      * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
      * @return self
@@ -559,10 +625,11 @@ class RegEx
     }
 
     /**
-     * Add at least two partial expressions to the overall regular expression and wrap it in an "or" expression.
+     * Adds at least two partial expressions to the overall regular expression and wrap it in an "or" expression.
      * This expression requires that one of its parts exists in the tested string.
      *
      * Example of the resulting regex string: (http|https)
+     * Examples of matching strings: "http", "https"
      *
      * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
      * @return self
@@ -582,10 +649,11 @@ class RegEx
     }
 
     /**
-     * Add one ore more partial expressions to the overall regular expression and wrap them in an "optional" expression.
+     * Adds one ore more partial expressions to the overall regular expression and wrap them in an "optional" expression.
      * The parts of this expression may or may not exist in the tested string.
      *
      * Example of the resulting regex string: https(s)?
+     * Examples of matching strings: "http", "https"
      *
      * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
      * @return self
@@ -599,6 +667,38 @@ class RegEx
         }
 
         $wrapperExpression = new Expressions\OptionEx(...$partialExpressions);
+        $this->expressions[] = $wrapperExpression;
+
+        return $this;
+    }
+
+    /**
+     * Adds one ore more partial expressions to the total regular expression and wrap them in a "repetition" expression.
+     * Expects the minimum and the maximum of repetitions as the first two arguments.
+     * The parts of this expression have to appear $min to $max times in the testes string.
+     *
+     * Examples:
+     * addRepetition(0, 1, "ab") produces "ab?" and matches "ab" and empty string.
+     * addRepetition(1, 1, "ab") produces "ab" and matches "ab".
+     * addRepetition(1, 2, "ab") produces "ab{1,2}" and matches "ab" and "abab".
+     * addRepetition(0, RepetitionEx::INFINITE, "ab") produces "ab*" and matches 0..n repetitions of "ab".
+     * addRepetition(1, RepetitionEx::INFINITE, "ab") produces "ab+". and matches 1..n repetitions of "ab".
+     * addRepetition(2, RepetitionEx::INFINITE, "ab") produces "ab{2,}" and matches "abab", "ababab", ...
+     *
+     * @param int $min The minimum of repetitions. Must be >= 0.
+     * @param int $max The maximum of repetitions. Must be >= 0 and >= $min.
+     * @param string|int|float|bool|Closure|AbstractExpression ...$partialExpressions
+     * @return self
+     */
+    public function addRepetition(int $min, int $max, ...$partialExpressions) : self
+    {
+        foreach ($partialExpressions as &$partialExpression) {
+            if ($partialExpression instanceof Closure) {
+                $partialExpression = $partialExpression($this);
+            }
+        }
+
+        $wrapperExpression = new Expressions\RepetitionEx($min, $max, ...$partialExpressions);
         $this->expressions[] = $wrapperExpression;
 
         return $this;

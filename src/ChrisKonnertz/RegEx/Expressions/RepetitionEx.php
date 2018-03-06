@@ -34,21 +34,24 @@ class RepetitionEx extends AbstractExpression
      * Constructor of the repetition expression class.
      *
      * @param int $min The minimum of repetitions. Must be >= 0.
-     * @param int $max The maximum of repetitions. Must be >= 0 and >= $min.
+     * @param int $max The maximum of repetitions. Must be >= 0 or self::INFINITE and must be >= $min.
      * @param string|int|float|bool|AbstractExpression ...$expressions The partial expressions
      */
     public function __construct(int $min, int $max, ...$expressions)
     {
+        if ($min === self::INFINITE) {
+            throw new \InvalidArgumentException('The minimum cannot be infinite');
+        }
         if ($min < 0) {
             throw new \InvalidArgumentException('The minimum cannot be less than 0');
         }
-        if ($max != self::INFINITE) {
+        if ($max !== self::INFINITE) {
             if ($max < 0) {
                 throw new \InvalidArgumentException('The maximum cannot be less than 0');
             }
-        }
-        if ($max < $min) {
-            throw new \InvalidArgumentException('The maximum cannot be less than the minimum');
+            if ($max < $min) {
+                throw new \InvalidArgumentException('The maximum cannot be less than the minimum');
+            }
         }
 
         $this->min = $min;
@@ -68,9 +71,10 @@ class RepetitionEx extends AbstractExpression
      */
     public function validate(array $expressions)
     {
-        if (count($expressions) < 2) {
+        if (count($expressions) < 1) {
             throw new \InvalidArgumentException(
-                'You have to pass at least two arguments to the constructor of an object of type"'.gettype($this).'".'
+                'You have to pass at least one expression argument to the constructor of an object of type"'.
+                gettype($this).'".'
             );
         }
 
@@ -106,6 +110,12 @@ class RepetitionEx extends AbstractExpression
                         $repetitions = '{' . $this->min . ',}';
                 }
             }
+        }
+        if ($this->min === 0 && $this->max === 1) {
+            $repetitions = '?'; // We use an "optional" expression instead
+        }
+        if ($this->min === 1 && $this->max === 1) {
+            $repetitions = ''; // We can omit the repetition
         }
 
         return $regEx.')'.$repetitions;
