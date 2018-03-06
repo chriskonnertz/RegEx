@@ -154,7 +154,7 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($this->wrapPartialRegEx('(?:ab)+', false), $regEx->toString());
         $regEx->clear();
 
-        $regEx->addRepetition(1, \ChrisKonnertz\RegEx\Expressions\RepetitionEx::INFINITE, 'ab');
+        $regEx->addRepetition(2, \ChrisKonnertz\RegEx\Expressions\RepetitionEx::INFINITE, 'ab');
         $this->assertEquals($this->wrapPartialRegEx('(?:ab){2,}', false), $regEx->toString());
         $regEx->clear();
     }
