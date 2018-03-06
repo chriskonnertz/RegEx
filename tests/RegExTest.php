@@ -147,11 +147,11 @@ class RegExTest extends \PHPUnit\Framework\TestCase
         $regEx->clear();
 
         $regEx->addRepetition(0, \ChrisKonnertz\RegEx\Expressions\RepetitionEx::INFINITE, 'ab');
-        $this->assertEquals($this->wrapPartialRegEx('ab*'), $regEx->toString());
+        $this->assertEquals($this->wrapPartialRegEx('(?:ab)*', false), $regEx->toString());
         $regEx->clear();
 
         $regEx->addRepetition(1, \ChrisKonnertz\RegEx\Expressions\RepetitionEx::INFINITE, 'ab');
-        $this->assertEquals($this->wrapPartialRegEx('ab+'), $regEx->toString());
+        $this->assertEquals($this->wrapPartialRegEx('(?:ab)+', false), $regEx->toString());
         $regEx->clear();
 
         $regEx->addRepetition(1, \ChrisKonnertz\RegEx\Expressions\RepetitionEx::INFINITE, 'ab');
