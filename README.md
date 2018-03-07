@@ -46,7 +46,7 @@ There is not much beauty in this regular expression. However, it is valid.
 Note that special characters will be quoted: `123-456` will become `123\-456`. 
 You may call the `addRaw()` method to avoid this behaviour.
 
-## Sophisticated example
+## More examples
 
 Here is an example how to create a nested regular expression:
 
@@ -60,6 +60,19 @@ echo $regEx;
 
 This will print out `[a-zA-Z]+` (with some extras).
 
+Re-using the `RegEx` object works this way:
+
+```
+$regEx = new ChrisKonnertz\RegEx\RegEx();
+
+$regEx->addAnd('First test);
+echo $regEx;
+
+$rexEx->clear()->addAnd('Second test');
+echo $regEx;
+```
+
+The `clear()` method will reset the `RegEx` object so you can use it to build a new regular expression.
 
 ## Builder methods
 
@@ -109,7 +122,7 @@ $regEx->addDigit();
 ```
 
 Adds a partial expression that expects a single digit.
-Same as: [0-9]
+Same as: `[0-9]`
 
 Example of the resulting regex string: `\d`
 
@@ -122,7 +135,7 @@ $regEx->addDigits();
 ```
 
 Adds a partial expression that expects 1..n of digits.
-Same as: [0-9]+
+Same as: `[0-9]+`
 
 Example of the resulting regex string: `\d+`
 
@@ -135,7 +148,7 @@ $regEx->addMaybeDigits();
 ```
 
 Adds a partial expression that expects 0..n of digits.
-Same as: [0-9]*
+Same as: `[0-9]*`
 
 Example of the resulting regex string: `\d*`
 
@@ -148,7 +161,7 @@ $regEx->addNonDigit();
 ```
 
 Adds a partial expression that expects a character that is not a digit.
-Same as: [^0-9]
+Same as: `[^0-9]`
 
 Example of the resulting regex string: `\D`
 
@@ -161,7 +174,7 @@ $regEx->addNonDigits();
 ```
 
 Adds a partial expression that expects 1..n of characters that are not digits.
-Same as: [^0-9]+
+Same as: `[^0-9]+`
 
 Example of the resulting regex string: `\D+`
 
@@ -174,7 +187,7 @@ $regEx->addMaybeNonDigits();
 ```
 
 Adds a partial expression that expects 0..n of characters that are not digits.
-Same as: [^0-9]*
+Same as: `[^0-9]*`
 
 Example of the resulting regex string: `\D*`
 
@@ -224,7 +237,7 @@ $regEx->addWordChar();
 
 Adds a partial expression that expects a single word character.
 This includes letters, digits and the underscore.
-Same as: [a-zA-Z_0-9]
+Same as: `[a-zA-Z_0-9]`
 
 Example of the resulting regex string: `\w`
 
@@ -238,7 +251,7 @@ $regEx->addWordChars();
 
 Adds a partial expression that expects 1..n of word characters.
 This includes letters, digits and the underscore.
-Same as: [a-zA-Z_0-9]+
+Same as: `[a-zA-Z_0-9]+`
 
 Example of the resulting regex string: `\w+`
 
@@ -252,7 +265,7 @@ $regEx->addMaybeWordChars();
 
 Adds a partial expression that expects 0..n of word characters.
 This includes letters, digits and the underscore.
-Same as: [a-zA-Z_0-9]*
+Same as: `[a-zA-Z_0-9]*`
 
 Example of the resulting regex string: `\w*`
 
@@ -266,7 +279,7 @@ $regEx->addNonWordChar();
 
 Adds a partial expression that expects a character that is not a word character.
 This includes letters, digits and the underscore.
-Same as: [^a-zA-Z_0-9]
+Same as: `[^a-zA-Z_0-9]`
 
 Example of the resulting regex string: `\W`
 
@@ -280,7 +293,7 @@ $regEx->addNonWordChars();
 
 Adds a partial expression that expects 1..n of characters that are not word characters.
 This includes letters, digits and the underscore.
-Same as: [^a-zA-Z_0-9]+
+Same as: `[^a-zA-Z_0-9]+`
 
 Example of the resulting regex string: `\W+`
 
@@ -294,7 +307,7 @@ $regEx->addMaybeNonWordChars();
 
 Adds a partial expression that expects 0..n of characters that are not word characters.
 This includes letters, digits and the underscore.
-Same as: [^a-zA-Z_0-9]*
+Same as: `[^a-zA-Z_0-9]*`
 
 Example of the resulting regex string: `\W*`
 
@@ -398,7 +411,7 @@ $regEx->addLineBreaks(PHP_EOL);
 ```
 
 Adds a partial expression that expects a 1..n line breaks.
-Per default \n and \r\n will be recognized.
+Per default `\n` and `\r\n` will be recognized.
 You may pass a parameter to define a specific line break pattern.
 
 Example resulting regex: `(\r?\n)+`
@@ -413,7 +426,7 @@ $regEx->addMaybeLineBreaks(PHP_EOL);
 ```
 
 Adds a partial expression that expects a 0..n line breaks.
-Per default \n and \r\n will be recognized.
+Per default `\n` and `\r\n` will be recognized.
 You may pass a parameter to define a specific line break pattern.
 
 Example resulting regex: `(\r?\n)*`
@@ -448,13 +461,15 @@ Example of the resulting regex string: `$`
 $regEx->addRange('a-z', '123'. '\-');
 ```
 
-Adds one ore more ranges to the overall regular expression and wrap them in a "range" expression.
+Adds one ore more ranges to the overall regular expression and wraps them in a "range" expression.
 Available from-to-ranges: `a-z`, `A-Z`, `0-9`
-ATTENTION: This expression will not automatically quote its inner parts.
+_ATTENTION_: This expression will not automatically quote its inner parts.
 
 Example of the resulting regex string: `[a-z123\-]`
 
 Examples of matching strings: `a`, `1`, `-`
+
+> This method uses the `RangeEx` expression class.
 
 ### addInvertedRange
 
@@ -462,13 +477,15 @@ Examples of matching strings: `a`, `1`, `-`
 $regEx->addInvertedRange('a-z', '123'. '\-');
 ```
 
-Adds one ore more ranges to the overall regular expression and wrap them in an inverted "range" expression.
+Adds one ore more ranges to the overall regular expression and wraps them in an inverted "range" expression.
 Available from-to-ranges: `a-z`, `A-Z`, `0-9`
-ATTENTION: This expression will not automatically quote its inner parts.
+_ATTENTION_: This expression will not automatically quote its inner parts.
 
 Example of the resulting regex string: `[^a-z123\-]`
 
 Examples of matching strings: `A`, `4`, `=`
+
+> This method uses the `RangeEx` expression class.
 
 ### addAnd
 
@@ -476,7 +493,7 @@ Examples of matching strings: `A`, `4`, `=`
 $regEx->addAnd('ht')->addAnd('tp');
 ```
 
-Adds a partial expression to the overall regular expression and wrap it in an "and" expression.
+Adds one ore more partial expression to the overall regular expression and wraps them in an "and" expression.
 This expression requires that all of its parts exist in the tested string.
 
 Example of the resulting regex string: `http`
@@ -486,18 +503,22 @@ Example of matching string: `http`
 > The `RegEx` class has a constructor that is an alias of the `addAnd` method: 
 `new RegEx('ab')` will generate the same regular expression as `regEx->andAdd('ab')`.
 
+> This method uses the `AndEx` expression class.
+
 ### addOr
 
 ```php
 $regEx->addOr('http', 'https');
 ```
 
-Adds at least two partial expressions to the overall regular expression and wrap it in an "or" expression.
+Adds at least two partial expressions to the overall regular expression and wraps them in an "or" expression.
 This expression requires that one of its parts exists in the tested string.
 
 Example of the resulting regex string: `http|https`
 
 Examples of matching strings: `http`, `https`
+
+> This method uses the `OrEx` expression class.
 
 ### addOption
 
@@ -505,12 +526,15 @@ Examples of matching strings: `http`, `https`
 $regEx->addAnd('http')->addAnd('s');
 ```
 
-Adds one ore more partial expressions to the overall regular expression and wrap them in an "optional" expression.
+Adds one ore more partial expressions to the overall regular expression and wraps them in an "optional" expression.
 The parts of this expression may or may not exist in the tested string.
 
 Example of the resulting regex string: `https(s)?`
 
 Examples of matching strings: `http`, `https`
+
+
+> This method uses the `OptionEx` expression class.
 
 ### addRepetition
 
@@ -523,9 +547,11 @@ $regEx->addRepetition(1, RepetitionEx::INFINITE, "ab"); // Produces "ab+" and ma
 $regEx->addRepetition(2, RepetitionEx::INFINITE, "ab"); // Produces "ab{2,}" and matches 2..n "ab"
 ```
 
-Adds one ore more partial expressions to the total regular expression and wrap them in a "repetition" expression.
+Adds one ore more partial expressions to the total regular expression and wraps them in a "repetition" expression.
 Expects the minimum and the maximum of repetitions as the first two arguments.
-The parts of this expression have to appear $min to $max times in the testes string.
+The parts of this expression have to appear `$min` to `$max` times in the tested string.
+
+> This method uses the `RepetitionEx` expression class.
 
 ### addCapturingGroup
 
@@ -533,11 +559,13 @@ The parts of this expression have to appear $min to $max times in the testes str
 $regEx->addCapturingGroup('test');
 ```
 
-Add one ore more partial expressions to the overall regular expression and wrap them in a "capturing group" expression.
+Adds one ore more partial expressions to the overall regular expression and wraps them in a "capturing group" expression.
 This expression will be added to the matches when the overall regular expression is tested.
 If you add more than one part these parts are linked by "and".
 
 Example of the resulting regex string: `(test)`
+
+> This method uses the `CapturingGroupEx` expression class.
 
 ### addComment
 
@@ -546,12 +574,14 @@ $regEx->addComment('This is a comment');
 ```
 
 Add one ore more comments to the overall regular expression and wrap them in a "comment" expression.
-This expression will not automatically  quote its its inner parts.
-ATTENTION: Comments are not allowed to include any closing brackets ( ")" )! Quoting them will not work.
+This expression will not automatically quote its its inner parts.
+_ATTENTION_: Comments are not allowed to include any closing brackets ( ")" )! Quoting them will not work.
 
 Example of the resulting regex string: `(?#This is a comment)`
 
 > Consider to use PHP comments in favor of regular expression comments.
+
+> This method uses the `CommentEx` expression class.
 
 ## Miscellaneous methods
 
@@ -657,7 +687,7 @@ $deepSize = $regEx->getSize(true);
 Returns the number of partial expressions. 
 If the parameter is false, only the partial expressions on the root level are counted. 
 If the parameter is true, the method traverses trough all partial expressions and counts 
-all partial expressions without sub expressions. Or with other words: If you visualize 
+all partial expressions without sub expressions. Or with other words: If you imagine 
 the regular expression as a tree then this method will only count its leaves.
 
 ### getExpressions
@@ -667,7 +697,6 @@ $expressions = $regEx->getExpressions();
 ```
 
 Getter for the partial expressions array.
-
 
 ### getStart
 
@@ -711,7 +740,7 @@ echo $visualisation;
 ```
 
 Returns a "visualisation" of the structure of the regular expression. 
-This might be helpful if you try to understand how the regular expression is built. 
+This might be helpful if you want to understand how the regular expression is built. 
 If the parameter is set to true, the result may include HTML tags. 
 
 Example output:
@@ -731,7 +760,7 @@ $stringified = $regEx->toString();
 ```
 
 Returns the concatenated partial regular expressions as a string.
-The magic method `__toString` has been implemented as well so you may convert the RegEx object to a string.
+The magic method `__toString` has been implemented as well so you may convert the `RegEx` object to a string.
 
 ## PHPVerbalExpressions
 
@@ -742,7 +771,7 @@ On the downside it is more complex.
 
 ## General notes
 
-* Contributions welcome. Do not hesitate to create issues and pull requests.
+* Contributions welcome. Do not hesitate to create issues and pull requests. Let me know if you miss a method.
 
 * If you want to test your regular expression, you may try an [online regex tester](http://www.phpliveregex.com/).
 

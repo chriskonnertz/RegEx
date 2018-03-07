@@ -539,7 +539,7 @@ class RegEx
     }
 
     /**
-     * Add one ore more ranges to the overall regular expression and wrap them in a "range" expression.
+     * Add one ore more ranges to the overall regular expression and wraps them in a "range" expression.
      * Available from-to-ranges: a-z, A-Z, 0-9
      * ATTENTION: This expression will not automatically quote its inner parts.
      *
@@ -579,7 +579,7 @@ class RegEx
     }
 
     /**
-     * Adds one ore more ranges to the overall regular expression and wrap them in an inverted "range" expression.
+     * Adds one ore more ranges to the overall regular expression and wraps them in an inverted "range" expression.
      * Available from-to-ranges: a-z, A-Z, 0-9
      * ATTENTION: This expression will not automatically quote its inner parts.
      *
@@ -601,7 +601,7 @@ class RegEx
     }
 
     /**
-     * Adds a partial expression to the overall regular expression and wrap it in an "and" expression.
+     * Adds one or more partial expressions to the overall regular expression and wraps them in an "and" expression.
      * This expression requires that all of its parts exist in the tested string.
      *
      * Example of the resulting regex string: http
@@ -625,7 +625,7 @@ class RegEx
     }
 
     /**
-     * Adds at least two partial expressions to the overall regular expression and wrap it in an "or" expression.
+     * Adds at least two partial expressions to the overall regular expression and wraps them in an "or" expression.
      * This expression requires that one of its parts exists in the tested string.
      *
      * Example of the resulting regex string: (http|https)
@@ -649,7 +649,7 @@ class RegEx
     }
 
     /**
-     * Adds one ore more partial expressions to the overall regular expression and wrap them in an "optional" expression.
+     * Adds one ore more partial expressions to the overall regular expression and wraps them in an "optional" expression.
      * The parts of this expression may or may not exist in the tested string.
      *
      * Example of the resulting regex string: https(s)?
@@ -673,9 +673,9 @@ class RegEx
     }
 
     /**
-     * Adds one ore more partial expressions to the total regular expression and wrap them in a "repetition" expression.
+     * Adds one ore more partial expressions to the total regular expression and wraps them in a "repetition" expression.
      * Expects the minimum and the maximum of repetitions as the first two arguments.
-     * The parts of this expression have to appear $min to $max times in the testes string.
+     * The parts of this expression have to appear $min to $max times in the tested string.
      *
      * Examples:
      * addRepetition(0, 1, "ab") produces "ab?" and matches "ab" and empty string.
@@ -992,7 +992,7 @@ class RegEx
 
     /**
      * Returns a "visualisation" of the structure of the regular expression.
-     * This might be helpful if you try to understand how the regular expression is built.
+     * This might be helpful if you want to understand how the regular expression is built.
      * If the parameter is set to true, the result may include HTML tags.
      *
      * @param bool $html If true, use HTML tags to prettify the visualisation
@@ -1048,7 +1048,7 @@ class RegEx
      * Returns the number of partial expressions.
      * If $recursive is false, only the partial expressions on the root level are counted.
      * If $recursive is true, the method traverses trough all partial expressions and counts
-     * all partial expressions without sub expressions. Or with other words: If you visualize
+     * all partial expressions without sub expressions. Or with other words: If you imagine
      * the regular expression as a tree then this method will only count its leaves.
      *
      * @param bool $recursive If true, also count nested expressions
