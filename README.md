@@ -458,7 +458,7 @@ Example of the resulting regex string: `$`
 ### addRange
 
 ```php
-$regEx->addRange('a-z', '123'. '\-');
+$regEx->addRange('a-z', '123', '\-');
 ```
 
 Adds one ore more ranges to the overall regular expression and wraps them in a "range" expression.
@@ -474,7 +474,7 @@ Examples of matching strings: `a`, `1`, `-`
 ### addInvertedRange
 
 ```php
-$regEx->addInvertedRange('a-z', '123'. '\-');
+$regEx->addInvertedRange('a-z', '123', '\-');
 ```
 
 Adds one ore more ranges to the overall regular expression and wraps them in an inverted "range" expression.
