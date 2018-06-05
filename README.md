@@ -735,7 +735,7 @@ Setter for the "end" property
 ### getVisualisation
 
 ```php
-$visualisation = $regEx->getStructure(true);
+$visualisation = $regEx->getStructure(false);
 echo $visualisation;
 ```
 
