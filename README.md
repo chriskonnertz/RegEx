@@ -767,7 +767,7 @@ The magic method `__toString` has been implemented as well so you may convert th
 RegEx has been inspired by [PHPVerbalExpressions](https://github.com/VerbalExpressions/PHPVerbalExpressions).
 It is not better than VerbalExpressions but different. RegEx makes more use of OOP principles. 
 Therefore it is better suited to mimic the structure of a regular expression. 
-On the downside it is more complex.
+On the downside it is a little bit more complex.
 
 ## General notes
 
