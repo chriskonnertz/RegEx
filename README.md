@@ -72,7 +72,7 @@ $rexEx->clear()->addAnd('Second test');
 echo $regEx;
 ```
 
-The `clear()` method will reset the `RegEx` object so you can use it to build a new regular expression.
+The `clear()` method will reset the `RegEx` object so you can reuse it to build a new regular expression.
 
 ## Builder methods
 
