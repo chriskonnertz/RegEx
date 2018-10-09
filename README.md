@@ -662,7 +662,7 @@ $regEx->traverse(function($expression, int $level, bool $hasChildren)
 });
 ```
 
-Call this method if you want to traverse it and all of it child expression, 
+Call this method if you want to traverse it and all of it child expressions, 
 no matter how deep they are nested in the tree. You only have to pass a closure, 
 you do not have to pass an argument for the level parameter. 
 The callback will have three arguments: The first is the child expression 
