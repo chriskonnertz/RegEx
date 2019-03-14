@@ -53,6 +53,11 @@ class RegEx
         self::SINGLE_LINE_MODIFIER_SHORTCUT,
         self::EXTENDED_MODIFIER_SHORTCUT
     ];
+    
+    /**
+     * Defines the number of spaces per "tab" when the expression is visualised
+     */
+    const VIS_TAB_SIZE = 2;
 
     /**
      * The current version number
@@ -1035,7 +1040,7 @@ class RegEx
                 }
             }
 
-            $output .= str_repeat($space, $level * 2).$type.$info.$value.$lineBreak;
+            $output .= str_repeat($space, $level * self::VIS_TAB_SIZE).$type.$info.$value.$lineBreak;
         });
 
         if ($html) {
