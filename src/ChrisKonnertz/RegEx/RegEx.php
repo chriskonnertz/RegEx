@@ -840,6 +840,7 @@ class RegEx
 
         return $this;
     }
+    
     /**
      * Activates or deactivates the "extended" ("x") modifier.
      * If active, whitespace is permitted.
