@@ -1,6 +1,7 @@
 # RegEx
 
 [![Build Status](https://img.shields.io/travis/chriskonnertz/RegEx.svg?style=flat-square)](https://travis-ci.org/chriskonnertz/RegEx)
+[![Version](https://img.shields.io/packagist/v/chriskonnertz/RegEx.svg?style=flat-square)](https://packagist.org/packages/chriskonnertz/regex)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/chriskonnertz/RegEx/master/LICENSE)
 
 Use methods to fluently create a regular expression in PHP. 
